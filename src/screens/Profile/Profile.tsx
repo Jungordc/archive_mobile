@@ -15,9 +15,9 @@ import {
     Icon,
 } from "native-base";
 import { uri } from "../../utils/uri";
-import ScrollableTabView, {
-    ScrollableTabBar,
-} from "react-native-scrollable-tab-view";
+// import ScrollableTabView, {
+//     ScrollableTabBar,
+// } from "react-native-scrollable-tab-view";
 export type ProfileProps = {};
 
 const Profile: React.FC<ProfileProps> = ({}) => {
@@ -91,18 +91,7 @@ const Profile: React.FC<ProfileProps> = ({}) => {
                 </Box>
             </Box>
             <Box>
-                <ScrollableTabView
-                    initialPage={0}
-                    renderTabBar={() => <ScrollableTabBar />}
-                >
-                    <RNText tabLabel="Tab #1">My</RNText>
-                    <RNText tabLabel="Tab #2 word word">favorite</RNText>
-                    <RNText tabLabel="Tab #3 word word word">project</RNText>
-                    <RNText tabLabel="Tab #4 word word word word">
-                        favorite
-                    </RNText>
-                    <RNText tabLabel="Tab #5">project</RNText>
-                </ScrollableTabView>
+                <Text>Content here</Text>
             </Box>
         </ScrollView>
     );
