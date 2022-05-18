@@ -10,8 +10,15 @@ const Edition = createNativeStackNavigator<EditionStackParamList>();
 
 export const EditionNavigator: React.FC = () => {
     return (
-        <Edition.Navigator>
+        <Edition.Navigator
+            screenOptions={{
+                headerShadowVisible: false,
+            }}
+        >
             <Edition.Screen
+                options={{
+                    title: "Archive",
+                }}
                 name="SelectCategorie"
                 component={SelectCategorie}
             />

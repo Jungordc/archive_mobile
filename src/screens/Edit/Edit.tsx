@@ -2,14 +2,22 @@
 
 import { View, Text } from "react-native";
 import React from "react";
+import { EditionScreenProps } from "../../navigation/types";
+import Editor from "../../components/Composite/Editor/Editor";
+import { Box } from "native-base";
 
-export type EditProps = {};
+export type EditProps = {} & EditionScreenProps<"Edition">;
 
-const Edit: React.FC<EditProps> = ({}) => {
+const Edit: React.FC<EditProps> = ({
+    navigation,
+    route: {
+        params: { category },
+    },
+}) => {
     return (
-        <View>
-            <Text>Edit</Text>
-        </View>
+        <Box flex={1}>
+            <Editor />
+        </Box>
     );
 };
 
