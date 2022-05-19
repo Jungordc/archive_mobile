@@ -2,23 +2,23 @@
 
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeStackParamList } from "./types";
-import Home from "../screens/Home/Home";
+import { RootStackParamList } from "./types";
 import Detail from "../screens/Detail/Detail";
 import Search from "../screens/Search/Search";
+import HomeTabNavigation from "./HomeTabNavigation";
 
-const HomeStack = createNativeStackNavigator<HomeStackParamList>();
+const HomeStack = createNativeStackNavigator<RootStackParamList>();
 
-export const HomeNavigator: React.FC = () => {
+export const RootStackNavigation: React.FC = () => {
     return (
-        <HomeStack.Navigator>
+        <HomeStack.Navigator initialRouteName="Home">
             <HomeStack.Screen
                 options={{
                     title: "Archive",
                     headerShadowVisible: false,
                 }}
-                name="Index"
-                component={Home}
+                name="Home"
+                component={HomeTabNavigation}
             />
             <HomeStack.Screen
                 options={{

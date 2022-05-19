@@ -1,26 +1,21 @@
 /** @format */
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
-import { RootTabParamList } from "./types";
-import TabBarIcon from "./TabBarIcon";
-// screen
-import Setting from "../screens/Setting/Setting";
-import { HomeNavigator } from "./Home";
-import { EditionNavigator } from "./Edition";
-import MeDash from "../screens/MeDash/MeDash";
-import { MeDashNavigator } from "./Dash";
+import { HomeTabPramList } from "./types";
 import { useTheme } from "native-base";
+import TabBarIcon from "./TabBarIcon";
+// screens
+import MeDash from "../screens/MeDash/MeDash";
+import Home from "../screens/Home/Home";
+import SelectCategorie from "../screens/SelectCategorie/SelectCategorie";
 
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
+const BottomTab = createBottomTabNavigator<HomeTabPramList>();
 
-const BottomTabNavigator: React.FC = () => {
+const HomeTabNavigation: React.FC = () => {
     const theme = useTheme();
-
     return (
         <BottomTab.Navigator
-            initialRouteName="Home"
+            initialRouteName="Index"
             screenOptions={{
                 tabBarActiveTintColor: theme.colors.primary[500],
             }}
@@ -33,12 +28,12 @@ const BottomTabNavigator: React.FC = () => {
                         <TabBarIcon name="grid-sharp" color={color} />
                     ),
                 }}
-                name="Home"
-                component={HomeNavigator}
+                name="Index"
+                component={Home}
             />
             <BottomTab.Screen
                 name="Edit"
-                component={EditionNavigator}
+                component={SelectCategorie}
                 options={{
                     title: "Nouveau",
                     header: () => null,
@@ -49,7 +44,7 @@ const BottomTabNavigator: React.FC = () => {
             />
             <BottomTab.Screen
                 name="MeDash"
-                component={MeDashNavigator}
+                component={MeDash}
                 options={{
                     title: "Archive",
                     header: () => null,
@@ -62,4 +57,4 @@ const BottomTabNavigator: React.FC = () => {
     );
 };
 
-export default BottomTabNavigator;
+export default HomeTabNavigation;

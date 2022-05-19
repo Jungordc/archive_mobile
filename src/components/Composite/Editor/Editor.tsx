@@ -1,5 +1,5 @@
 /** @format */
-import { ScrollView, TextInput, View } from "react-native";
+import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
 import {
     Box,
     FlatList,
@@ -11,6 +11,7 @@ import {
     VStack,
 } from "native-base";
 import React from "react";
+import Tags from "react-native-tags";
 import ImageViewInput from "../ImageViewInput/ImageViewInput";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import InputActions from "../InputActions/InputActions";
@@ -76,7 +77,47 @@ const Editor = () => {
                                     autoCorrect={false}
                                 />
                             </HStack>
-
+                            <Box>
+                                <Tags
+                                    initialText="monkey"
+                                    textInputProps={{
+                                        placeholder: "Any type of animal",
+                                    }}
+                                    initialTags={["dog", "cat", "chicken"]}
+                                    onChangeTags={(tags) => console.log(tags)}
+                                    onTagPress={(
+                                        index,
+                                        tagLabel,
+                                        event,
+                                        deleted
+                                    ) =>
+                                        console.log(
+                                            index,
+                                            tagLabel,
+                                            event,
+                                            deleted ? "deleted" : "not deleted"
+                                        )
+                                    }
+                                    containerStyle={{
+                                        justifyContent: "center",
+                                    }}
+                                    inputStyle={{ backgroundColor: "white" }}
+                                    renderTag={({
+                                        tag,
+                                        index,
+                                        onPress,
+                                        deleteTagOnPress,
+                                        readonly,
+                                    }) => (
+                                        <TouchableOpacity
+                                            key={`${tag}-${index}`}
+                                            onPress={onPress}
+                                        >
+                                            <Text>{tag}</Text>
+                                        </TouchableOpacity>
+                                    )}
+                                />
+                            </Box>
                             <Box>
                                 <Pressable
                                     p={1}
