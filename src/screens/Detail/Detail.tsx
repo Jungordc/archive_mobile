@@ -4,14 +4,14 @@ import { FlatList, ScrollView } from "react-native";
 import React from "react";
 import { Box, Text } from "native-base";
 import DetailReader from "../../components/Composite/DetailReader/DetailReader";
-import { HomeScreenProps } from "../../navigation/types";
+import { RootStackScreenProps } from "../../navigation/types";
 import Card from "../../components/Composite/Card/Card";
 import CommentReplay from "../../components/Composite/CommentReplay/CommentReplay";
 import DetailActions from "../../components/Composite/DetailActions/DetailActions";
 import AvatarLabel from "../../components/Primitive/AvatarLabel/AvatarLabel";
 import { uri } from "../../utils/uri";
 
-export type DetailProps = {} & HomeScreenProps<"Detail">;
+export type DetailProps = {} & RootStackScreenProps<"Detail">;
 
 const Detail: React.FC<DetailProps> = ({ navigation }) => {
     const data = new Array(10)

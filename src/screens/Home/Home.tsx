@@ -4,10 +4,10 @@ import { View, FlatList, Dimensions } from "react-native";
 import React from "react";
 import Card from "../../components/Composite/Card/Card";
 import SearchButton from "../../components/Primitive/SearchButton/SearchButton";
-import { HomeScreenProps } from "../../navigation/types";
+import { HomeTabScreenProps } from "../../navigation/types";
 import Author from "../../components/Composite/Author/Author";
 
-export type HomeProps = {} & HomeScreenProps<"Index">;
+export type HomeProps = {} & HomeTabScreenProps<"Index">;
 
 const w = Dimensions.get("screen").width;
 

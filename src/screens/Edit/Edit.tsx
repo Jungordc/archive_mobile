@@ -2,11 +2,11 @@
 
 import { View, Text } from "react-native";
 import React from "react";
-import { EditionScreenProps } from "../../navigation/types";
+import { RootStackScreenProps } from "../../navigation/types";
 import Editor from "../../components/Composite/Editor/Editor";
 import { Box } from "native-base";
 
-export type EditProps = {} & EditionScreenProps<"Edition">;
+export type EditProps = {} & RootStackScreenProps<"Edition">;
 
 const Edit: React.FC<EditProps> = ({
     navigation,

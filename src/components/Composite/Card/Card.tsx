@@ -27,10 +27,10 @@ const Card: React.FC<CardProps> = ({ onPress, ...boxProps }) => {
                     <Image alt="img" source={uri} h={150} w="100%" />
                 </Box>
                 <Box p={2} flex={1} mt={2}>
-                    <Text fontSize="xs" fontWeight="bold">
+                    <Text numberOfLines={1} fontSize="xs" fontWeight="bold">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     </Text>
-                    <Text fontSize="2xs" color="gray.800">
+                    <Text numberOfLines={3} fontSize="2xs" color="gray.800">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Placeat, veniam? Quod doloremque quas quos totam vitae
                         explicabo, itaque minus sint praesentium, dolores

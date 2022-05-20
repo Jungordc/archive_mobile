@@ -2,11 +2,11 @@
 
 import { FlatList } from "react-native";
 import React from "react";
-import { EditionScreenProps } from "../../navigation/types";
+import { HomeTabScreenProps } from "../../navigation/types";
 import CardDash from "../../components/Composite/CardDash/CardDash";
 import { Box, Heading } from "native-base";
 
-export type SelectCategorieProps = {} & EditionScreenProps<"SelectCategorie">;
+export type SelectCategorieProps = {} & HomeTabScreenProps<"Edit">;
 
 const SelectCategorie: React.FC<SelectCategorieProps> = ({ navigation }) => {
     const data = [

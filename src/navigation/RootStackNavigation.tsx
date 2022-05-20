@@ -6,6 +6,7 @@ import { RootStackParamList } from "./types";
 import Detail from "../screens/Detail/Detail";
 import Search from "../screens/Search/Search";
 import HomeTabNavigation from "./HomeTabNavigation";
+import Edit from "../screens/Edit/Edit";
 
 const HomeStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -29,6 +30,7 @@ export const RootStackNavigation: React.FC = () => {
                 component={Detail}
             />
             <HomeStack.Screen name="Search" component={Search} />
+            <HomeStack.Screen name="Edition" component={Edit} />
         </HomeStack.Navigator>
     );
 };
