@@ -15,16 +15,15 @@ import {
     Icon,
 } from "native-base";
 import { uri } from "../../utils/uri";
-// import ScrollableTabView, {
-//     ScrollableTabBar,
-// } from "react-native-scrollable-tab-view";
-export type ProfileProps = {};
+import { RootStackScreenProps } from "../../navigation/types";
 
-const Profile: React.FC<ProfileProps> = ({}) => {
+export type ProfileProps = {} & RootStackScreenProps<"Profile">;
+
+const Profile: React.FC<ProfileProps> = ({ route: { params }, navigation }) => {
     return (
         <ScrollView>
             <Box position="relative">
-                <Box h={120} bg="primary.500">
+                <Box h={170} bg="primary.500">
                     <Image flex={1} alt="cover" source={uri} />
                 </Box>
                 <Avatar
@@ -53,8 +52,10 @@ const Profile: React.FC<ProfileProps> = ({}) => {
                 <Box>
                     <Text>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Necessitatibus doloremque sed earum itaque excepturi.
-                        Laboriosam, fugiat doloribus reprehenderit.
+                        Recusandae harum doloribus, cumque quo labore ad dolor,
+                        consequatur quia nesciunt aliquid expedita unde quas
+                        voluptate magnam accusantium nihil. Eaque, omnis
+                        consectetur.
                     </Text>
                 </Box>
                 <VStack my={3} space={2}>

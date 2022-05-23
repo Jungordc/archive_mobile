@@ -18,6 +18,7 @@ const HomeTabNavigation: React.FC = () => {
             initialRouteName="Index"
             screenOptions={{
                 tabBarActiveTintColor: theme.colors.primary[500],
+                header: () => null,
             }}
         >
             <BottomTab.Screen
@@ -46,8 +47,7 @@ const HomeTabNavigation: React.FC = () => {
                 name="MeDash"
                 component={MeDash}
                 options={{
-                    title: "Archive",
-                    header: () => null,
+                    title: "Moi",
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="person-sharp" color={color} />
                     ),

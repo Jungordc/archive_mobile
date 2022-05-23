@@ -21,8 +21,13 @@ const CommentReplay: React.FC<CommentReplayProps> = ({ replays }) => {
                 onReplay={onpenEditor}
                 children={
                     <React.Fragment>
-                        {replays?.map((item) => {
-                            return <Comment onReplay={onpenEditor} />;
+                        {replays?.map((item, index) => {
+                            return (
+                                <Comment
+                                    key={`key${index}`}
+                                    onReplay={onpenEditor}
+                                />
+                            );
                         })}
                         {comment && (
                             <Box>

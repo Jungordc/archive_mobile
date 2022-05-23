@@ -3,22 +3,22 @@
  * @format */
 
 import React from "react";
-import { Icon, VStack } from "native-base";
+import { Icon, HStack } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { InterfaceVStackProps } from "native-base/lib/typescript/components/primitives/Stack/VStack";
 import { IconButton } from "../../Primitive/IconButton/IconButton";
+import { InterfaceHStackProps } from "native-base/lib/typescript/components/primitives/Stack/HStack";
 
-export type DetailActions = {} & InterfaceVStackProps;
+export type DetailActions = {} & InterfaceHStackProps;
 const DetailActions: React.FC<DetailActions> = ({ ...vstackProps }) => {
     return (
-        <VStack p={1} space={2} {...vstackProps}>
+        <HStack flex={1} p={1} space={2} {...vstackProps}>
             <IconButton icon={<Icon as={Ionicons} name="thumbs-up-sharp" />} />
             <IconButton icon={<Icon as={Ionicons} name="eye-sharp" />} />
             <IconButton icon={<Icon as={Ionicons} name="ios-save-sharp" />} />
             <IconButton
                 icon={<Icon as={Ionicons} name="md-arrow-redo-sharp" />}
             />
-        </VStack>
+        </HStack>
     );
 };
 

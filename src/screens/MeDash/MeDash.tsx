@@ -2,20 +2,52 @@
 
 import { Box, Heading, Divider, VStack, HStack, Text } from "native-base";
 import React from "react";
-import { ScrollView, TouchableOpacity } from "react-native";
+import { ScrollView, TouchableOpacity, Animated } from "react-native";
 import CardDash from "../../components/Composite/CardDash/CardDash";
 import ItemSetting from "../../components/Composite/ItemSetting/ItemSetting";
 import AvatarLabel from "../../components/Primitive/AvatarLabel/AvatarLabel";
-import { MeDashScreenProps } from "../../navigation/types";
+import { HomeTabScreenProps } from "../../navigation/types";
 import { uri } from "../../utils/uri";
 
-export type MeDashProps = {} & MeDashScreenProps<"DashList">;
+export type MeDashProps = {} & HomeTabScreenProps<"MeDash">;
+
+const AHeading = Animated.createAnimatedComponent(Heading);
 
 const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
+    const scrollY = React.useRef(new Animated.Value(0)).current;
     return (
-        <ScrollView>
-            <Box p={2}>
-                <Heading>Menu</Heading>
+        <Animated.ScrollView
+            onScroll={Animated.event(
+                [
+                    {
+                        nativeEvent: {
+                            contentOffset: {
+                                y: scrollY,
+                            },
+                        },
+                    },
+                ],
+                {
+                    useNativeDriver: true,
+                }
+            )}
+        >
+            <Box p={2} mt={50}>
+                <AHeading
+                    fontSize="4xl"
+                    style={{
+                        transform: [
+                            {
+                                scale: scrollY.interpolate({
+                                    inputRange: [-1, 0, 1],
+                                    outputRange: [1.5, 1, 1],
+                                }),
+                            },
+                        ],
+                    }}
+                >
+                    Menu
+                </AHeading>
                 <VStack space={2} my={2} mt={4}>
                     <TouchableOpacity
                         onPress={() =>
@@ -103,7 +135,7 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
                     </Text>
                 </Box>
             </Box>
-        </ScrollView>
+        </Animated.ScrollView>
     );
 };
 
