@@ -32,8 +32,8 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
                 }
             )}
         >
-            <Box p={2} mt={50}>
-                <AHeading
+            <Box p={2}>
+                {/* <AHeading
                     fontSize="4xl"
                     style={{
                         transform: [
@@ -47,7 +47,7 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
                     }}
                 >
                     Menu
-                </AHeading>
+                </AHeading> */}
                 <VStack space={2} my={2} mt={4}>
                     <TouchableOpacity
                         onPress={() =>

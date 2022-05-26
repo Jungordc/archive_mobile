@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({ onPress, ...boxProps }) => {
                     />
                 </Box>
                 <Box flex={1} w="100%" h={150}>
-                    <Image alt="img" source={uri} h={150} w="100%" />
+                    <Image alt="img" source={uri} flex={1} />
                 </Box>
                 <Box p={2} flex={1} mt={2}>
                     <Text numberOfLines={1} fontSize="xs" fontWeight="bold">

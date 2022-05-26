@@ -20,7 +20,7 @@ export const RootStackNavigation: React.FC = () => {
             <HomeStack.Screen
                 options={{
                     title: "Archive",
-                    header: () => null,
+                    headerShown: false,
                     headerShadowVisible: false,
                 }}
                 name="Home"
@@ -35,7 +35,15 @@ export const RootStackNavigation: React.FC = () => {
                 component={Detail}
             />
             <HomeStack.Screen name="Search" component={Search} />
-            <HomeStack.Screen name="Edition" component={Edit} />
+            <HomeStack.Screen
+                options={{
+                    title: "Nouvel archive",
+                    headerTitleAlign: "center",
+                    headerShadowVisible: false,
+                }}
+                name="Edition"
+                component={Edit}
+            />
             <HomeStack.Screen
                 options={{
                     contentStyle: {},
@@ -46,7 +54,15 @@ export const RootStackNavigation: React.FC = () => {
             />
             <HomeStack.Screen name="NewLib" component={NewLib} />
             <HomeStack.Screen name="Help" component={Help} />
-            <HomeStack.Screen name="About" component={About} />
+            <HomeStack.Screen
+                options={{
+                    title: "Apropos",
+                    headerTitleAlign: "center",
+                    headerShadowVisible: false,
+                }}
+                name="About"
+                component={About}
+            />
         </HomeStack.Navigator>
     );
 };

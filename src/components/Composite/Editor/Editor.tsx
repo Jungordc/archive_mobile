@@ -1,5 +1,5 @@
 /** @format */
-import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
+import { ScrollView, TextInput, TouchableOpacity } from "react-native";
 import {
     Box,
     FlatList,
@@ -9,49 +9,64 @@ import {
     Pressable,
     Text,
     VStack,
+    View,
 } from "native-base";
 import React from "react";
 import Tags from "react-native-tags";
 import ImageViewInput from "../ImageViewInput/ImageViewInput";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import InputActions from "../InputActions/InputActions";
+import InputTitle from "../../Primitive/InputTitle/InputTitle";
+import { uri } from "../../../utils/uri";
+import ImageContainers from "../../../../packages/image-container-plus/ImageContainers";
+import Chip from "../../Primitive/Chip/Chip";
+import InputTitleUtils from "../../Primitive/InputTitle/InputTitleUtils";
 
 export type EditorProps = {};
 
 const Editor = () => {
-    const data = new Array(5).fill(0);
+    const data = new Array(5).fill(0).map((i) => uri);
     return (
         <React.Fragment>
             <ScrollView>
                 <Box flex={1}>
-                    <HStack p={2} space={2} my={5}>
-                        <View
-                            style={{
-                                height: 50,
-                                width: 50,
-                                backgroundColor: "red",
-                                borderRadius: 50,
+                    <View mx={1}>
+                        <InputTitle
+                            textInputProps={{
+                                placeholder: "Titre",
                             }}
                         />
-                        <TextInput
-                            style={{ fontSize: 20 }}
-                            placeholder="Ajouter un titre..."
+                    </View>
+                    <View mx={1}>
+                        <InputTitle
+                            textInputProps={{
+                                placeholder: "Description",
+                                multiline: true,
+                                style: {
+                                    fontSize: 16,
+                                    color: "#626262",
+                                },
+                            }}
                         />
-                    </HStack>
+                    </View>
                     <Box ml={47} p={2}>
-                        <HStack space={2} alignItems="center">
-                            <Icon
-                                as={Ionicons}
-                                color="primary.500"
-                                name="documents"
-                                mt={1}
-                            />
-                            <Text color="primary.500" fontSize="2xs">
-                                Documments...
-                            </Text>
-                        </HStack>
+                        <VStack space={4}>
+                            <HStack space={2} alignItems="center">
+                                <Icon
+                                    as={Ionicons}
+                                    color="coolGray.400"
+                                    name="documents"
+                                    mt={1}
+                                />
+                                <Text color="coolGray.500" fontSize="2xs">
+                                    Documments...
+                                </Text>
+                            </HStack>
+                            <ImageContainers images={data} />
+                        </VStack>
                     </Box>
-                    <FlatList
+
+                    {/* <FlatList
                         maxH={230}
                         bounces={false}
                         horizontal
@@ -61,86 +76,61 @@ const Editor = () => {
                         renderItem={() => {
                             return <ImageViewInput />;
                         }}
-                    />
-                    <Box ml={47} p={2}>
-                        <VStack mt={2}>
-                            <HStack my={3} space={1} minH={100} maxH={120}>
-                                <Icon as={Ionicons} name="book-sharp" mt={1} />
-                                <TextInput
-                                    multiline
-                                    style={{
-                                        fontSize: 14,
-                                        flex: 1,
-                                        textAlignVertical: "top",
-                                    }}
-                                    placeholder="Description..."
-                                    autoCorrect={false}
-                                />
-                            </HStack>
-                            <Box>
-                                <Tags
-                                    initialText="monkey"
-                                    textInputProps={{
-                                        placeholder: "Any type of animal",
-                                    }}
-                                    initialTags={["dog", "cat", "chicken"]}
-                                    onChangeTags={(tags) => console.log(tags)}
-                                    onTagPress={(
+                    /> */}
+                    <Box>
+                        <InputTitleUtils max={6}>
+                            <Tags
+                                initialText="monkey"
+                                textInputProps={{
+                                    placeholder: "Any type of animal",
+                                }}
+                                initialTags={["dog", "cat", "chicken"]}
+                                onChangeTags={(tags) => console.log(tags)}
+                                onTagPress={(index, tagLabel, event, deleted) =>
+                                    console.log(
                                         index,
                                         tagLabel,
                                         event,
-                                        deleted
-                                    ) =>
-                                        console.log(
-                                            index,
-                                            tagLabel,
-                                            event,
-                                            deleted ? "deleted" : "not deleted"
-                                        )
+                                        deleted ? "deleted" : "not deleted"
+                                    )
+                                }
+                                containerStyle={
+                                    {
+                                        // justifyContent: "center",
                                     }
-                                    containerStyle={{
-                                        justifyContent: "center",
-                                    }}
-                                    inputStyle={{ backgroundColor: "white" }}
-                                    renderTag={({
-                                        tag,
-                                        index,
-                                        onPress,
-                                        deleteTagOnPress,
-                                        readonly,
-                                    }) => (
-                                        <TouchableOpacity
-                                            key={`${tag}-${index}`}
-                                            onPress={onPress}
-                                        >
-                                            <Text>{tag}</Text>
-                                        </TouchableOpacity>
-                                    )}
-                                />
-                            </Box>
+                                }
+                                inputStyle={{
+                                    backgroundColor: "transparent",
+                                }}
+                                renderTag={({
+                                    tag,
+                                    index,
+                                    onPress,
+                                    deleteTagOnPress,
+                                    readonly,
+                                }) => (
+                                    <Chip key={index} ml={2}>
+                                        {tag}
+                                    </Chip>
+                                )}
+                            />
+                        </InputTitleUtils>
+                    </Box>
+                    <Box ml={47} p={2}>
+                        <VStack mt={2}>
+                            <Box my={3}></Box>
                             <Box>
-                                <Pressable
-                                    p={1}
-                                    px={4}
-                                    borderRadius="full"
-                                    borderColor="primary.500"
-                                    borderWidth={1}
-                                >
-                                    <HStack space={2} alignItems="center">
-                                        <Icon
-                                            as={Ionicons}
-                                            color="primary.500"
-                                            name="images"
-                                            mt={1}
-                                        />
-                                        <Text
-                                            color="primary.500"
-                                            fontSize="2xs"
-                                        >
-                                            Photo de coverture
-                                        </Text>
-                                    </HStack>
-                                </Pressable>
+                                <HStack space={2} alignItems="center">
+                                    <Icon
+                                        as={Ionicons}
+                                        color="coolGray.400"
+                                        name="images"
+                                        mt={1}
+                                    />
+                                    <Text color="coolGray.500" fontSize="2xs">
+                                        Photo de coverture
+                                    </Text>
+                                </HStack>
                                 <ImageViewInput h={300} w={280} />
                             </Box>
                         </VStack>

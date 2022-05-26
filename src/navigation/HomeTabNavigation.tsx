@@ -18,7 +18,6 @@ const HomeTabNavigation: React.FC = () => {
             initialRouteName="Index"
             screenOptions={{
                 tabBarActiveTintColor: theme.colors.primary[500],
-                header: () => null,
             }}
         >
             <BottomTab.Screen
@@ -36,8 +35,9 @@ const HomeTabNavigation: React.FC = () => {
                 name="Edit"
                 component={SelectCategorie}
                 options={{
-                    title: "Nouveau",
-                    header: () => null,
+                    title: "Categorie",
+                    tabBarLabel: "Nouveau",
+                    headerTitleAlign: "center",
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="add-circle-sharp" color={color} />
                     ),
@@ -47,7 +47,9 @@ const HomeTabNavigation: React.FC = () => {
                 name="MeDash"
                 component={MeDash}
                 options={{
-                    title: "Moi",
+                    title: "Menu",
+                    tabBarLabel: "Moi",
+                    headerTitleAlign: "center",
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="person-sharp" color={color} />
                     ),
