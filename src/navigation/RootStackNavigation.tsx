@@ -16,20 +16,29 @@ const HomeStack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootStackNavigation: React.FC = () => {
     return (
-        <HomeStack.Navigator initialRouteName="Home">
+        <HomeStack.Navigator
+            initialRouteName="Home"
+            screenOptions={{
+                headerTitleAlign: "center",
+                headerShadowVisible: false,
+                contentStyle: {
+                    backgroundColor: "#FFF",
+                },
+            }}
+        >
             <HomeStack.Screen
                 options={{
                     title: "Archive",
+                    header: () => null,
                     headerShown: false,
-                    headerShadowVisible: false,
                 }}
                 name="Home"
                 component={HomeTabNavigation}
             />
             <HomeStack.Screen
                 options={{
-                    headerShadowVisible: false,
-                    title: "",
+                    headerTitleAlign: "left",
+                    title: "Archive",
                 }}
                 name="Detail"
                 component={Detail}
@@ -38,27 +47,16 @@ export const RootStackNavigation: React.FC = () => {
             <HomeStack.Screen
                 options={{
                     title: "Nouvel archive",
-                    headerTitleAlign: "center",
-                    headerShadowVisible: false,
                 }}
                 name="Edition"
                 component={Edit}
             />
-            <HomeStack.Screen
-                options={{
-                    contentStyle: {},
-                    headerTransparent: true,
-                }}
-                name="Profile"
-                component={Profile}
-            />
+            <HomeStack.Screen name="Profile" component={Profile} />
             <HomeStack.Screen name="NewLib" component={NewLib} />
             <HomeStack.Screen name="Help" component={Help} />
             <HomeStack.Screen
                 options={{
                     title: "Apropos",
-                    headerTitleAlign: "center",
-                    headerShadowVisible: false,
                 }}
                 name="About"
                 component={About}

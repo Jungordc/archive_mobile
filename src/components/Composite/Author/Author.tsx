@@ -1,9 +1,10 @@
 /** @format */
 
-import { Box, Image, Avatar } from "native-base";
+import { Box, Image, Avatar, Text } from "native-base";
 import { InterfaceBoxProps } from "native-base/lib/typescript/components/primitives/Box/types";
 import React from "react";
 import AvatarLabel from "../../Primitive/AvatarLabel/AvatarLabel";
+import TextDotSeparator from "../../Primitive/TextDotSeparator/TextDotSeparator";
 
 type AuthorProps = {} & InterfaceBoxProps;
 
@@ -16,6 +17,11 @@ const Author: React.FC<AuthorProps> = ({ ...boxProps }) => {
         <Box flex={1} {...boxProps}>
             <Box>
                 <Image alt="cover" borderRadius="md" source={uri} h="24" />
+                <TextDotSeparator>
+                    <Text>Bibliotheque</Text>
+                    <Text>200 contenus</Text>
+                    <Text>300 j'aimes</Text>
+                </TextDotSeparator>
                 <AvatarLabel
                     mt={2}
                     source={uri}

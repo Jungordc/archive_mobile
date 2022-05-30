@@ -17,7 +17,7 @@ const SearchButton: React.FC<SearchButtonProps> = ({
     return (
         <TouchableOpacity onPress={onPress}>
             <HStack
-                bg="gray.200"
+                bg="coolGray.100"
                 p={3}
                 borderRadius="full"
                 flex={1}

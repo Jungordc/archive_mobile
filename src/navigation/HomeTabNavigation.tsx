@@ -16,14 +16,18 @@ const HomeTabNavigation: React.FC = () => {
     return (
         <BottomTab.Navigator
             initialRouteName="Index"
+            sceneContainerStyle={{
+                backgroundColor: "#fff",
+            }}
             screenOptions={{
                 tabBarActiveTintColor: theme.colors.primary[500],
             }}
         >
             <BottomTab.Screen
                 options={{
-                    title: "Acceuil",
-                    header: () => null,
+                    title: "Archive",
+                    tabBarLabel: "Acceuil",
+                    headerTitleAlign: "center",
                     tabBarIcon: ({ color }) => (
                         <TabBarIcon name="grid-sharp" color={color} />
                     ),

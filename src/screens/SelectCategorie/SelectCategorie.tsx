@@ -4,7 +4,8 @@ import { FlatList } from "react-native";
 import React from "react";
 import { HomeTabScreenProps } from "../../navigation/types";
 import CardDash from "../../components/Composite/CardDash/CardDash";
-import { Box, Heading } from "native-base";
+import { Box, Heading, View } from "native-base";
+import PopularCat from "../../components/Composite/PopularCat/PopularCat";
 
 export type SelectCategorieProps = {} & HomeTabScreenProps<"Edit">;
 
@@ -24,9 +25,15 @@ const SelectCategorie: React.FC<SelectCategorieProps> = ({ navigation }) => {
             data={data}
             numColumns={2}
             ListHeaderComponent={
-                <Box my={4} p={2}>
-                    <Heading>
-                        Selection une categorie pour votre publication
+                <Box my={4}>
+                    <Heading p={2} color="coolGray.700">
+                        Categories Populaires
+                    </Heading>
+                    <View my={2}>
+                        <PopularCat />
+                    </View>
+                    <Heading p={2} color="coolGray.700" fontSize="md">
+                        Toutes les Catgories
                     </Heading>
                 </Box>
             }

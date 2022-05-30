@@ -3,14 +3,11 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { NativeBaseProvider } from "native-base";
-import useCachedResources from "./src/hooks/useCachedResources";
-import useColorScheme from "./src/hooks/useColorScheme";
 import Navigation from "./src/navigation";
 import ThemeProvider from "./src/Theme/ThemeProvider";
+import SplashLoader from "./src/containers/SplachLoader";
 
 export default function App() {
-    const isLoadingComplete = useCachedResources();
     const colorScheme = "light"; //useColorScheme();
 
     const setBackgroundButtonNavigation = React.useCallback(async () => {
@@ -23,16 +20,14 @@ export default function App() {
         setBackgroundButtonNavigation();
     }, []);
 
-    if (!isLoadingComplete) {
-        return null;
-    } else {
-        return (
+    return (
+        <SplashLoader>
             <ThemeProvider>
                 <SafeAreaProvider>
                     <StatusBar />
                     <Navigation colorScheme={colorScheme} />
                 </SafeAreaProvider>
             </ThemeProvider>
-        );
-    }
+        </SplashLoader>
+    );
 }
