@@ -22,7 +22,7 @@ const InputTitleUtils: React.FC<InputTitleUtilsUtilsProps> = ({
 }) => {
     const isEdit = React.useMemo(() => value > 0, [value]);
     return (
-        <HStack flex={1} p={2} space={1} my={5} {...props}>
+        <HStack alignItems="center" flex={1} p={2} space={1} my={5} {...props}>
             <View
                 style={{
                     height: 50,

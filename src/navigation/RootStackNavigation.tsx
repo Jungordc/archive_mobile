@@ -52,7 +52,13 @@ export const RootStackNavigation: React.FC = () => {
                 component={Edit}
             />
             <HomeStack.Screen name="Profile" component={Profile} />
-            <HomeStack.Screen name="NewLib" component={NewLib} />
+            <HomeStack.Screen
+                options={{
+                    title: "Nouvelle Bibliotheque",
+                }}
+                name="NewLib"
+                component={NewLib}
+            />
             <HomeStack.Screen name="Help" component={Help} />
             <HomeStack.Screen
                 options={{
