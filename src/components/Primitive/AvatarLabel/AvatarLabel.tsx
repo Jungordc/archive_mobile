@@ -28,7 +28,7 @@ const AvatarLabel: React.FC<AvatarLabelProps> = ({
     ...restProps
 }) => {
     return (
-        <HStack {...restProps}>
+        <HStack alignItems="center" {...restProps}>
             {source && <Avatar size="sm" {...avatarProps} source={source} />}
             <VStack justifyContent="center" ml={2} {...titleContainer}>
                 <Text fontSize="xs" {...titleProps} color="blueGray.900">

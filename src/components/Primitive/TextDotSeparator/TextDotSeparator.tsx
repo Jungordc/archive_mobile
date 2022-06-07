@@ -25,7 +25,7 @@ const TextDotSeparator: React.FC<TextDotSeparatorProps> = ({
     const InnerDotcomponent: any = DotComponent ? (
         DotComponent
     ) : (
-        <Dot {...dotProps} />
+        <Dot mt="1" {...dotProps} />
     );
     return (
         <HStack space={2} alignItems="center" {...props}>
