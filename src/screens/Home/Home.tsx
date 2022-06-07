@@ -26,6 +26,11 @@ const data = new Array(11)
 
 const Home: React.FC<HomeProps> = ({ navigation, route }) => {
     const { onScrollHandler, headerAnimatedStyle } = useHeaderScrollAnimation();
+    const goToDetail = React.useCallback(
+        (post: number | string) => navigation.navigate("Detail", { post }),
+        []
+    );
+
     return (
         <SafeAreaView>
             <Animated.View
@@ -65,6 +70,7 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
                 {/* <Author mt={4} /> */}
             </Animated.View>
             <Animated.FlatList
+                bounces={false}
                 ListHeaderComponent={<View my="20" />}
                 onScroll={onScrollHandler}
                 showsVerticalScrollIndicator={false}
@@ -73,11 +79,9 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
                 renderItem={({ index, item }) => {
                     return (
                         <>
-                            <View my="2">
-                                <Divider color="amber.300" />
-                            </View>
-                            <CardFeedContainer>
-                                <FeedCardHorizontal />
+                            {index !== 0 && <Divider color="amber.300" />}
+                            <CardFeedContainer onPress={goToDetail}>
+                                <FeedCardHorizontal py={2} />
                             </CardFeedContainer>
                         </>
                     );

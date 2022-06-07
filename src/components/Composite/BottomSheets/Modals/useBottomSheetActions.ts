@@ -10,7 +10,7 @@ type argsType = {
 };
 
 export default function useBottomSheetActions({
-    snapPoints = ["30%", "50%"],
+    snapPoints,
     onClose,
     onOpen,
 }: argsType) {
@@ -46,7 +46,7 @@ export default function useBottomSheetActions({
 
     return {
         ref: bottomSheetModalRef,
-        snapPoints,
+        snapPoints: snapPoints || ["30%", "50%"],
         onClose: _onClose,
         onOpen: _onOpen,
     };

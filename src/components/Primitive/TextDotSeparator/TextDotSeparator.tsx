@@ -28,7 +28,7 @@ const TextDotSeparator: React.FC<TextDotSeparatorProps> = ({
         <Dot mt="1" {...dotProps} />
     );
     return (
-        <HStack space={2} alignItems="center" {...props}>
+        <HStack flex={1} space={2} alignItems="center" {...props}>
             {childrenComponentArray.map((child: any, index) => {
                 return (
                     <React.Fragment key={index}>

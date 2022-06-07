@@ -16,22 +16,33 @@ const Comment: React.FC<CommentProps> = ({ children, onReplay }) => {
     return (
         <Box flex={1}>
             <VStack mr={2}>
-                <HStack justifyContent="space-between" alignItems="center">
+                <HStack
+                    mb={2}
+                    pr={3}
+                    justifyContent="space-between"
+                    alignItems="center"
+                >
                     <AvatarLabel
                         source={uri}
                         avatarProps={{
-                            size: "md",
+                            size: 6,
                         }}
                         title="user archive"
                         titleProps={{
-                            color: "coolGray.800",
+                            color: "coolGray.700",
                             fontWeight: "medium",
-                            fontSize: "sm",
+                            fontSize: "md",
                         }}
                     />
                     <Text fontSize="2xs">12 min</Text>
                 </HStack>
-                <Box marginLeft={55}>
+                <Box
+                    bg="coolGray.100"
+                    px={4}
+                    py={2}
+                    borderRadius="3xl"
+                    marginLeft={25}
+                >
                     <Text
                         color="coolGray.600"
                         fontSize={12}

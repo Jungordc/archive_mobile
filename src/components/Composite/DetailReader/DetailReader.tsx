@@ -1,7 +1,8 @@
 /** @format */
 
-import { Box, Text, Image, VStack } from "native-base";
+import { Box, Text, VStack, Heading, View } from "native-base";
 import React from "react";
+import Image from "../../../../packages/image-container-plus/components/Image";
 import CardAction from "../CardAction/CardAction";
 
 export type DetailReaderProps = {};
@@ -12,8 +13,18 @@ const uri = {
 const DetailReader: React.FC<DetailReaderProps> = ({}) => {
     return (
         <Box flex={1}>
-            <Box flex={1} my={2}>
-                <Image alt="image" source={uri} w="100%" h={200} />
+            <VStack mb={3} p={3}>
+                <Heading fontSize="4xl" lineHeight="md" color="coolGray.800">
+                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                </Heading>
+                <Text fontSize="2xl" color="blue.600">
+                    #items #medecin #stPrierre #2030
+                </Text>
+            </VStack>
+            <Box flex={1} m={3}>
+                <View h={200} w="100%">
+                    <Image />
+                </View>
             </Box>
             {/* <CardAction
                 justifyContent="space-between"
@@ -45,21 +56,12 @@ const DetailReader: React.FC<DetailReaderProps> = ({}) => {
                 ]}
             /> */}
             <Box p={2}>
-                <VStack mb={3}>
+                <Box m={3}>
                     <Text
-                        fontWeight="medium"
-                        fontSize="2xl"
-                        color="coolGray.800"
+                        lineHeight="lg"
+                        color="coolGray.600"
+                        textAlign="justify"
                     >
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit.
-                    </Text>
-                    <Text color="blue.600">
-                        #items #medecin #stPrierre #2030
-                    </Text>
-                </VStack>
-                <Box>
-                    <Text color="coolGray.700" textAlign="justify">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Consequatur, consectetur molestiae voluptatibus est vel
                         iusto dignissimos. Quisquam iure illo consequuntur,

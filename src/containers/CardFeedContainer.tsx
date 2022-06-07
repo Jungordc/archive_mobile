@@ -5,9 +5,18 @@ import SavePostBottomSheet from "../components/Composite/BottomSheets/Modals/Sav
 import ActionMenuBottomSheet from "../components/Composite/BottomSheets/Modals/ActionMenuBottomSheet";
 import useBottomSheetActions from "../components/Composite/BottomSheets/Modals/useBottomSheetActions";
 
-const CardFeedContainer: React.FC = ({ children }) => {
+export type CardFeedContainerProps = {
+    onPress?(archiveId: number | string): void;
+};
+
+const CardFeedContainer: React.FC<CardFeedContainerProps> = ({
+    children,
+    onPress,
+}) => {
     const [saved, setSaved] = React.useState<boolean>(false);
-    const actionBottonSheet = useBottomSheetActions({});
+    const actionBottonSheet = useBottomSheetActions({
+        snapPoints: ["30%", "42%"],
+    });
     const savePostBottonSheet = useBottomSheetActions({
         onOpen(present) {
             if (!saved) {
@@ -30,6 +39,7 @@ const CardFeedContainer: React.FC = ({ children }) => {
             onMenu: actionBottonSheet.onOpen,
             infos: ["1 jour environs", "200 j'aimes", "2000 vues"],
             baseOnText: "Base sur votre historiques",
+            onPress: () => onPress?.(234),
         }),
         [saved]
     );
@@ -44,7 +54,7 @@ const CardFeedContainer: React.FC = ({ children }) => {
             />
             <ActionMenuBottomSheet
                 ref={actionBottonSheet.ref}
-                snapPoints={savePostBottonSheet.snapPoints}
+                snapPoints={actionBottonSheet.snapPoints}
             />
         </>
     );

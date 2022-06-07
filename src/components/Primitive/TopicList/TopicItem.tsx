@@ -1,19 +1,18 @@
 /** @format */
 
-import { View, Text, Pressable } from "native-base";
-import { InterfaceViewProps } from "native-base/src/components/basic/View/types";
-import { InterfacePressableProps } from "native-base/src/components/primitives/Pressable/types";
+import { Button } from "native-base";
+import { IButtonProps } from "native-base/lib/typescript/components/primitives/Button/types";
 import React from "react";
 
 type TopicItemProps = {
     title: string;
-} & InterfacePressableProps;
+} & IButtonProps;
 
 const TopicItem: React.FC<TopicItemProps> = ({ title, ...props }) => {
     return (
-        <Pressable borderRadius="3xl" px="5" p="2" m={1} {...props}>
-            <Text color={props.color}>{title}</Text>
-        </Pressable>
+        <Button borderRadius="3xl" px="5" p="2" m={1} {...props}>
+            {title}
+        </Button>
     );
 };
 

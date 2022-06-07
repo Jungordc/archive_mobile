@@ -25,6 +25,7 @@ const TopicList: React.FC<TopicListProps> = ({
     return (
         <View>
             <FlatList
+                bounces={false}
                 showsHorizontalScrollIndicator={false}
                 horizontal
                 data={data}
@@ -35,11 +36,13 @@ const TopicList: React.FC<TopicListProps> = ({
                             onSelect?.(index);
                         }}
                         title={item.title}
-                        color={
-                            _selected === index
-                                ? "coolGray.300"
-                                : "coolGray.700"
-                        }
+                        _text={{
+                            color:
+                                _selected === index
+                                    ? "coolGray.300"
+                                    : "coolGray.700",
+                        }}
+                        colorScheme="muted"
                         bg={_selected === index ? "black" : "coolGray.100"}
                     />
                 )}

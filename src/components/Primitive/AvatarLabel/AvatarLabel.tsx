@@ -6,27 +6,46 @@ import { ImageSourcePropType } from "react-native";
 import { InterfaceTextProps } from "native-base/lib/typescript/components/primitives/Text/types";
 import { InterfaceHStackProps } from "native-base/lib/typescript/components/primitives/Stack/HStack";
 import { InterfaceVStackProps } from "native-base/lib/typescript/components/primitives/Stack/VStack";
+import ItemContainer from "../ItemContainer/ItemContainer";
 
 export type AvatarLabelProps = {
     source?: ImageSourcePropType;
-    title: string;
-    subTitle?: string;
+    title: string | React.ReactNode;
+    subTitle?: string | React.ReactNode;
     titleProps?: InterfaceTextProps;
     subTitleProps?: InterfaceTextProps;
     avatarProps?: IAvatarProps;
     titleContainer?: InterfaceVStackProps;
+    action?: React.ReactNode;
 } & InterfaceHStackProps;
 
 const AvatarLabel: React.FC<AvatarLabelProps> = ({
     source,
     title,
     subTitle,
+    action,
     titleProps,
     subTitleProps,
     avatarProps,
     titleContainer,
     ...restProps
 }) => {
+    return (
+        <ItemContainer
+            alignItems="center"
+            rootContainerProps={{
+                alignItems: "center",
+            }}
+            title={title}
+            subTitle={subTitle}
+            titleProps={titleProps}
+            subTitleProps={subTitleProps}
+            mainProps={{ ml: "4", ...titleContainer }}
+            avatar={<Avatar size="sm" {...avatarProps} source={source} />}
+            actions={action}
+        />
+    );
+
     return (
         <HStack alignItems="center" {...restProps}>
             {source && <Avatar size="sm" {...avatarProps} source={source} />}

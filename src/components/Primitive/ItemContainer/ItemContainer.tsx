@@ -14,11 +14,12 @@ import TextOrComponent from "../Utils/TextOrComponent";
 export type ItemContainerProps = {
     avatar?: React.ReactNode;
     actions?: React.ReactNode;
-    title: string | React.ReactNode;
-    subTitle: string | React.ReactNode;
+    title?: string | React.ReactNode;
+    subTitle?: string | React.ReactNode;
     titleProps?: InterfaceTextProps;
     subTitleProps?: InterfaceTextProps;
     mainProps?: IVStackProps;
+    rootContainerProps?: IHStackProps;
 } & IHStackProps;
 
 const ItemContainer: React.FC<ItemContainerProps> = ({
@@ -29,6 +30,7 @@ const ItemContainer: React.FC<ItemContainerProps> = ({
     titleProps,
     subTitleProps,
     mainProps,
+    rootContainerProps,
     ...props
 }) => {
     // title container
@@ -43,8 +45,8 @@ const ItemContainer: React.FC<ItemContainerProps> = ({
         textProps: subTitleProps,
     });
     return (
-        <HStack {...props}>
-            <HStack>
+        <HStack justifyContent="space-between" alignItems="center" {...props}>
+            <HStack {...rootContainerProps}>
                 {avatar && <View>{avatar}</View>}
                 <VStack {...mainProps}>
                     {innerTitle}
