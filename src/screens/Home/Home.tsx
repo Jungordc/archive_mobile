@@ -1,22 +1,21 @@
 /** @format */
 
 import React from "react";
-import { FlatList } from "react-native";
 import { Icon, Heading, IconButton, View } from "native-base";
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Card from "../../components/Composite/Card/Card";
-import { HomeTabScreenProps } from "../../navigation/types";
 import Author from "../../components/Composite/Author/Author";
+import { HomeTabScreenProps } from "../../navigation/types";
 import TopicList from "../../components/Primitive/TopicList/TopicList";
 import HStack from "native-base/src/components/primitives/Stack/HStack";
 import FeedCardHorizontal from "../../components/Composite/Cards/FeedCardHorizontal/FeedCardHorizontal";
 import CardFeedContainer from "../../containers/CardFeedContainer";
 import Divider from "native-base/src/components/composites/Divider";
 import Animated from "react-native-reanimated";
-import { useHeaderScrollAnimation } from "../../hooks/useHeaderScrollAnimation";
+import useAnimatedCollapsingHeader from "../../hooks/useAnimatedCollapsingHeader";
 
 export type HomeProps = {} & HomeTabScreenProps<"Index">;
 
@@ -25,7 +24,7 @@ const data = new Array(11)
     .map((_, index) => ({ id: index, title: ` title n0 ${index}` }));
 
 const Home: React.FC<HomeProps> = ({ navigation, route }) => {
-    const { onScrollHandler, headerAnimatedStyle } = useHeaderScrollAnimation();
+    const headerAnimated = useAnimatedCollapsingHeader();
     const goToDetail = React.useCallback(
         (post: number | string) => navigation.navigate("Detail", { post }),
         []
@@ -33,15 +32,19 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
 
     return (
         <SafeAreaView>
+            <StatusBar backgroundColor="#fff" />
             <Animated.View
                 style={[
                     {
                         marginVertical: 10,
                         backgroundColor: "#fff",
                         position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
                         zIndex: 1,
                     },
-                    headerAnimatedStyle,
+                    headerAnimated.animatedStyles,
                 ]}
             >
                 <HStack
@@ -72,7 +75,7 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
             <Animated.FlatList
                 bounces={false}
                 ListHeaderComponent={<View my="20" />}
-                onScroll={onScrollHandler}
+                onScroll={headerAnimated.scrollHandler}
                 showsVerticalScrollIndicator={false}
                 data={data}
                 keyExtractor={(_, index) => index.toString()}
@@ -85,14 +88,6 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
                             </CardFeedContainer>
                         </>
                     );
-                    // return (
-                    //     <Card
-                    //         m={1}
-                    //         onPress={() => {
-                    //             navigation.navigate("Detail", { post: index });
-                    //         }}
-                    //     />
-                    // );
                 }}
             />
         </SafeAreaView>

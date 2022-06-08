@@ -37,13 +37,14 @@ export const RootStackNavigation: React.FC = () => {
             />
             <HomeStack.Screen
                 options={{
-                    headerTitleAlign: "left",
-                    title: "Archive",
+                    headerShown: false,
+                    header: () => null,
+                    headerTransparent: true,
                 }}
                 name="Detail"
                 component={Detail}
             />
-            <HomeStack.Screen name="Search" component={Search} />
+            <HomeStack.Screen name="SearchDetail" component={Search} />
             <HomeStack.Screen
                 options={{
                     title: "Nouvel archive",

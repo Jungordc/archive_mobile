@@ -21,19 +21,21 @@ const HomeTabNavigation: React.FC = () => {
                 backgroundColor: theme.colors.white,
             }}
             screenOptions={{
-                tabBarActiveTintColor: theme.colors.primary[500],
+                tabBarActiveTintColor: theme.colors.coolGray[800],
+                tabBarInactiveTintColor: theme.colors.coolGray[500],
+                tabBarShowLabel: false,
+                tabBarStyle: {
+                    borderTopWidth: 0,
+                },
             }}
         >
             <BottomTab.Screen
                 options={{
-                    title: "Archive",
-                    tabBarLabel: "Acceuil",
-                    headerTitleAlign: "center",
                     headerShown: false,
                     tabBarIcon: (props) => (
                         <TabBarIcon
-                            name="ios-grid-outline"
-                            focusIconName="grid-sharp"
+                            name="home-outline"
+                            focusIconName="home"
                             {...props}
                         />
                     ),
