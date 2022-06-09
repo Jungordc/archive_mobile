@@ -15,7 +15,7 @@ const CardFeedContainer: React.FC<CardFeedContainerProps> = ({
 }) => {
     const [saved, setSaved] = React.useState<boolean>(false);
     const actionBottonSheet = useBottomSheetActions({
-        snapPoints: ["30%", "42%"],
+        snapPoints: ["35%", "37%"],
     });
     const savePostBottonSheet = useBottomSheetActions({
         onOpen(present) {

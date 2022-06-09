@@ -183,14 +183,19 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                                 }
                             />
                         </View>
-                        <DetailReader />
+                        <DetailReader
+                            title="Syllabus de spychologie 2021: unilu l1"
+                            tagues="#bienfait #unilu #spychologie_de_travail"
+                            description="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium explicabo voluptatibus ut? Commodi corporis unde sunt repudiandae dolores temporibus, molestiae quisquam quae voluptatum facilis eligendi officiis quidem nulla molestias libero! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium explicabo voluptatibus ut? Commodi corporis unde sunt repudiandae dolores temporibus, molestiae quisquam quae voluptatum facilis eligendi officiis quidem nulla molestias libero!"
+                        />
+
                         <Box px={4} py={2} mb={3}>
                             <Text
                                 fontWeight="medium"
                                 fontSize="lg"
                                 color="coolGray.700"
                             >
-                                Sujet Similaires
+                                Dans le meme contexte
                             </Text>
                         </Box>
                     </View>

@@ -14,9 +14,9 @@ export default function App() {
     const colorScheme = "light"; //useColorScheme();
 
     return (
-        <BottomButtonNavigationColor>
-            <SplashLoader>
-                <ThemeProvider>
+        <ThemeProvider>
+            <BottomButtonNavigationColor>
+                <SplashLoader>
                     <SafeAreaProvider>
                         <StatusBar />
                         <GestureHandlerRootView style={{ flex: 1 }}>
@@ -25,8 +25,8 @@ export default function App() {
                             </BottomSheetModalProvider>
                         </GestureHandlerRootView>
                     </SafeAreaProvider>
-                </ThemeProvider>
-            </SplashLoader>
-        </BottomButtonNavigationColor>
+                </SplashLoader>
+            </BottomButtonNavigationColor>
+        </ThemeProvider>
     );
 }

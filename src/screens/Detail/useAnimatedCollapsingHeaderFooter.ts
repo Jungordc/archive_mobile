@@ -1,5 +1,5 @@
 /** @format */
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { LayoutChangeEvent, LayoutRectangle } from "react-native";
 import {
     Extrapolate,
@@ -11,10 +11,10 @@ import {
 
 const MAX_HEIGHT = 90;
 const DEFAULT_BREAKPOINT_LAYOUT: LayoutRectangle = {
-    height: 0,
-    width: 0,
+    height: 90,
+    width: 360,
     x: 0,
-    y: 0,
+    y: 64,
 };
 
 type AnimatedShareValueType = {
@@ -33,9 +33,7 @@ export function useAnimatedCollapsingHeaderFooter() {
     const scrollY = useSharedValue<number>(0);
     const animatedValue = useShareScrollValue();
 
-    const breakPoints = useSharedValue<LayoutRectangle>(
-        DEFAULT_BREAKPOINT_LAYOUT
-    );
+    const breakPoints = useSharedValue<number>(DEFAULT_BREAKPOINT_LAYOUT.y);
 
     const scrollHandler = useAnimatedScrollHandler({
         onScroll: (event) => {
@@ -52,17 +50,19 @@ export function useAnimatedCollapsingHeaderFooter() {
         },
     });
 
-    const headerRightAnimatedStyles = useAnimatedStyle(() => ({
-        opacity: interpolate(
-            scrollY.value,
-            [
-                breakPoints.value.y - breakPoints.value.height / 2,
-                breakPoints.value.y,
-            ],
-            [0, 1],
-            Extrapolate.CLAMP
-        ),
-    }));
+    const headerRightAnimatedStyles = useAnimatedStyle(() => {
+        return {
+            opacity: interpolate(
+                scrollY.value,
+                [
+                    breakPoints.value - 10,
+                    breakPoints.value + DEFAULT_BREAKPOINT_LAYOUT.height,
+                ],
+                [0, 1],
+                Extrapolate.CLAMP
+            ),
+        };
+    });
 
     const headerAnimatedStyles = useAnimatedStyle(() => ({
         transform: [
@@ -89,9 +89,14 @@ export function useAnimatedCollapsingHeaderFooter() {
         ],
     }));
 
-    const setBreakPoints = useCallback((event: LayoutChangeEvent) => {
-        breakPoints.value = event.nativeEvent.layout;
-    }, []);
+    const setBreakPoints = useCallback(
+        (event: LayoutChangeEvent) => {
+            console.log("setBreakPoints", event.nativeEvent.layout);
+            breakPoints.value = event.nativeEvent.layout.y;
+        },
+        [breakPoints]
+    );
+
     return {
         footerAnimatedStyles,
         headerAnimatedStyles,

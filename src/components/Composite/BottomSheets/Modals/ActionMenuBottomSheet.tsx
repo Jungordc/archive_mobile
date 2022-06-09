@@ -1,9 +1,9 @@
 /** @format */
 
-import { View, Text, Pressable } from "native-base";
+import { View, Text, Icon, HStack } from "native-base";
 import React from "react";
 import { BottomSheetModal, TouchableOpacity } from "@gorhom/bottom-sheet";
-
+import Ionicons from "@expo/vector-icons/Ionicons";
 /**
  * S'abonner a l'Hauteur | Se desabonner a l'hauteur
  * Inaproprier
@@ -15,14 +15,28 @@ export type ActionMenuBottomSheetProps = {
     snapPoints?: string[];
 };
 
-const ActionItemPressable: React.FC = ({ children }) => {
+type ActionItemPressableProps = {
+    iconName?: string;
+};
+
+const ActionItemPressable: React.FC<ActionItemPressableProps> = ({
+    children,
+    iconName,
+}) => {
     return (
         <TouchableOpacity>
-            <Pressable p={2}>
-                <Text color="coolGray.700" fontWeight="medium" fontSize="2xl">
+            <HStack p={2} space={4} alignItems="center">
+                <Icon
+                    color="coolGray.500"
+                    size={25}
+                    fontWeight="medium"
+                    as={Ionicons}
+                    name={iconName}
+                />
+                <Text color="coolGray.700" fontSize="lg">
                     {children}
                 </Text>
-            </Pressable>
+            </HStack>
         </TouchableOpacity>
     );
 };
@@ -33,13 +47,21 @@ const ActionMenuBottomSheet = React.forwardRef<
     return (
         <BottomSheetModal ref={ref} snapPoints={snapPoints}>
             <View p={2}>
-                <ActionItemPressable>S'abonner a l'auteur </ActionItemPressable>
-                <ActionItemPressable>Bloquer l'auteur</ActionItemPressable>
-                <ActionItemPressable>
+                <ActionItemPressable iconName="person-remove-outline">
+                    S'abonner a l'auteur{" "}
+                </ActionItemPressable>
+                <ActionItemPressable iconName="lock-closed-outline">
+                    Bloquer l'auteur
+                </ActionItemPressable>
+                <ActionItemPressable iconName="eye-off-outline">
                     Ne plus voir cet archive
                 </ActionItemPressable>
-                <ActionItemPressable>Inaproprier</ActionItemPressable>
-                <ActionItemPressable>Signaler</ActionItemPressable>
+                <ActionItemPressable iconName="bug-outline">
+                    Inapproprié
+                </ActionItemPressable>
+                <ActionItemPressable iconName="flag-outline">
+                    Signaler
+                </ActionItemPressable>
             </View>
         </BottomSheetModal>
     );

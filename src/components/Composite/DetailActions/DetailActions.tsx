@@ -46,7 +46,7 @@ const DetailActions: React.FC<DetailActions> = ({ ...vstackProps }) => {
             <IconButtonLabel iconName="heart-outline" label="234" />
             <IconButtonLabel iconName="bookmark-outline" label="34" />
             <IconButtonLabel iconName="chatbubble-outline" label="23" />
-            <IconButtonLabel iconName="ios-share-outline" label="2" />
+            <IconButtonLabel iconName="share-outline" label="2" />
         </HStack>
     );
 };
