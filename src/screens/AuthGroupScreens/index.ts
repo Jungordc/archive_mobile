@@ -31,3 +31,4 @@ export {
 } from "./CodeConfirmInput";
 export { EmailInputProps, default as EmailScreen } from "./EmailInput";
 export { NameInputProps, default as UserNameScreen } from "./NameInput";
+export { CheckInboxProps, default as CheckInboxScreen } from "./CheckInbox";

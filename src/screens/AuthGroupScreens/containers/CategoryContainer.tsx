@@ -13,8 +13,9 @@ import {
 import { HStack } from "native-base/src/components/primitives/Stack";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import RootContainer from "../../components/Primitive/RootContainer/Container";
-import TextLink from "../../components/Primitive/TextLink/TextLink";
+import RootContainer from "../../../components/Primitive/RootContainer/Container";
+import TextLink from "../../../components/Primitive/TextLink/TextLink";
+import { InterfaceTextProps } from "native-base/src/components/primitives/Text/types";
 
 const ButtonChoice: React.FC<{
     onPress?: (e: any) => void;
@@ -35,6 +36,16 @@ const ButtonChoice: React.FC<{
         >
             {title}
         </Button>
+    );
+};
+
+export const TextTermOfService: React.FC<InterfaceTextProps> = (props) => {
+    return (
+        <Text color="coolGray.700" {...props}>
+            By signing up, you agree to our{" "}
+            <TextLink>Terms of Service</TextLink> and acknowlodge that our{" "}
+            <TextLink>Privacy Policy</TextLink> applies to you
+        </Text>
     );
 };
 
@@ -123,12 +134,7 @@ const CategoryContainer: React.FC<CategoryContainerProps> = ({
                     </View>
                 </VStack>
                 <View flex={0.1}>
-                    <Text color="coolGray.700">
-                        By signing up, you agree to our{" "}
-                        <TextLink>Terms of Service</TextLink> and acknowlodge
-                        that our <TextLink>Privacy Policy</TextLink> applies to
-                        you
-                    </Text>
+                    <TextTermOfService />
                 </View>
             </View>
         </RootContainer>

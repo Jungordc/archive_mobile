@@ -2,7 +2,7 @@
 
 import React from "react";
 import { RootStackScreenProps } from "../../navigation/types";
-import CategoryContainer from "./CategoryContainer";
+import CategoryContainer from "./containers/CategoryContainer";
 
 export type CategoryLoginProps = {} & RootStackScreenProps<"Login">;
 const CategoryLogin: React.FC<CategoryLoginProps> = ({ navigation }) => {

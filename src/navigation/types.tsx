@@ -27,6 +27,8 @@ export type RootStackParamList = {
     EmailAuth: undefined;
     UsernameAuth: undefined;
     ConfimCodeAuth: undefined;
+    CheckInbox: undefined;
+    //
     Home: NavigatorScreenParams<HomeTabPramList>; //tab Route
     DashList: undefined;
     NewLib: undefined;

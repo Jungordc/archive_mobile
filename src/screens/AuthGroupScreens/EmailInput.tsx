@@ -1,17 +1,21 @@
 /** @format */
 
-import { View, Text } from "react-native";
 import React from "react";
-import RootContainer from "../../components/Primitive/RootContainer/Container";
+import { RootStackScreenProps } from "../../navigation/types";
+import InputContainer from "./containers/InputContainer";
 
-export type EmailInputProps = {};
-const EmailInput: React.FC<EmailInputProps> = () => {
+export type EmailInputProps = {} & RootStackScreenProps<"EmailAuth">;
+const EmailInput: React.FC<EmailInputProps> = ({ navigation }) => {
+    const onContinue = React.useCallback(
+        () => navigation.navigate("UsernameAuth"),
+        []
+    );
     return (
-        <RootContainer>
-            <View>
-                <Text>EmailInput</Text>
-            </View>
-        </RootContainer>
+        <InputContainer
+            btnProps={{
+                onPress: onContinue,
+            }}
+        />
     );
 };
 

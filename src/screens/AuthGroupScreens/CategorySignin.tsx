@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import CategoryContainer from "./CategoryContainer";
+import CategoryContainer from "./containers/CategoryContainer";
 import { RootStackScreenProps } from "../../navigation/types";
 
 export type CategorySigninProps = {} & RootStackScreenProps<"Signin">;

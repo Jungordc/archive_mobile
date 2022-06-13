@@ -17,6 +17,7 @@ import {
     EmailScreen,
     CategorySigninScreen,
     ConfirmCodeScreen,
+    CheckInboxScreen,
 } from "../screens/AuthGroupScreens";
 
 export const RootStackNavigation: React.FC = () => {
@@ -47,6 +48,10 @@ export const RootStackNavigation: React.FC = () => {
                 <HomeStack.Screen
                     name="UsernameAuth"
                     component={UserNameScreen}
+                />
+                <HomeStack.Screen
+                    name="CheckInbox"
+                    component={CheckInboxScreen}
                 />
                 <HomeStack.Screen
                     name="ConfimCodeAuth"
