@@ -1,16 +1,6 @@
 /** @format */
 
 import React from "react";
-import {
-    Box,
-    Button,
-    Heading,
-    HStack,
-    Icon,
-    IconButton,
-    Text,
-    View,
-} from "native-base";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DetailReader from "../../components/Composite/DetailReader/DetailReader";
 import { RootStackScreenProps } from "../../navigation/types";
@@ -25,6 +15,14 @@ import { useAnimatedCollapsingHeaderFooter } from "./useAnimatedCollapsingHeader
 import Divider from "native-base/src/components/composites/Divider";
 import CardFeedContainer from "../../containers/CardFeedContainer";
 import FeedCardHorizontal from "../../components/Composite/Cards/FeedCardHorizontal/FeedCardHorizontal";
+import Box from "native-base/src/components/primitives/Box";
+import HStack from "native-base/src/components/primitives/Stack/HStack";
+import IconButton from "native-base/src/components/composites/IconButton";
+import { Icon } from "native-base/src/components/primitives/Icon";
+import Heading from "native-base/src/components/primitives/Heading";
+import { View } from "native-base/src/components/basic/View";
+import Button from "native-base/src/components/primitives/Button/Button";
+import Text from "native-base/src/components/primitives/Text";
 
 export type DetailProps = {} & RootStackScreenProps<"Detail">;
 

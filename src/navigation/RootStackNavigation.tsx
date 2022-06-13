@@ -1,8 +1,8 @@
 /** @format */
 
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "./types";
+import { HomeStack } from "./navigatorCreator";
+
 import Detail from "../screens/Detail/Detail";
 import Search from "../screens/Search/Search";
 import HomeTabNavigation from "./HomeTabNavigation";
@@ -11,13 +11,17 @@ import Profile from "../screens/Profile/Profile";
 import Help from "../screens/Help/Help";
 import About from "../screens/About/About";
 import NewLib from "../screens/NewLib/NewLib";
-
-const HomeStack = createNativeStackNavigator<RootStackParamList>();
+import {
+    CategoryLoginScreen,
+    UserNameScreen,
+    EmailScreen,
+    CategorySigninScreen,
+    ConfirmCodeScreen,
+} from "../screens/AuthGroupScreens";
 
 export const RootStackNavigation: React.FC = () => {
     return (
         <HomeStack.Navigator
-            initialRouteName="Home"
             screenOptions={{
                 headerTitleAlign: "center",
                 headerShadowVisible: false,
@@ -26,6 +30,29 @@ export const RootStackNavigation: React.FC = () => {
                 },
             }}
         >
+            <HomeStack.Group
+                screenOptions={{
+                    headerShown: false,
+                }}
+            >
+                <HomeStack.Screen
+                    name="Login"
+                    component={CategoryLoginScreen}
+                />
+                <HomeStack.Screen
+                    name="Signin"
+                    component={CategorySigninScreen}
+                />
+                <HomeStack.Screen name="EmailAuth" component={EmailScreen} />
+                <HomeStack.Screen
+                    name="UsernameAuth"
+                    component={UserNameScreen}
+                />
+                <HomeStack.Screen
+                    name="ConfimCodeAuth"
+                    component={ConfirmCodeScreen}
+                />
+            </HomeStack.Group>
             <HomeStack.Screen
                 options={{
                     title: "Archive",

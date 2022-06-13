@@ -10,12 +10,17 @@ import IconButton, {
     IconButtonProps,
 } from "../../Primitive/IconButton/IconButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import ConnectToPicker from "./ConnectToPicker";
+import { ComonType } from "./types";
 
 export type ProfileUserProps = {
     source?: ImageSourcePropType;
     avatarProps?: AvatarProps;
     iconButtonProps?: IconButtonProps;
-} & InterfaceViewProps;
+} & InterfaceViewProps &
+    ComonType;
+
+const IconButtonConnected = ConnectToPicker(IconButton);
 
 const ProfileUser: React.FC<ProfileUserProps> = ({
     size = "16",
@@ -31,7 +36,10 @@ const ProfileUser: React.FC<ProfileUserProps> = ({
             ) : (
                 <View size={16} bg="coolGray.300" borderRadius="full" />
             )}
-            <IconButton
+            <IconButtonConnected
+                onSelectImage={(image) => {
+                    console.log(image);
+                }}
                 position="absolute"
                 right={-15}
                 bottom={-15}

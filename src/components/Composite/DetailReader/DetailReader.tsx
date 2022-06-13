@@ -3,6 +3,7 @@
 import { Box, Text, VStack, Heading, View } from "native-base";
 import React from "react";
 import Image from "../../../../packages/image-container-plus/components/Image";
+import { uri } from "../../../utils/uri";
 
 export type DetailReaderProps = {
     tagues?: string;
@@ -28,7 +29,7 @@ const DetailReader: React.FC<DetailReaderProps> = ({
             </VStack>
             <Box flex={1} m={3}>
                 <View h={200} w="100%">
-                    <Image />
+                    <Image source={uri} />
                 </View>
             </Box>
             <Box p={2}>

@@ -1,7 +1,6 @@
 /** @format */
 
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { HomeTabPramList } from "./types";
+import { BottomTab } from "./navigatorCreator";
 import { useTheme } from "native-base";
 import TabBarIcon from "./TabBarIcon";
 // screens
@@ -9,8 +8,6 @@ import MeDash from "../screens/MeDash/MeDash";
 import Home from "../screens/Home/Home";
 import SelectCategorie from "../screens/SelectCategorie/SelectCategorie";
 import Search from "../screens/Search/Search";
-
-const BottomTab = createBottomTabNavigator<HomeTabPramList>();
 
 const HomeTabNavigation: React.FC = () => {
     const theme = useTheme();
@@ -82,8 +79,8 @@ const HomeTabNavigation: React.FC = () => {
                     headerTitleAlign: "center",
                     tabBarIcon: (props) => (
                         <TabBarIcon
-                            name="md-person-outline"
-                            focusIconName="person-sharp"
+                            name="person-circle-outline"
+                            focusIconName="person-circle-sharp"
                             {...props}
                         />
                     ),

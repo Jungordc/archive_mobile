@@ -21,6 +21,12 @@ declare global {
 // route stack params list
 
 export type RootStackParamList = {
+    // Group Auth
+    Login: undefined;
+    Signin: undefined;
+    EmailAuth: undefined;
+    UsernameAuth: undefined;
+    ConfimCodeAuth: undefined;
     Home: NavigatorScreenParams<HomeTabPramList>; //tab Route
     DashList: undefined;
     NewLib: undefined;
