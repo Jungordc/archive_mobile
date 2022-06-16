@@ -21,7 +21,7 @@ import IconButton from "native-base/src/components/composites/IconButton";
 import { Icon } from "native-base/src/components/primitives/Icon";
 import Heading from "native-base/src/components/primitives/Heading";
 import { View } from "native-base/src/components/basic/View";
-import Button from "native-base/src/components/primitives/Button/Button";
+import { Button } from "native-base/src/components/primitives/Button";
 import Text from "native-base/src/components/primitives/Text";
 
 export type DetailProps = {} & RootStackScreenProps<"Detail">;
@@ -56,8 +56,10 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                     backButton={
                         <HStack space={2} alignItems="center">
                             <IconButton
+                                onPress={navigation.goBack}
                                 fontVariant="small-caps"
                                 colorScheme="coolGray"
+                                size="sm"
                                 icon={
                                     <Icon
                                         as={Ionicons}
@@ -76,7 +78,7 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                         <AnimatedBox style={headerRightAnimatedStyles}>
                             <HStack space="3">
                                 <Button
-                                    bgColor="primary.500"
+                                    colorScheme="green"
                                     size="sm"
                                     borderRadius="full"
                                 >

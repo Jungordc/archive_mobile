@@ -6,20 +6,15 @@ import Heading from "native-base/src/components/primitives/Heading";
 import { View } from "native-base/src/components/basic/View";
 import { VStack } from "native-base/src/components/primitives/Stack";
 import Text from "native-base/src/components/primitives/Text";
+import { Button } from "native-base/src/components/primitives/Button";
 import { RootStackScreenProps } from "../../navigation/types";
 import LottieView from "lottie-react-native";
-import Animated, {
-    Extrapolate,
-    interpolate,
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring,
-} from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import useEmailCheckAnimations from "../../animations/useEmailCheckAnimation";
 
 export type CheckInboxProps = {} & RootStackScreenProps<"CheckInbox">;
 
-const AText = Animated.createAnimatedComponent(Text);
+const AText = Animated.createAnimatedComponent(Button);
 
 const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
     const lottieRef = useRef<LottieView | null>(null);
@@ -60,10 +55,10 @@ const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
                     <View h="24" position="relative">
                         <AText
                             style={animatedTextStyle}
-                            color="green.700"
-                            fontSize="md"
-                            textAlign="center"
                             zIndex={1}
+                            variant="link"
+                            size="lg"
+                            colorScheme="green"
                             onPress={onGoNext}
                         >
                             Inserer le code
@@ -74,11 +69,11 @@ const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
                             left={0}
                             right={0}
                             onPress={onResend}
-                            color="green.700"
-                            textAlign="center"
+                            variant="link"
+                            colorScheme="green"
                             style={animatedTextResendStyle}
                         >
-                            Resend the link to sign in
+                            Renvoyer le code de confirmation
                         </AText>
                     </View>
                 </VStack>

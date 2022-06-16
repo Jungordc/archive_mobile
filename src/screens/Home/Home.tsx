@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { Icon, Heading, IconButton, View } from "native-base";
+import { Icon, Heading, IconButton, View, Pressable } from "native-base";
 import { StatusBar } from "expo-status-bar";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -16,6 +16,7 @@ import CardFeedContainer from "../../containers/CardFeedContainer";
 import Divider from "native-base/src/components/composites/Divider";
 import Animated from "react-native-reanimated";
 import useAnimatedCollapsingHeader from "../../hooks/useAnimatedCollapsingHeader";
+import { connectorFeedCards } from "../../services/connectors/feedConnector";
 
 export type HomeProps = {} & HomeTabScreenProps<"Index">;
 
@@ -23,12 +24,14 @@ const data = new Array(11)
     .fill(0)
     .map((_, index) => ({ id: index, title: ` title n0 ${index}` }));
 
+const FeedCardConnected = connectorFeedCards(FeedCardHorizontal);
+
 const Home: React.FC<HomeProps> = ({ navigation, route }) => {
     const headerAnimated = useAnimatedCollapsingHeader();
-    const goToDetail = React.useCallback(
-        (post: number | string) => navigation.navigate("Detail", { post }),
-        []
-    );
+    const goToDetail = React.useCallback(() => {
+        console.log(".....................>>>>>>>>>>>>>");
+        navigation.navigate("Detail", { post: 1 });
+    }, []);
 
     return (
         <SafeAreaView>
@@ -83,6 +86,14 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
                     return (
                         <>
                             {index !== 0 && <Divider color="amber.300" />}
+                            {/* <Pressable
+                                onPress={goToDetail}
+                                h="56"
+                                bgColor="amber.400"
+                            />
+                            <Pressable onPress={goToDetail}>
+                                <FeedCardConnected py={2} />
+                            </Pressable> */}
                             <CardFeedContainer onPress={goToDetail}>
                                 <FeedCardHorizontal py={2} />
                             </CardFeedContainer>

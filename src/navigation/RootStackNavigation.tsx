@@ -19,10 +19,13 @@ import {
     ConfirmCodeScreen,
     CheckInboxScreen,
 } from "../screens/AuthGroupScreens";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Pressable } from "react-native";
 
 export const RootStackNavigation: React.FC = () => {
     return (
         <HomeStack.Navigator
+            initialRouteName="Home"
             screenOptions={{
                 headerTitleAlign: "center",
                 headerShadowVisible: false,
@@ -33,7 +36,10 @@ export const RootStackNavigation: React.FC = () => {
         >
             <HomeStack.Group
                 screenOptions={{
-                    headerShown: false,
+                    headerBackTitleVisible: false,
+                    headerTitle: () => null,
+                    headerTransparent: true,
+                    headerShadowVisible: false,
                 }}
             >
                 <HomeStack.Screen
@@ -52,6 +58,24 @@ export const RootStackNavigation: React.FC = () => {
                 <HomeStack.Screen
                     name="CheckInbox"
                     component={CheckInboxScreen}
+                    options={({ navigation }) => ({
+                        presentation: "modal",
+                        headerShadowVisible: false,
+                        headerLeft: () => (
+                            <Pressable
+                                onPress={navigation.goBack}
+                                style={({ pressed }) => ({
+                                    opacity: pressed ? 0.5 : 1,
+                                })}
+                            >
+                                <Ionicons
+                                    name="close"
+                                    size={25}
+                                    style={{ marginRight: 15 }}
+                                />
+                            </Pressable>
+                        ),
+                    })}
                 />
                 <HomeStack.Screen
                     name="ConfimCodeAuth"
@@ -84,10 +108,37 @@ export const RootStackNavigation: React.FC = () => {
                 name="Edition"
                 component={Edit}
             />
-            <HomeStack.Screen name="Profile" component={Profile} />
+            <HomeStack.Screen
+                name="Profile"
+                component={Profile}
+                options={({ navigation }) => ({
+                    headerBackTitleVisible: false,
+                    headerTitle: () => null,
+                    headerTransparent: true,
+                    headerShadowVisible: false,
+                    headerLeft: () => (
+                        <Pressable
+                            onPress={navigation.goBack}
+                            style={({ pressed }) => ({
+                                opacity: pressed ? 0.5 : 1,
+                            })}
+                        >
+                            <Ionicons
+                                name="close"
+                                size={25}
+                                style={{ marginRight: 15 }}
+                            />
+                        </Pressable>
+                    ),
+                })}
+            />
             <HomeStack.Screen
                 options={{
                     title: "Nouvelle Bibliotheque",
+                    headerTitleAlign: "left",
+                    headerTitleStyle: {
+                        fontSize: 15,
+                    },
                 }}
                 name="NewLib"
                 component={NewLib}

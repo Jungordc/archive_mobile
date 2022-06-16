@@ -14,20 +14,18 @@ import AvatarLabel from "../../../Primitive/AvatarLabel/AvatarLabel";
 import Image from "../../../../../packages/image-container-plus/components/Image";
 import { uri } from "../../../../utils/uri";
 import TextDotSeparator from "../../../Primitive/TextDotSeparator/TextDotSeparator";
-import Pressable from "../../../Primitive/Pressable/Pressable";
+// import Pressable from "../../../Primitive/Pressable/Pressable";
 
 const WIDTH: number | string = "20";
 
 export type FeedCardHorizontalProps = {
-    onMenu?(e: any): void;
-    onSave?(e: any): void;
     avatar?: ImageSourcePropType;
     username?: string;
-    saved?: boolean;
     cover?: ImageSourcePropType;
     title?: string;
     baseOnText?: string;
     infos?: string[];
+    actions?: React.ReactNode;
 } & InterfacePressableProps;
 
 const TextInfo: React.FC = (props) => (
@@ -39,87 +37,65 @@ const FeedCardHorizontal: React.FC<FeedCardHorizontalProps> = ({
     avatar = uri,
     cover = uri,
     username = "Archive user",
-    saved = false,
     infos,
     baseOnText,
-    onSave,
-    onMenu,
+    actions,
     ...props
 }) => {
     return (
-        <Pressable flex={1} {...props}>
-            <View flex={1}>
-                <VStack flex={1} space="2" px={2} m={2}>
-                    <AvatarLabel
-                        avatarProps={{
-                            size: 6,
-                        }}
-                        titleProps={{
-                            fontSize: 14,
-                            color: "coolGray.600",
-                        }}
-                        source={avatar}
-                        title={username}
-                    />
-                    <HStack flex={1} space="2" justifyContent="space-between">
-                        <VStack flex={1} space={2}>
-                            <Heading color="coolGray.700" fontSize="md">
-                                {title}
-                            </Heading>
-                            <TextDotSeparator dotProps={{ bg: "coolGray.700" }}>
-                                {infos?.map((infoText, index) => (
-                                    <TextInfo key={`${index}${infoText}`}>
-                                        {infoText}
-                                    </TextInfo>
-                                ))}
-                            </TextDotSeparator>
-                        </VStack>
-                        {cover && (
-                            <View h="20" w={WIDTH}>
-                                <Image />
+        <View flex={1}>
+            <VStack flex={1} space="2" px={2} m={2}>
+                <AvatarLabel
+                    avatarProps={{
+                        size: 6,
+                    }}
+                    titleProps={{
+                        fontSize: 14,
+                        color: "coolGray.600",
+                    }}
+                    source={avatar}
+                    title={username}
+                />
+                <HStack flex={1} space="2" justifyContent="space-between">
+                    <VStack flex={1} space={2}>
+                        <Heading color="coolGray.700" fontSize="md">
+                            {title}
+                        </Heading>
+                        <TextDotSeparator dotProps={{ bg: "coolGray.700" }}>
+                            {infos?.map((infoText, index) => (
+                                <TextInfo key={`${index}${infoText}`}>
+                                    {infoText}
+                                </TextInfo>
+                            ))}
+                        </TextDotSeparator>
+                    </VStack>
+                    {cover && (
+                        <View h="20" w={WIDTH}>
+                            <Image />
+                        </View>
+                    )}
+                </HStack>
+                {(baseOnText || actions) && (
+                    <HStack justifyContent="space-between" alignItems="center">
+                        {baseOnText && (
+                            <Text fontSize="2xs" color="coolGray.500">
+                                {baseOnText}
+                            </Text>
+                        )}
+                        {actions && (
+                            <View w={WIDTH}>
+                                <HStack
+                                    space={2}
+                                    justifyContent="space-between"
+                                >
+                                    {actions}
+                                </HStack>
                             </View>
                         )}
                     </HStack>
-                    <HStack justifyContent="space-between" alignItems="center">
-                        <Text fontSize="2xs" color="coolGray.500">
-                            {baseOnText}
-                        </Text>
-                        <View w={WIDTH}>
-                            <HStack space={2} justifyContent="space-between">
-                                <IconButton
-                                    onPress={onSave}
-                                    size="sm"
-                                    fontVariant="small-caps"
-                                    colorScheme="coolGray"
-                                    icon={
-                                        <Icon
-                                            as={Ionicons}
-                                            name={
-                                                saved
-                                                    ? "md-bookmark"
-                                                    : "md-bookmark-outline"
-                                            }
-                                        />
-                                    }
-                                />
-                                <IconButton
-                                    onPress={onMenu}
-                                    size="sm"
-                                    fontVariant="small-caps"
-                                    colorScheme="coolGray"
-                                    icon={
-                                        <Icon
-                                            as={Ionicons}
-                                            name="ellipsis-vertical"
-                                        />
-                                    }
-                                />
-                            </HStack>
-                        </View>
-                    </HStack>
-                </VStack>
-            </View>
-        </Pressable>
+                )}
+            </VStack>
+        </View>
     );
 };
 

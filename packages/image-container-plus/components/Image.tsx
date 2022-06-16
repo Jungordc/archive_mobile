@@ -12,11 +12,17 @@ export type ImageProps = {
 
 const Image: React.FC<ImageProps> = ({
     bgColor = "coolGray.400",
+    borderRadius = "md",
     source,
     ...props
 }) => {
     const [inner, setInner] = React.useState(
-        <View borderRadius="md" flex={1} bgColor={bgColor} {...props} />
+        <View
+            borderRadius={borderRadius}
+            flex={1}
+            bgColor={bgColor}
+            {...props}
+        />
     );
 
     const url = React.useMemo(() => {
@@ -33,7 +39,7 @@ const Image: React.FC<ImageProps> = ({
                 if (isImage) {
                     setInner(
                         <NBImage
-                            borderRadius="md"
+                            borderRadius={borderRadius}
                             alt="img"
                             source={source}
                             flex={1}

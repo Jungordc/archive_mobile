@@ -1,35 +1,36 @@
 /** @format */
 
-import { View, Text } from "native-base";
+import { View } from "native-base";
+import { InterfaceViewProps } from "native-base/src/components/basic/View/types";
 import React from "react";
-import ProfileCover from "./ProfileCover";
-import ProfileUser from "./ProfileUser";
-import { ComonType } from "./types";
+import ProfileCover, { ProfileCoverProps } from "./ProfileCover";
+import ProfileUser, { ProfileUserProps } from "./ProfileUser";
 
 export type ProfileImagesProps = {
-    onImageCoverSelect?(e: any): void;
-    onImageProfileSelect?(e: any): void;
-} & Omit<ComonType, "onSelectImage">;
+    edit?: boolean;
+    profileCoverProps?: ProfileCoverProps;
+    profileAvatarProps?: ProfileUserProps;
+} & InterfaceViewProps;
 
 const ProfileImages: React.FC<ProfileImagesProps> = ({
-    isEdit = false,
-    onImageCoverSelect,
-    onImageProfileSelect,
+    edit,
+    profileAvatarProps,
+    profileCoverProps,
     ...props
 }) => {
     return (
-        <View>
-            <ProfileCover onSelectImage={onImageCoverSelect} isEdit={isEdit} />
+        <View {...props}>
+            <ProfileCover edit={edit} {...profileCoverProps} />
             <ProfileUser
-                onSelectImage={onImageProfileSelect}
-                isEdit={isEdit}
+                edit={edit}
                 position="absolute"
-                left="1.5"
+                left="3"
                 bottom={-35}
                 bg="coolGray.300"
                 borderRadius="full"
                 borderColor="#fff"
                 borderWidth="4"
+                {...profileAvatarProps}
             />
         </View>
     );
