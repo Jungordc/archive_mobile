@@ -4,7 +4,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import DetailReader from "../../components/Composite/DetailReader/DetailReader";
 import { RootStackScreenProps } from "../../navigation/types";
-import DetailActions from "../../components/Composite/DetailActions/DetailActions";
+import DetailActions from "./DetailActions";
 import AvatarLabel from "../../components/Primitive/AvatarLabel/AvatarLabel";
 import { uri } from "../../utils/uri";
 import TextDotSeparator from "../../components/Primitive/TextDotSeparator/TextDotSeparator";
@@ -21,8 +21,9 @@ import IconButton from "native-base/src/components/composites/IconButton";
 import { Icon } from "native-base/src/components/primitives/Icon";
 import Heading from "native-base/src/components/primitives/Heading";
 import { View } from "native-base/src/components/basic/View";
-import { Button } from "native-base/src/components/primitives/Button";
 import Text from "native-base/src/components/primitives/Text";
+import SubButtonContainer from "../../containers/Actions/SubButtonContainer";
+import MoreButtonBottomSheet from "../../containers/Actions/MoreButtonBottomSheet";
 
 export type DetailProps = {} & RootStackScreenProps<"Detail">;
 
@@ -77,23 +78,11 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                     rightHeader={
                         <AnimatedBox style={headerRightAnimatedStyles}>
                             <HStack space="3">
-                                <Button
-                                    colorScheme="green"
-                                    size="sm"
-                                    borderRadius="full"
-                                >
-                                    S'abonner
-                                </Button>
-                                <IconButton
-                                    // size="sm"
-                                    fontVariant="small-caps"
-                                    colorScheme="coolGray"
-                                    icon={
-                                        <Icon
-                                            as={Ionicons}
-                                            name="ellipsis-vertical"
-                                        />
-                                    }
+                                <SubButtonContainer />
+                                <MoreButtonBottomSheet
+                                    btnProps={{
+                                        iconName: "ellipsis-vertical",
+                                    }}
                                 />
                             </HStack>
                         </AnimatedBox>
@@ -132,31 +121,12 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                                         >
                                             Lorem ipsum
                                         </Text>
-                                        <Button
-                                            bgColor="primary.500"
-                                            size="sm"
-                                            borderRadius="full"
-                                        >
-                                            S'abonner
-                                        </Button>
+                                        <SubButtonContainer />
                                     </HStack>
                                 }
                                 subTitle={
                                     <HStack>
                                         <TextDotSeparator>
-                                            <View>
-                                                <IconButton
-                                                    size="sm"
-                                                    fontVariant="small-caps"
-                                                    colorScheme="coolGray"
-                                                    icon={
-                                                        <Icon
-                                                            as={Ionicons}
-                                                            name="md-bookmark"
-                                                        />
-                                                    }
-                                                />
-                                            </View>
                                             <Text color="coolGray.600">
                                                 Il y a 2 jours
                                             </Text>
@@ -165,21 +135,6 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                                             </Text>
                                         </TextDotSeparator>
                                     </HStack>
-                                }
-                                action={
-                                    <View>
-                                        <IconButton
-                                            // size="sm"
-                                            fontVariant="small-caps"
-                                            colorScheme="coolGray"
-                                            icon={
-                                                <Icon
-                                                    as={Ionicons}
-                                                    name="ellipsis-horizontal"
-                                                />
-                                            }
-                                        />
-                                    </View>
                                 }
                             />
                         </View>
