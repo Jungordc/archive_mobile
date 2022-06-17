@@ -11,22 +11,28 @@ export type IconLabelProps = {
     icon?: any;
     iconProps?: InterfaceIconProps;
     labelProps?: InterfaceTextProps;
+    labelPosition?: "Left" | "Right";
 };
 
 const IconLabel: React.FC<IconLabelProps> = ({
     label,
+    labelPosition = "Right",
     icon,
     labelProps,
     iconProps,
 }) => {
+    const Label = (
+        <Text isTruncated fontSize="2xs" {...labelProps}>
+            {label}
+        </Text>
+    );
     return (
         <HStack space={2} alignItems="center">
+            {labelPosition === "Left" && Label}
             {icon && (
                 <Icon size="xs" as={Ionicons} name={icon} {...iconProps} />
             )}
-            <Text isTruncated fontSize="2xs" {...labelProps}>
-                {label}
-            </Text>
+            {labelPosition === "Right" && Label}
         </HStack>
     );
 };

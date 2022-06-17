@@ -41,6 +41,11 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
         setBreakPoints,
     } = useAnimatedCollapsingHeaderFooter();
 
+    const handlerComment = React.useCallback(
+        () => navigation.navigate("Comments", { post: 12 }),
+        []
+    );
+
     return (
         <SafeAreaView>
             <AnimatedBox
@@ -183,7 +188,7 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                 right={0}
                 flex={1}
             >
-                <DetailActions />
+                <DetailActions onPressComment={handlerComment} />
             </AnimatedBox>
         </SafeAreaView>
     );

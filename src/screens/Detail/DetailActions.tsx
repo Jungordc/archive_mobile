@@ -11,8 +11,11 @@ import SaveButtonBottomSheet from "../../containers/Actions/SaveButtonBottomShee
 import { InterfaceIconButtonProps } from "native-base/src/components/composites/IconButton/types";
 import LikeButtonContainer from "../../containers/Actions/LikeButtonContainer";
 import LabelChangeActionContainer from "../../containers/Actions/LabelChangeActionContainer";
+import CommentButton from "../../components/Composite/ButtonsActions/CommentButton";
 
-export type DetailActions = {} & InterfaceHStackProps;
+export type DetailActions = {
+    onPressComment?(): void;
+} & InterfaceHStackProps;
 
 type IconButtonLabelProps = {
     icon: string | React.ReactNode;
@@ -48,7 +51,10 @@ const IconButtonLabel: React.FC<IconButtonLabelProps> = ({ icon, label }) => {
     );
 };
 
-const DetailActions: React.FC<DetailActions> = ({ ...vstackProps }) => {
+const DetailActions: React.FC<DetailActions> = ({
+    onPressComment,
+    ...vstackProps
+}) => {
     return (
         <HStack
             flex={1}
@@ -85,7 +91,16 @@ const DetailActions: React.FC<DetailActions> = ({ ...vstackProps }) => {
                     />
                 )}
             />
-            <IconButtonLabel icon="chatbubble-outline" label="23" />
+            <IconButtonLabel
+                icon={
+                    <CommentButton
+                        onPress={onPressComment}
+                        {...ComonButtonActionProps}
+                    />
+                }
+                label="23"
+            />
+            {/* <IconButtonLabel icon="chatbubble-outline" label="23" /> */}
             <IconButtonLabel icon="share-outline" label="2" />
         </HStack>
     );

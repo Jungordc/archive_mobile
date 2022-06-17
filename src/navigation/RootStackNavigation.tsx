@@ -21,6 +21,7 @@ import {
 } from "../screens/AuthGroupScreens";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Pressable } from "react-native";
+import Comments from "../screens/Comments/Comments";
 
 export const RootStackNavigation: React.FC = () => {
     return (
@@ -151,6 +152,16 @@ export const RootStackNavigation: React.FC = () => {
                 name="About"
                 component={About}
             />
+            {/* Modal actions.... */}
+            <HomeStack.Group
+                screenOptions={{
+                    presentation: "modal",
+                    animation: "slide_from_bottom",
+                    headerTitleAlign: "left",
+                }}
+            >
+                <HomeStack.Screen name="Comments" component={Comments} />
+            </HomeStack.Group>
         </HomeStack.Navigator>
     );
 };

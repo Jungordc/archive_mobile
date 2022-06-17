@@ -40,6 +40,7 @@ export type RootStackParamList = {
     Detail: { post: string | number };
     SelectCategorie: undefined;
     Edition: { category: string | number };
+    Comments: { post: number | string }; // Modal
 };
 
 export type HomeTabPramList = {
