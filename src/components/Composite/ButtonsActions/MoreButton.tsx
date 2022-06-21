@@ -1,30 +1,17 @@
 /** @format */
 
 import React from "react";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Icon } from "native-base/src/components/primitives/Icon";
 import IconButton, {
-    IIconButtonProps,
-} from "native-base/src/components/composites/IconButton";
-import { IoniconsNameType } from "./types";
+    IconButtonProps,
+} from "../../Primitive/IconButton/IconButton";
 
-export type MoreButtonProps = {
-    iconName?: IoniconsNameType;
-} & IIconButtonProps;
+export type MoreButtonProps = {} & IconButtonProps;
 
 const MoreButton: React.FC<MoreButtonProps> = ({
     iconName = "ellipsis-vertical",
     ...props
 }) => {
-    return (
-        <IconButton
-            size="sm"
-            fontVariant="small-caps"
-            colorScheme="coolGray"
-            icon={<Icon as={Ionicons} name={iconName} />}
-            {...props}
-        />
-    );
+    return <IconButton iconName={iconName} {...props} />;
 };
 
 export default MoreButton;

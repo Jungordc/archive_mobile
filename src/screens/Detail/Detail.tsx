@@ -27,11 +27,7 @@ import MoreButtonBottomSheet from "../../containers/Actions/MoreButtonBottomShee
 import useFakeData from "../../services/faceData";
 
 export type DetailProps = {} & RootStackScreenProps<"Detail">;
-
 const AnimatedBox = Animated.createAnimatedComponent(Box);
-// const data = new Array(10)
-//     .fill(0)
-//     .map((i, index) => ({ id: index, title: ` title n0 ${index}` }));
 
 const Detail: React.FC<DetailProps> = ({ navigation }) => {
     const {

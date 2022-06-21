@@ -13,7 +13,6 @@ export type SaveButtonBottomSheetProps = {
 const SaveButtonBottomSheet: React.FC<SaveButtonBottomSheetProps> = ({
     btnProps,
     onSaved,
-    ...props
 }) => {
     const [saved, setSaved] = React.useState<boolean>(false);
     React.useEffect(() => {

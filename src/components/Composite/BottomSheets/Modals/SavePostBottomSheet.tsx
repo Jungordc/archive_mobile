@@ -7,6 +7,7 @@ import HStack from "native-base/src/components/primitives/Stack/HStack";
 import Heading from "native-base/src/components/primitives/Heading";
 import VStack from "native-base/src/components/primitives/Stack/VStack";
 import { ActivityIndicator } from "react-native";
+import ButtonBottomSheets from "../ButtonBottomSheets";
 
 export type SavePostBottomSheetProps = {
     snapPoints?: string[];
@@ -29,17 +30,9 @@ const SavePostBottomSheet = React.forwardRef<
                 <VStack space={5}>
                     <HStack alignItems="center" justifyContent="space-between">
                         <Heading fontSize={20}>Enregistrer dans</Heading>
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: theme.colors.primary[500],
-                                paddingHorizontal: theme.sizes[4],
-                                paddingVertical: theme.sizes[2],
-                                borderRadius: 500,
-                            }}
-                            onPress={onConfirm}
-                        >
-                            <Text color="coolGray.50">Confirmer</Text>
-                        </TouchableOpacity>
+                        <ButtonBottomSheets onPress={onConfirm}>
+                            Confirmer
+                        </ButtonBottomSheets>
                     </HStack>
                     <Divider />
                     <View>

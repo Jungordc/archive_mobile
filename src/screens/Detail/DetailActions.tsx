@@ -12,6 +12,7 @@ import { InterfaceIconButtonProps } from "native-base/src/components/composites/
 import LikeButtonContainer from "../../containers/Actions/LikeButtonContainer";
 import LabelChangeActionContainer from "../../containers/Actions/LabelChangeActionContainer";
 import CommentButton from "../../components/Composite/ButtonsActions/CommentButton";
+import ShareContainerButtonSheet from "../../containers/Actions/ShareContainerButtonSheet";
 
 export type DetailActions = {
     onPressComment?(): void;
@@ -100,8 +101,20 @@ const DetailActions: React.FC<DetailActions> = ({
                 }
                 label="23"
             />
-            {/* <IconButtonLabel icon="chatbubble-outline" label="23" /> */}
-            <IconButtonLabel icon="share-outline" label="2" />
+
+            <LabelChangeActionContainer
+                initialLabel={2}
+                children={({ label, onChangeLabel }) => (
+                    <IconButtonLabel
+                        icon={
+                            <ShareContainerButtonSheet
+                                btnProps={ComonButtonActionProps}
+                            />
+                        }
+                        label={label.toString()}
+                    />
+                )}
+            />
         </HStack>
     );
 };

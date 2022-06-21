@@ -1,46 +1,32 @@
 /** @format */
 
 import React from "react";
-import Entypo from "@expo/vector-icons/Entypo";
-import { Box, Icon, IconButton as NIconButton } from "native-base";
-import * as NavigationBar from "expo-navigation-bar";
-import { InterfaceIconButtonProps } from "native-base/lib/typescript/components/composites/IconButton/types";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Icon, IIconProps } from "native-base/src/components/primitives/Icon";
+import {
+    default as NBIconButton,
+    IIconButtonProps,
+} from "native-base/src/components/composites/IconButton";
+import { IoniconsNameType } from "./Type";
 
+export { IoniconsNameType as IconNames };
 export type IconButtonProps = {
-    onPress?(): void;
-} & InterfaceIconButtonProps;
+    iconName?: IoniconsNameType;
+    iconProps?: IIconProps;
+} & IIconButtonProps;
 
-export const IconButton: React.FC<IconButtonProps> = ({
-    onPress,
-    ...restProps
+const IconButton: React.FC<IconButtonProps> = ({
+    iconName = "ellipsis-vertical",
+    iconProps,
+    ...props
 }) => {
     return (
-        <NIconButton
-            onPress={onPress}
-            size="lg"
-            icon={<Icon as={Entypo} name="emoji-happy" />}
-            borderRadius="full"
-            _icon={{
-                color: "coolGray.900",
-                size: "2xl",
-            }}
-            _hover={{
-                bg: "orange.600:alpha.20",
-            }}
-            _pressed={{
-                bg: "orange.600:alpha.20",
-                _ios: {
-                    _icon: {
-                        size: "2xl",
-                    },
-                },
-            }}
-            _ios={{
-                _icon: {
-                    size: "2xl",
-                },
-            }}
-            {...restProps}
+        <NBIconButton
+            size="sm"
+            fontVariant="small-caps"
+            colorScheme="coolGray"
+            icon={<Icon as={Ionicons} name={iconName} {...iconProps} />}
+            {...props}
         />
     );
 };

@@ -2,17 +2,15 @@
 
 import React from "react";
 import IconButton, {
-    IIconButtonProps,
-} from "native-base/src/components/composites/IconButton";
-import { Icon } from "native-base/src/components/primitives/Icon";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { IoniconsNameType } from "./types";
+    IconButtonProps,
+    IconNames,
+} from "../../Primitive/IconButton/IconButton";
 
 export type SaveButtonProps = {
     saved?: boolean;
-    savedIconName?: IoniconsNameType;
-    unSavedIconName?: IoniconsNameType;
-} & IIconButtonProps;
+    savedIconName?: IconNames;
+    unSavedIconName?: IconNames;
+} & IconButtonProps;
 
 const SaveButton: React.FC<SaveButtonProps> = ({
     saved,
@@ -22,15 +20,7 @@ const SaveButton: React.FC<SaveButtonProps> = ({
 }) => {
     return (
         <IconButton
-            size="sm"
-            fontVariant="small-caps"
-            colorScheme="coolGray"
-            icon={
-                <Icon
-                    as={Ionicons}
-                    name={saved ? savedIconName : unSavedIconName}
-                />
-            }
+            iconName={saved ? savedIconName : unSavedIconName}
             {...props}
         />
     );

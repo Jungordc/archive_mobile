@@ -1,19 +1,16 @@
 /** @format */
 
-import { View, Text } from "react-native";
 import React from "react";
 import IconButton, {
-    IIconButtonProps,
-} from "native-base/src/components/composites/IconButton";
-import { Icon } from "native-base/src/components/primitives/Icon";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { IoniconsNameType } from "./types";
+    IconButtonProps,
+    IconNames,
+} from "../../Primitive/IconButton/IconButton";
 
 export type LikeButtonProps = {
     liked?: boolean;
-    likedIconName?: IoniconsNameType;
-    unLikedIconName?: IoniconsNameType;
-} & IIconButtonProps;
+    likedIconName?: IconNames;
+    unLikedIconName?: IconNames;
+} & IconButtonProps;
 
 const LikeButton: React.FC<LikeButtonProps> = ({
     liked,
@@ -23,15 +20,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({
 }) => {
     return (
         <IconButton
-            size="sm"
-            fontVariant="small-caps"
-            colorScheme="coolGray"
-            icon={
-                <Icon
-                    as={Ionicons}
-                    name={liked ? likedIconName : unLikedIconName}
-                />
-            }
+            iconName={liked ? likedIconName : unLikedIconName}
             {...props}
         />
     );
