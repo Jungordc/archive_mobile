@@ -3,6 +3,7 @@
 import { View, FlatList } from "react-native";
 import React from "react";
 import TopicItem from "./TopicItem";
+import useFakeData from "../../../services/faceData";
 
 export type TopicListProps = {
     data?: { title: string; id: number | string }[];
@@ -10,16 +11,12 @@ export type TopicListProps = {
     onSelect?(e: string | number): void;
 };
 
-const _data = new Array(7).fill(0).map((_, index) => ({
-    title: `Topic ${index}`,
-    id: `id${index}`,
-}));
-
 const TopicList: React.FC<TopicListProps> = ({
     selected = 0,
     onSelect,
-    data = _data,
+    // data = _data,
 }) => {
+    const data = useFakeData({ id: 0, title: "Topic title" });
     const [_selected, setSelected] = React.useState<number | string>(selected);
 
     return (

@@ -1,22 +1,13 @@
 /** @format */
 
 import React from "react";
-import { ScrollView, Text as RNText } from "react-native";
+import { ScrollView } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import {
-    Box,
-    Text,
-    Image,
-    Avatar,
-    Button,
-    Heading,
-    VStack,
-    HStack,
-    Icon,
-} from "native-base";
-import { uri } from "../../utils/uri";
+import { Box, Text, Heading, VStack, HStack, Icon } from "native-base";
 import { RootStackScreenProps } from "../../navigation/types";
 import RootContainer from "../../components/Primitive/RootContainer/Container";
+import ProfileImageButton from "../../components/Composite/ProfileImages/ProfileImageButton";
+import SubButtonContainer from "../../containers/Actions/SubButtonContainer";
 
 export type ProfileProps = {} & RootStackScreenProps<"Profile">;
 
@@ -24,28 +15,7 @@ const Profile: React.FC<ProfileProps> = ({ route: { params }, navigation }) => {
     return (
         <RootContainer>
             <ScrollView>
-                <Box position="relative">
-                    <Box h={170} bg="primary.500">
-                        <Image flex={1} alt="cover" source={uri} />
-                    </Box>
-                    <Avatar
-                        left={2}
-                        marginTop={-8}
-                        size="lg"
-                        source={uri}
-                        borderColor="coolGray.100"
-                        borderWidth="4"
-                    />
-                    <Button
-                        colorScheme="green"
-                        alignSelf="flex-end"
-                        w={150}
-                        borderRadius="full"
-                        mr={2}
-                    >
-                        S'abonner
-                    </Button>
-                </Box>
+                <ProfileImageButton btn={<SubButtonContainer />} />
                 <Box my={3} p={2}>
                     <VStack mb={3}>
                         <Heading>Unicaf Schoolarships</Heading>

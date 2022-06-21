@@ -5,11 +5,12 @@ import { FlatList } from "react-native";
 import { View, Text, Heading } from "native-base";
 import CommentReplay from "../../components/Composite/CommentReplay/CommentReplay";
 import CommentInput from "../../components/Composite/Comment/CommentInput";
+import useFakeData from "../../services/faceData";
 
 export type CommentsProps = {};
 
 const Comments: React.FC<CommentsProps> = ({}) => {
-    const data = new Array(10).fill(0).map((_, index) => ({ id: `${index}` }));
+    const data = useFakeData({ id: 0 }, 10);
 
     return (
         <View flex={1}>

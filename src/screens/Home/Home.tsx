@@ -17,19 +17,21 @@ import Divider from "native-base/src/components/composites/Divider";
 import Animated from "react-native-reanimated";
 import useAnimatedCollapsingHeader from "../../hooks/useAnimatedCollapsingHeader";
 import { connectorFeedCards } from "../../services/connectors/feedConnector";
+import useFakeData from "../../services/faceData";
 
 export type HomeProps = {} & HomeTabScreenProps<"Index">;
 
-const data = new Array(11)
-    .fill(0)
-    .map((_, index) => ({ id: index, title: ` title n0 ${index}` }));
+// const data = new Array(11)
+//     .fill(0)
+//     .map((_, index) => ({ id: index, title: ` title n0 ${index}` }));
 
 const FeedCardConnected = connectorFeedCards(FeedCardHorizontal);
 
 const Home: React.FC<HomeProps> = ({ navigation, route }) => {
     const headerAnimated = useAnimatedCollapsingHeader();
+    const data = useFakeData({ id: 0, title: "Titre face" }, 12);
+
     const goToDetail = React.useCallback(() => {
-        console.log(".....................>>>>>>>>>>>>>");
         navigation.navigate("Detail", { post: 1 });
     }, []);
 

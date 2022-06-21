@@ -24,13 +24,14 @@ import { View } from "native-base/src/components/basic/View";
 import Text from "native-base/src/components/primitives/Text";
 import SubButtonContainer from "../../containers/Actions/SubButtonContainer";
 import MoreButtonBottomSheet from "../../containers/Actions/MoreButtonBottomSheet";
+import useFakeData from "../../services/faceData";
 
 export type DetailProps = {} & RootStackScreenProps<"Detail">;
 
 const AnimatedBox = Animated.createAnimatedComponent(Box);
-const data = new Array(10)
-    .fill(0)
-    .map((i, index) => ({ id: index, title: ` title n0 ${index}` }));
+// const data = new Array(10)
+//     .fill(0)
+//     .map((i, index) => ({ id: index, title: ` title n0 ${index}` }));
 
 const Detail: React.FC<DetailProps> = ({ navigation }) => {
     const {
@@ -40,6 +41,8 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
         scrollHandler,
         setBreakPoints,
     } = useAnimatedCollapsingHeaderFooter();
+
+    const data = useFakeData({ id: 0, title: "Bienfait" });
 
     const handlerComment = React.useCallback(
         () => navigation.navigate("Comments", { post: 12 }),
