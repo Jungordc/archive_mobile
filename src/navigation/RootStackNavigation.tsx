@@ -29,6 +29,7 @@ import {
     creatorScreenOptions,
     modalScreenOptions,
 } from "./options/rootStackNavigationOptions";
+import Reading from "../screens/Reading/Reading";
 
 export const RootStackNavigation: React.FC = () => {
     return (
@@ -108,6 +109,7 @@ export const RootStackNavigation: React.FC = () => {
                 name="Detail"
                 component={Detail}
             />
+            <HomeStack.Screen name="Reading" component={Reading} />
             <HomeStack.Screen name="SearchDetail" component={Search} />
 
             <HomeStack.Screen

@@ -9,7 +9,7 @@ import FeedCardHorizontal from "../../components/Composite/Cards/FeedCardHorizon
 import CardFeedContainer from "../../containers/CardFeedContainer";
 import Divider from "native-base/src/components/composites/Divider";
 import Animated from "react-native-reanimated";
-import useAnimatedCollapsingHeader from "../../hooks/useAnimatedCollapsingHeader";
+import useAnimatedCollapsingHeader from "../../hooks/animations/useAnimatedCollapsingHeader";
 import useFakeData from "../../services/faceData";
 import RootContainer from "../../components/Primitive/RootContainer/Container";
 import IconButton from "../../components/Primitive/IconButton/IconButton";

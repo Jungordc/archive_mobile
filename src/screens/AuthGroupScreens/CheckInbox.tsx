@@ -10,7 +10,7 @@ import { Button } from "native-base/src/components/primitives/Button";
 import { RootStackScreenProps } from "../../navigation/types";
 import LottieView from "lottie-react-native";
 import Animated from "react-native-reanimated";
-import useEmailCheckAnimations from "../../animations/useEmailCheckAnimation";
+import useEmailCheckAnimations from "../../hooks/animations/useEmailCheckAnimation";
 
 export type CheckInboxProps = {} & RootStackScreenProps<"CheckInbox">;
 

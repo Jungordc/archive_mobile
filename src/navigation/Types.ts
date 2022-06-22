@@ -22,6 +22,8 @@ declare global {
     }
 }
 
+type IDType = number | string;
+
 // route stack params list
 export type RootStackParamList = {
     // Group Auth
@@ -34,16 +36,18 @@ export type RootStackParamList = {
     //
     Home: NavigatorScreenParams<HomeTabPramList>; //tab Route
     DashList: undefined;
-    NewLib: undefined;
     About: undefined;
-    Profile: { author: number | string };
+    Profile: { author: IDType };
     Help: undefined;
     Save: undefined;
     SearchDetail: undefined;
-    Detail: { post: string | number };
+    Detail: { post: IDType };
+    Reading: { post: IDType };
     SelectCategorie: undefined;
-    Edition: { category: string | number };
-    Comments: { post: number | string }; // Modal
+    NewLib: undefined;
+    Edition: { category: IDType };
+    //modals
+    Comments: { post: IDType }; // Modal
 };
 
 // tab params list

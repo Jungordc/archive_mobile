@@ -8,23 +8,18 @@ import DetailActions from "./DetailActions";
 import AvatarLabel from "../../components/Primitive/AvatarLabel/AvatarLabel";
 import { uri } from "../../utils/uri";
 import TextDotSeparator from "../../components/Primitive/TextDotSeparator/TextDotSeparator";
-import { Ionicons } from "@expo/vector-icons";
 import Animated from "react-native-reanimated";
-import HeaderNavbar from "../../components/Primitive/HeaderNavBar/HeaderNavbar";
 import { useAnimatedCollapsingHeaderFooter } from "./useAnimatedCollapsingHeaderFooter";
 import Divider from "native-base/src/components/composites/Divider";
 import CardFeedContainer from "../../containers/CardFeedContainer";
 import FeedCardHorizontal from "../../components/Composite/Cards/FeedCardHorizontal/FeedCardHorizontal";
 import Box from "native-base/src/components/primitives/Box";
 import HStack from "native-base/src/components/primitives/Stack/HStack";
-import IconButton from "native-base/src/components/composites/IconButton";
-import { Icon } from "native-base/src/components/primitives/Icon";
-import Heading from "native-base/src/components/primitives/Heading";
 import { View } from "native-base/src/components/basic/View";
 import Text from "native-base/src/components/primitives/Text";
 import SubButtonContainer from "../../containers/Actions/SubButtonContainer";
-import MoreButtonBottomSheet from "../../containers/Actions/MoreButtonBottomSheet";
 import useFakeData from "../../services/faceData";
+import DetailHeader from "./DetailHeader";
 
 export type DetailProps = {} & RootStackScreenProps<"Detail">;
 const AnimatedBox = Animated.createAnimatedComponent(Box);
@@ -57,40 +52,9 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                 py={3}
                 style={headerAnimatedStyles}
             >
-                <HeaderNavbar
-                    backButton={
-                        <HStack space={2} alignItems="center">
-                            <IconButton
-                                onPress={navigation.goBack}
-                                fontVariant="small-caps"
-                                colorScheme="coolGray"
-                                size="sm"
-                                icon={
-                                    <Icon
-                                        as={Ionicons}
-                                        name="ios-arrow-back-outline"
-                                    />
-                                }
-                            />
-                            <AnimatedBox style={headerRightAnimatedStyles}>
-                                <Heading fontSize="md" color="coolGray.700">
-                                    Lorem ipsum
-                                </Heading>
-                            </AnimatedBox>
-                        </HStack>
-                    }
-                    rightHeader={
-                        <AnimatedBox style={headerRightAnimatedStyles}>
-                            <HStack space="3">
-                                <SubButtonContainer />
-                                <MoreButtonBottomSheet
-                                    btnProps={{
-                                        iconName: "ellipsis-vertical",
-                                    }}
-                                />
-                            </HStack>
-                        </AnimatedBox>
-                    }
+                <DetailHeader
+                    goBack={navigation.goBack}
+                    animatedStyle={headerRightAnimatedStyles}
                 />
             </AnimatedBox>
             <Animated.FlatList
