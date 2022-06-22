@@ -4,7 +4,7 @@ import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Pressable } from "react-native";
 
-import { HomeStack } from "./navigatorCreator";
+import { HomeStack } from "./NavigatorCreator";
 
 import Detail from "../screens/Detail/Detail";
 import Search from "../screens/Search/Search";
