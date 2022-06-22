@@ -1,34 +1,28 @@
 /** @format */
-import { ScrollView, TextInput, TouchableOpacity } from "react-native";
-import {
-    Box,
-    FlatList,
-    Heading,
-    HStack,
-    Icon,
-    Pressable,
-    Text,
-    VStack,
-    View,
-} from "native-base";
+import { ScrollView } from "react-native";
+import { Box, HStack, Icon, Text, VStack, View } from "native-base";
 import React from "react";
 import Tags from "react-native-tags";
 import ImageViewInput from "../ImageViewInput/ImageViewInput";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import InputActions from "../InputActions/InputActions";
 import InputTitle from "../../Primitive/InputTitle/InputTitle";
-import { uri } from "../../../utils/uri";
 import ImageContainers from "../../../../packages/image-container-plus/ImageContainers";
 import Chip from "../../Primitive/Chip/Chip";
 import InputTitleUtils from "../../Primitive/InputTitle/InputTitleUtils";
 
+import { uri } from "../../../utils/uri";
+import ProfileImages from "../ProfileImages/ProfileImages";
+
 export type EditorProps = {};
 
-const Editor = () => {
-    const data = new Array(5).fill(0).map((i) => uri);
+const Editor: React.FC<EditorProps> = () => {
+    const data = new Array(6).fill(0).map((i) => uri);
+
     return (
         <React.Fragment>
             <ScrollView>
+                <ProfileImages edit showAvatar={false} />
                 <Box flex={1}>
                     <View mx={1}>
                         <InputTitle
@@ -62,7 +56,7 @@ const Editor = () => {
                                     Documments...
                                 </Text>
                             </HStack>
-                            <ImageContainers images={data} />
+                            <ImageContainers images={data} height="56" />
                         </VStack>
                     </Box>
 
@@ -116,7 +110,7 @@ const Editor = () => {
                             />
                         </InputTitleUtils>
                     </Box>
-                    <Box ml={47} p={2}>
+                    {/* <Box ml={47} p={2}>
                         <VStack mt={2}>
                             <Box my={3}></Box>
                             <Box>
@@ -134,7 +128,7 @@ const Editor = () => {
                                 <ImageViewInput h={300} w={280} />
                             </Box>
                         </VStack>
-                    </Box>
+                    </Box> */}
                 </Box>
                 <Box h="24" />
             </ScrollView>

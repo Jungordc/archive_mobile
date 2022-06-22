@@ -10,16 +10,18 @@ import SelectCategorie from "../screens/SelectCategorie/SelectCategorie";
 import Search from "../screens/Search/Search";
 
 const HomeTabNavigation: React.FC = () => {
-    const theme = useTheme();
+    // const theme = useTheme();
     return (
         <BottomTab.Navigator
             initialRouteName="Index"
-            sceneContainerStyle={{
-                backgroundColor: theme.colors.white,
-            }}
+            sceneContainerStyle={
+                {
+                    // backgroundColor: theme.colors.white,
+                }
+            }
             screenOptions={{
-                tabBarActiveTintColor: theme.colors.coolGray[800],
-                tabBarInactiveTintColor: theme.colors.coolGray[500],
+                // tabBarActiveTintColor: theme.colors.coolGray[800],
+                // tabBarInactiveTintColor: theme.colors.coolGray[500],
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     borderTopWidth: 0,

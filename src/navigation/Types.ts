@@ -8,9 +8,13 @@
 import {
     CompositeScreenProps,
     NavigatorScreenParams,
+    RouteProp,
 } from "@react-navigation/native";
 import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import {
+    NativeStackNavigationOptions,
+    NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 
 declare global {
     namespace ReactNavigation {
@@ -19,7 +23,6 @@ declare global {
 }
 
 // route stack params list
-
 export type RootStackParamList = {
     // Group Auth
     Login: undefined;
@@ -43,6 +46,7 @@ export type RootStackParamList = {
     Comments: { post: number | string }; // Modal
 };
 
+// tab params list
 export type HomeTabPramList = {
     Index: undefined;
     Edit: undefined;
@@ -58,3 +62,12 @@ export type HomeTabScreenProps<T extends keyof HomeTabPramList> =
         BottomTabScreenProps<HomeTabPramList, T>,
         RootStackScreenProps<keyof RootStackParamList>
     >;
+
+//screen options type
+export type ScreenOptionsType =
+    | NativeStackNavigationOptions
+    | ((props: {
+          route: RouteProp<RootStackParamList, keyof RootStackParamList>;
+          navigation: any;
+      }) => NativeStackNavigationOptions)
+    | undefined;

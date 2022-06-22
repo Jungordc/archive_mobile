@@ -1,39 +1,30 @@
 /** @format */
 
-import { View, Text, Heading, Divider, Button } from "native-base";
 import React from "react";
 import { ScrollView } from "react-native";
+import { View } from "native-base/src/components/basic/View";
 import ProfileImages from "../../components/Composite/ProfileImages/ProfileImages";
 import InputTitle from "../../components/Primitive/InputTitle/InputTitle";
-import RootContainer from "../../components/Primitive/RootContainer/Container";
 import usePickImage from "../../hooks/pickers/usePickImage";
 import { RootStackScreenProps } from "../../navigation/types";
+import useBtnSaveEffect from "../../hooks/actions/useBtnSaveEffect";
 
 export type NewLibProps = {} & RootStackScreenProps<"NewLib">;
+
 const NewLib: React.FC<NewLibProps> = ({ navigation }) => {
-    const cover = usePickImage();
-    const profile = usePickImage();
+    const cover = usePickImage({});
+    const profile = usePickImage({ aspect: [4, 4] });
 
     const handlerSave = React.useCallback(() => {
-        console.log(".......//////");
+        console.log("save .......//////");
     }, []);
 
-    React.useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight() {
-                return (
-                    <Button
-                        onPress={handlerSave}
-                        colorScheme="green"
-                        rounded="full"
-                        size="sm"
-                    >
-                        Enregistrer
-                    </Button>
-                );
-            },
-        });
-    }, [navigation, handlerSave]);
+    useBtnSaveEffect({
+        navigation,
+        btnProps: {
+            onPress: handlerSave,
+        },
+    });
 
     return (
         <ScrollView bounces={false}>

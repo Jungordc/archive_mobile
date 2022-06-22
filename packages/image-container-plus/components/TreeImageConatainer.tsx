@@ -1,14 +1,19 @@
 /** @format */
 
-import { View, Text, HStack, VStack } from "native-base";
 import React from "react";
+import { HStack, VStack } from "native-base";
+import { InterfaceHStackProps } from "native-base/src/components/primitives/Stack/HStack";
 import { ComonTypeContainerImage } from "../Types";
 import Image from "./Image";
 
-export type TreeImageContainerProps = {} & ComonTypeContainerImage;
-const TreeImageContainer: React.FC<TreeImageContainerProps> = ({ images }) => {
+export type TreeImageContainerProps = {} & InterfaceHStackProps &
+    ComonTypeContainerImage;
+const TreeImageContainer: React.FC<TreeImageContainerProps> = ({
+    images,
+    ...props
+}) => {
     return (
-        <HStack space={1} height={150} overflow="hidden" borderRadius="md">
+        <HStack space={1} overflow="hidden" borderRadius="md" {...props}>
             <Image />
             <VStack flex={1} space={1}>
                 <Image />

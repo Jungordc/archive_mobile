@@ -1,10 +1,10 @@
 /** @format */
 
-import { View, Text } from "react-native";
 import React from "react";
 import { RootStackScreenProps } from "../../navigation/types";
 import Editor from "../../components/Composite/Editor/Editor";
 import { Box } from "native-base";
+import useBtnSaveEffect from "../../hooks/actions/useBtnSaveEffect";
 
 export type EditProps = {} & RootStackScreenProps<"Edition">;
 
@@ -14,6 +14,14 @@ const Edit: React.FC<EditProps> = ({
         params: { category },
     },
 }) => {
+    useBtnSaveEffect({
+        navigation,
+        btnProps: {
+            onPress: () => {
+                console.log("Text....");
+            },
+        },
+    });
     return (
         <Box flex={1}>
             <Editor />

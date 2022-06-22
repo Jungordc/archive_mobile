@@ -1,15 +1,27 @@
 /** @format */
 
 import React from "react";
-import { View, Text, HStack, VStack, Heading } from "native-base";
+import { View, HStack, VStack, Heading } from "native-base";
 import Image from "./Image";
 import { ComonTypeContainerImage } from "../Types";
 
 export type ForImageContainerProps = {} & ComonTypeContainerImage;
-const ForImageContainer: React.FC<ForImageContainerProps> = ({ images }) => {
+
+const LENGHT_SIZE = 4;
+
+const ForImageContainer: React.FC<ForImageContainerProps> = ({
+    images,
+    ...props
+}) => {
     const lenght = images?.length || 0;
     return (
-        <HStack flex={1} space={1} overflow="hidden" borderRadius="md">
+        <HStack
+            flex={1}
+            space={1}
+            overflow="hidden"
+            borderRadius="md"
+            {...props}
+        >
             <VStack flex={1} space={1}>
                 <Image />
                 <Image />
@@ -20,7 +32,7 @@ const ForImageContainer: React.FC<ForImageContainerProps> = ({ images }) => {
                 </View>
                 <View position="relative" flex={1}>
                     <Image />
-                    {lenght > 4 && (
+                    {lenght > LENGHT_SIZE && (
                         <View
                             position="absolute"
                             flex={1}
@@ -31,9 +43,10 @@ const ForImageContainer: React.FC<ForImageContainerProps> = ({ images }) => {
                             right={0}
                             justifyContent="center"
                             alignItems="center"
+                            borderRadius="md"
                         >
                             <Heading fontSize="3xl" color="coolGray.200">
-                                {lenght - 4} +
+                                {lenght - LENGHT_SIZE} +
                             </Heading>
                         </View>
                     )}

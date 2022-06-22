@@ -8,6 +8,7 @@ import ProfileUser, { ProfileUserProps } from "./ProfileUser";
 
 export type ProfileImagesProps = {
     edit?: boolean;
+    showAvatar?: boolean;
     profileCoverProps?: ProfileCoverProps;
     profileAvatarProps?: ProfileUserProps;
 } & InterfaceViewProps;
@@ -16,22 +17,25 @@ const ProfileImages: React.FC<ProfileImagesProps> = ({
     edit,
     profileAvatarProps,
     profileCoverProps,
+    showAvatar = true,
     ...props
 }) => {
     return (
         <View {...props}>
             <ProfileCover edit={edit} {...profileCoverProps} />
-            <ProfileUser
-                edit={edit}
-                position="absolute"
-                left="3"
-                bottom={-35}
-                bg="coolGray.300"
-                borderRadius="full"
-                borderColor="#fff"
-                borderWidth="4"
-                {...profileAvatarProps}
-            />
+            {showAvatar && (
+                <ProfileUser
+                    edit={edit}
+                    position="absolute"
+                    left="3"
+                    bottom={-35}
+                    bg="coolGray.300"
+                    borderRadius="full"
+                    borderColor="#fff"
+                    borderWidth="4"
+                    {...profileAvatarProps}
+                />
+            )}
         </View>
     );
 };

@@ -1,13 +1,7 @@
 /** @format */
 
 import React from "react";
-import { Icon, Heading, IconButton, View, Pressable } from "native-base";
-import { StatusBar } from "expo-status-bar";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-import Card from "../../components/Composite/Card/Card";
-import Author from "../../components/Composite/Author/Author";
+import { Heading, View } from "native-base";
 import { HomeTabScreenProps } from "../../navigation/types";
 import TopicList from "../../components/Primitive/TopicList/TopicList";
 import HStack from "native-base/src/components/primitives/Stack/HStack";
@@ -16,16 +10,11 @@ import CardFeedContainer from "../../containers/CardFeedContainer";
 import Divider from "native-base/src/components/composites/Divider";
 import Animated from "react-native-reanimated";
 import useAnimatedCollapsingHeader from "../../hooks/useAnimatedCollapsingHeader";
-import { connectorFeedCards } from "../../services/connectors/feedConnector";
 import useFakeData from "../../services/faceData";
+import RootContainer from "../../components/Primitive/RootContainer/Container";
+import IconButton from "../../components/Primitive/IconButton/IconButton";
 
 export type HomeProps = {} & HomeTabScreenProps<"Index">;
-
-// const data = new Array(11)
-//     .fill(0)
-//     .map((_, index) => ({ id: index, title: ` title n0 ${index}` }));
-
-const FeedCardConnected = connectorFeedCards(FeedCardHorizontal);
 
 const Home: React.FC<HomeProps> = ({ navigation, route }) => {
     const headerAnimated = useAnimatedCollapsingHeader();
@@ -36,8 +25,7 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
     }, []);
 
     return (
-        <SafeAreaView>
-            <StatusBar backgroundColor="#fff" />
+        <RootContainer>
             <Animated.View
                 style={[
                     {
@@ -69,13 +57,12 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
                         variant="outline"
                         borderRadius="full"
                         size="sm"
-                        icon={<Icon as={Ionicons} name="ios-flash-outline" />}
+                        iconName="ios-flash-outline"
                     />
                 </HStack>
                 <View my="1">
                     <TopicList />
                 </View>
-                {/* <Author mt={4} /> */}
             </Animated.View>
             <Animated.FlatList
                 bounces={false}
@@ -103,7 +90,7 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
                     );
                 }}
             />
-        </SafeAreaView>
+        </RootContainer>
     );
 };
 

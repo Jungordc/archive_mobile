@@ -1,6 +1,9 @@
 /** @format */
 
 import React from "react";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { Pressable } from "react-native";
+
 import { HomeStack } from "./navigatorCreator";
 
 import Detail from "../screens/Detail/Detail";
@@ -11,6 +14,8 @@ import Profile from "../screens/Profile/Profile";
 import Help from "../screens/Help/Help";
 import About from "../screens/About/About";
 import NewLib from "../screens/NewLib/NewLib";
+import Comments from "../screens/Comments/Comments";
+
 import {
     CategoryLoginScreen,
     UserNameScreen,
@@ -19,9 +24,11 @@ import {
     ConfirmCodeScreen,
     CheckInboxScreen,
 } from "../screens/AuthGroupScreens";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Pressable } from "react-native";
-import Comments from "../screens/Comments/Comments";
+
+import {
+    creatorScreenOptions,
+    modalScreenOptions,
+} from "./options/rootStackNavigationOptions";
 
 export const RootStackNavigation: React.FC = () => {
     return (
@@ -102,13 +109,7 @@ export const RootStackNavigation: React.FC = () => {
                 component={Detail}
             />
             <HomeStack.Screen name="SearchDetail" component={Search} />
-            <HomeStack.Screen
-                options={{
-                    title: "Nouvel archive",
-                }}
-                name="Edition"
-                component={Edit}
-            />
+
             <HomeStack.Screen
                 name="Profile"
                 component={Profile}
@@ -133,17 +134,26 @@ export const RootStackNavigation: React.FC = () => {
                     ),
                 })}
             />
-            <HomeStack.Screen
-                options={{
-                    title: "Nouvelle Bibliotheque",
-                    headerTitleAlign: "left",
-                    headerTitleStyle: {
-                        fontSize: 15,
-                    },
-                }}
-                name="NewLib"
-                component={NewLib}
-            />
+
+            {/* Edition and Creator Group */}
+            <HomeStack.Group screenOptions={creatorScreenOptions}>
+                <HomeStack.Screen
+                    options={{
+                        title: "Nouvel archive",
+                    }}
+                    name="Edition"
+                    component={Edit}
+                />
+                <HomeStack.Screen
+                    options={{
+                        title: "Nouvelle Bibliotheque",
+                    }}
+                    name="NewLib"
+                    component={NewLib}
+                />
+            </HomeStack.Group>
+
+            {/* Info Group */}
             <HomeStack.Screen name="Help" component={Help} />
             <HomeStack.Screen
                 options={{
@@ -152,14 +162,9 @@ export const RootStackNavigation: React.FC = () => {
                 name="About"
                 component={About}
             />
+
             {/* Modal actions.... */}
-            <HomeStack.Group
-                screenOptions={{
-                    presentation: "modal",
-                    animation: "slide_from_bottom",
-                    headerTitleAlign: "left",
-                }}
-            >
+            <HomeStack.Group screenOptions={modalScreenOptions}>
                 <HomeStack.Screen name="Comments" component={Comments} />
             </HomeStack.Group>
         </HomeStack.Navigator>

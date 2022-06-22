@@ -15,6 +15,7 @@ import IconButtonBottomSheets, {
 } from "../IconButtonBottomSheets";
 import Divider from "native-base/src/components/composites/Divider";
 import ButtonBottomSheets from "../ButtonBottomSheets";
+import { useShare } from "../../../../hooks/actions/useShare";
 
 export type ShareBottonSheetProps = {} & ComonBottomSheetType;
 
@@ -29,31 +30,22 @@ const LabelContainer: React.FC<{
         </VStack>
     );
 };
+
 const ShareBottonSheet = React.forwardRef<
     BottomSheetModal,
     ShareBottonSheetProps
 >(({ snapPoints = [], ...props }, ref) => {
+    const handlerShareContent = useShare({ dialogTitle: "archive Partage" });
+
     const onShare = async () => {
-        try {
-            const result = await Share.share({
+        handlerShareContent({
+            content: {
                 title: "Partager l'argive",
                 url: "http://jungo-archive.com/dkjsdkjkdjkjsdkflkjk",
                 message:
                     "https://web.facebook.com/photo/?fbid=462179109245813&set=a.128777029252691",
-            });
-            if (result.action === Share.sharedAction) {
-                console.log(result);
-                if (result.activityType) {
-                    // shared with activity type of result.activityType
-                } else {
-                    // shared
-                }
-            } else if (result.action === Share.dismissedAction) {
-                // dismissed
-            }
-        } catch (error: any) {
-            alert(error.message);
-        }
+            },
+        });
     };
     return (
         <BottomSheetModal ref={ref} snapPoints={snapPoints}>
