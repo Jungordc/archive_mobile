@@ -9,10 +9,10 @@ import React from "react";
 import { uri } from "../../../utils/uri";
 import IconLabel from "../../Primitive/IconLabel/IconLabel";
 import TextDotSeparator from "../../Primitive/TextDotSeparator/TextDotSeparator";
+import { newValueType } from "./core";
+import keys from "lodash/keys";
 
-export type CommentProps = {
-    onReplay?(): void;
-};
+export type CommentProps = {} & newValueType;
 
 const LineViewProps: InterfaceViewProps = {
     borderLeftWidth: "2",
@@ -109,55 +109,132 @@ const ContainerTextComment = React.forwardRef<any, ContainerTextCommentProps>(
     }
 );
 
-const Comment: React.FC<CommentProps> = ({ children, onReplay }) => {
+const Comment: React.FC<CommentProps> = ({
+    depthOptions,
+    id,
+    root,
+    text_content,
+    user,
+}) => {
+    const depthsList = keys(depthOptions).sort();
     return (
-        <Box flex={1} position="relative" mb="4">
-            <VStack mr={2}>
-                <View
-                    bg="white"
-                    zIndex={10}
-                    position="absolute"
-                    top={0}
-                    left={0}
-                    py="2"
-                    borderRadius="full"
-                >
-                    <Avatar source={uri} size="sm" />
-                </View>
-                <View
-                    // bg="amber.50"
-                    ml="4"
-                    borderLeftWidth="2"
-                    borderBottomLeftRadius="2xl"
-                    borderColor="coolGray.300"
-                    pb="3"
-                >
-                    <ContainerTextComment />
-                    <View mb={-6}>
-                        <ContainerMoreWithLine>
-                            <MoreWhiteAvatar />
-                        </ContainerMoreWithLine>
-                        <ContainerMoreWithLine>
-                            <View position="relative">
-                                <HStack space={2}>
-                                    <Avatar size="sm" />
-                                    <ContainerTextComment ml={0} />
-                                </HStack>
+        <View mx="2" bgColor="amber.200" flex={1}>
+            <HStack space="2" flex={1}>
+                <HStack>
+                    {depthsList.map((item) => {
+                        const values = depthOptions[item];
+                        return (
+                            <View
+                                key={item}
+                                position="relative"
+                                bgColor="blue.300"
+                                width="10"
+                            >
+                                {values.avatar && (
+                                    <Avatar
+                                        source={uri}
+                                        size="sm"
+                                        zIndex="1"
+                                        borderColor="white"
+                                        borderWidth="2"
+                                    />
+                                )}
+                                {values.isResponce && (
+                                    <View
+                                        // zIndex="1"
+                                        height={10}
+                                        width={10}
+                                        bgColor="blue.600"
+                                    >
+                                        <View
+                                            // bg="red.900"
+                                            position="absolute"
+                                            top={0}
+                                            left="50%"
+                                            h={5}
+                                            w="50%"
+                                            borderLeftColor="coolGray.900"
+                                            borderBottomColor="coolGray.900"
+                                            borderBottomWidth="3"
+                                            borderLeftWidth="3"
+                                            borderBottomLeftRadius="2xl"
+                                        />
+                                    </View>
+                                )}
+                                {values.haveResponce && (
+                                    <View
+                                        height="100%"
+                                        w="1"
+                                        bgColor="black"
+                                        position="absolute"
+                                        top="0"
+                                        bottom="0"
+                                        right="50%"
+                                        left="50%"
+                                    />
+                                )}
                             </View>
-                        </ContainerMoreWithLine>
-                        <ContainerMoreWithLine
-                            containerProps={{
-                                mt: -3,
-                            }}
-                        >
-                            <Text fontSize="md" color="coolGray.700">
-                                Voir 2 autres reponse...
-                            </Text>
-                        </ContainerMoreWithLine>
-                    </View>
+                        );
+                    })}
+                </HStack>
+                <View flex={1}>
+                    <Text>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Deserunt nemo, distinctio quia quod earum
+                        perferendis, dicta iure eos consequuntur magni sequi!
+                        Nesciunt possimus rerum quasi sequi nostrum velit vel
+                        dolores?
+                    </Text>
                 </View>
-            </VStack>
-        </Box>
+            </HStack>
+        </View>
+        // <Box flex={1} position="relative" mb="4">
+        //     <VStack mr={2}>
+        //         <View
+        //             bg="white"
+        //             zIndex={10}
+        //             position="absolute"
+        //             top={0}
+        //             left={0}
+        //             py="2"
+        //             borderRadius="full"
+        //         >
+        //             <Avatar source={uri} size="sm" />
+        //         </View>
+        //         <View
+        //             // bg="amber.50"
+        //             ml="4"
+        //             borderLeftWidth="2"
+        //             borderBottomLeftRadius="2xl"
+        //             borderColor="coolGray.300"
+        //             pb="3"
+        //         >
+        //             <ContainerTextComment />
+        //             <View mb={-6}>
+        //                 <ContainerMoreWithLine>
+        //                     <MoreWhiteAvatar />
+        //                 </ContainerMoreWithLine>
+        //                 <ContainerMoreWithLine>
+        //                     <View position="relative">
+        //                         <HStack space={2}>
+        //                             <Avatar size="sm" />
+        //                             <ContainerTextComment ml={0} />
+        //                         </HStack>
+        //                     </View>
+        //                 </ContainerMoreWithLine>
+        //                 <ContainerMoreWithLine
+        //                     containerProps={{
+        //                         mt: -3,
+        //                     }}
+        //                 >
+        //                     <Text fontSize="md" color="coolGray.700">
+        //                         Voir 2 autres reponse...
+        //                     </Text>
+        //                 </ContainerMoreWithLine>
+        //             </View>
+        //         </View>
+        //     </VStack>
+        // </Box>
     );
 };
 

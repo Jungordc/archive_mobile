@@ -4,25 +4,25 @@ import React from "react";
 import { FlatList } from "react-native";
 import { View, Text, Heading } from "native-base";
 import CommentReplay from "../../components/Composite/CommentReplay/CommentReplay";
-import CommentInput from "../../components/Composite/Comment/CommentInput";
+import { CommentItem, CommentInput } from "../../components/Composite/Comment";
 import useFakeData from "../../services/faceData";
+import { CommentPreProcessor } from "../../components/Composite/Comment/core";
+import { comments } from "../../components/Composite/Comment/commet.data.json";
 
 export type CommentsProps = {};
 
 const Comments: React.FC<CommentsProps> = ({}) => {
-    const data = useFakeData({ id: 0 }, 10);
+    const data = new CommentPreProcessor(comments);
 
     return (
         <View flex={1}>
             <FlatList
                 bounces={false}
                 showsVerticalScrollIndicator={false}
-                data={data}
-                keyExtractor={(i) => i.id}
+                data={data.detCommentPreProcessed()}
+                keyExtractor={(i) => i.id.toString()}
                 renderItem={({ item, index }) => {
-                    return (
-                        <CommentReplay replays={index === 1 ? [1, 2, 3] : []} />
-                    );
+                    return <CommentItem {...item} />;
                 }}
             />
             <View
