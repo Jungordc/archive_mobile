@@ -43,9 +43,11 @@ export type RootStackParamList = {
     SearchDetail: undefined;
     Detail: { post: IDType };
     Reading: { post: IDType };
+    // Edition...
     SelectCategorie: undefined;
     NewLib: undefined;
     Edition: { category: IDType };
+    EditionDocs: undefined;
     //modals
     Comments: { post: IDType }; // Modal
 };

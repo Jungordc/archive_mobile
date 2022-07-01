@@ -30,6 +30,7 @@ import {
     modalScreenOptions,
 } from "./options/rootStackNavigationOptions";
 import Reading from "../screens/Reading/Reading";
+import EditingDocs from "../screens/EditingDocs/EditingDocs";
 
 export const RootStackNavigation: React.FC = () => {
     return (
@@ -145,6 +146,13 @@ export const RootStackNavigation: React.FC = () => {
                     }}
                     name="Edition"
                     component={Edit}
+                />
+                <HomeStack.Screen
+                    // options={{
+                    //     headerTransparent: true,
+                    // }}
+                    name="EditionDocs"
+                    component={EditingDocs}
                 />
                 <HomeStack.Screen
                     options={{

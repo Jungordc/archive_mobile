@@ -1,151 +1,161 @@
 /** @format */
-import { ScrollView } from "react-native";
-import { Box, HStack, Icon, Text, VStack, View } from "native-base";
 import React from "react";
-import Tags from "react-native-tags";
-import ImageViewInput from "../ImageViewInput/ImageViewInput";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import InputActions from "../InputActions/InputActions";
-import InputTitle from "../../Primitive/InputTitle/InputTitle";
+import { ScrollView } from "react-native";
+import { Button } from "native-base/src/components/primitives/Button";
+import { View } from "native-base/src/components/basic/View";
+import Text from "native-base/src/components/primitives/Text";
+import VStack from "native-base/src/components/primitives/Stack/VStack";
+
 import ImageContainers from "../../../../packages/image-container-plus/ImageContainers";
-import Chip from "../../Primitive/Chip/Chip";
-import InputTitleUtils from "../../Primitive/InputTitle/InputTitleUtils";
+import InputTitle from "../../Primitive/InputTitle/InputTitle";
+import Icon from "../../Primitive/Icons/Icon";
+import InputTags from "./InputTags";
+import ProfileImageConnector from "../ProfileImages/ProfileImageConnector";
 
-import { uri } from "../../../utils/uri";
-import ProfileImages from "../ProfileImages/ProfileImages";
+export type EditorDataType = {
+    title: string;
+    description: string;
+    cover: string;
+    tags: string[];
+    docs: string[];
+};
 
-export type EditorProps = {};
+export type ControllerTypeProps<CType = any, T = EditorDataType> = {
+    controller: CType;
+    render: (value: {
+        value: any;
+        onChange(value: any): void;
+    }) => React.ReactNode;
+    name: keyof T;
+};
 
-const Editor: React.FC<EditorProps> = () => {
-    const data = new Array(6).fill(0).map((i) => uri);
+export type EditorProps<T = { uri: string }> = {
+    handlerEditingDocs?(): void;
+    onPressImage?(image: T): void;
+    controllerComponent: React.ComponentType<ControllerTypeProps>;
+    controller: any;
+};
 
+const Editor: React.FC<EditorProps> = ({
+    handlerEditingDocs,
+    onPressImage,
+    controller,
+    controllerComponent: Controller,
+    ...props
+}) => {
     return (
-        <React.Fragment>
-            <ScrollView>
-                <ProfileImages edit showAvatar={false} />
-                <Box flex={1}>
-                    <View mx={1}>
-                        <InputTitle
-                            textInputProps={{
-                                placeholder: "Titre",
-                            }}
+        <ScrollView showsVerticalScrollIndicator={false}>
+            <Controller
+                name="cover"
+                controller={controller}
+                render={({ onChange, value }) => {
+                    return (
+                        <ProfileImageConnector
+                            edit
+                            showAvatar={false}
+                            initialCover={value ? { uri: value } : undefined}
+                            onChangeCover={({ uri }) => onChange(uri)}
                         />
-                    </View>
-                    <View mx={1}>
-                        <InputTitle
-                            textInputProps={{
-                                placeholder: "Description",
-                                multiline: true,
-                                style: {
-                                    fontSize: 16,
-                                    color: "#626262",
-                                },
-                            }}
-                        />
-                    </View>
-                    <Box ml={47} p={2}>
-                        <VStack space={4}>
-                            <HStack space={2} alignItems="center">
-                                <Icon
-                                    as={Ionicons}
-                                    color="coolGray.400"
-                                    name="documents"
-                                    mt={1}
-                                />
-                                <Text color="coolGray.500" fontSize="2xs">
-                                    Documments...
-                                </Text>
-                            </HStack>
-                            <ImageContainers images={data} height="56" />
-                        </VStack>
-                    </Box>
-
-                    {/* <FlatList
-                        maxH={230}
-                        bounces={false}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        ListHeaderComponent={<Box w={45} />}
-                        data={data}
-                        renderItem={() => {
-                            return <ImageViewInput />;
-                        }}
-                    /> */}
-                    <Box>
-                        <InputTitleUtils max={6}>
-                            <Tags
-                                initialText="monkey"
+                    );
+                }}
+            />
+            <View flex={1}>
+                <View mx={1}>
+                    <Controller
+                        controller={controller}
+                        name="title"
+                        render={({ onChange, value }) => (
+                            <InputTitle
+                                maxLength={75}
                                 textInputProps={{
-                                    placeholder: "Any type of animal",
+                                    placeholder: "Titre",
+                                    multiline: true,
+                                    value,
+                                    onChangeText: onChange,
                                 }}
-                                initialTags={["dog", "cat", "chicken"]}
-                                onChangeTags={(tags) => console.log(tags)}
-                                onTagPress={(index, tagLabel, event, deleted) =>
-                                    console.log(
-                                        index,
-                                        tagLabel,
-                                        event,
-                                        deleted ? "deleted" : "not deleted"
-                                    )
-                                }
-                                containerStyle={
-                                    {
-                                        // justifyContent: "center",
-                                    }
-                                }
-                                inputStyle={{
-                                    backgroundColor: "transparent",
-                                }}
-                                renderTag={({
-                                    tag,
-                                    index,
-                                    onPress,
-                                    deleteTagOnPress,
-                                    readonly,
-                                }) => (
-                                    <Chip key={index} ml={2}>
-                                        {tag}
-                                    </Chip>
-                                )}
                             />
-                        </InputTitleUtils>
-                    </Box>
-                    {/* <Box ml={47} p={2}>
-                        <VStack mt={2}>
-                            <Box my={3}></Box>
-                            <Box>
-                                <HStack space={2} alignItems="center">
-                                    <Icon
-                                        as={Ionicons}
-                                        color="coolGray.400"
-                                        name="images"
-                                        mt={1}
-                                    />
-                                    <Text color="coolGray.500" fontSize="2xs">
-                                        Photo de coverture
-                                    </Text>
-                                </HStack>
-                                <ImageViewInput h={300} w={280} />
-                            </Box>
-                        </VStack>
-                    </Box> */}
-                </Box>
-                <Box h="24" />
-            </ScrollView>
-            <Box
-                position="absolute"
-                left={0}
-                bottom={0}
-                flex={1}
-                w="100%"
-                p={2}
-                borderTopColor="coolGray.300"
-                borderTopWidth={1}
-                bg="white"
-            >
-                <InputActions />
-            </Box>
-        </React.Fragment>
+                        )}
+                    />
+                </View>
+                <View mx={1}>
+                    <Controller
+                        controller={controller}
+                        name="description"
+                        render={({ onChange, value }) => (
+                            <InputTitle
+                                textInputProps={{
+                                    placeholder: "Description",
+                                    multiline: true,
+                                    style: {
+                                        fontSize: 16,
+                                        color: "#626262",
+                                    },
+                                    value,
+                                    onChangeText: onChange,
+                                }}
+                            />
+                        )}
+                    />
+                </View>
+                <View flex={1}>
+                    <Controller
+                        controller={controller}
+                        name="tags"
+                        render={({ onChange, value }) => (
+                            <InputTags value={value} onChange={onChange} />
+                        )}
+                    />
+                </View>
+                <View m="4" ml="16">
+                    <VStack space="3">
+                        <Button
+                            onPress={handlerEditingDocs}
+                            variant="outline"
+                            colorScheme="text"
+                            rounded="full"
+                            leftIcon={<Icon name="document-attach-outline" />}
+                            _text={{
+                                fontSize: "2xs",
+                                ml: "1",
+                            }}
+                            _icon={{
+                                size: "xs",
+                            }}
+                        >
+                            Ajouter une document...
+                        </Button>
+                        <Controller
+                            controller={controller}
+                            name="docs"
+                            render={({ value }) => (
+                                <ImageContainers
+                                    h="64"
+                                    onPress={onPressImage}
+                                    images={value?.map((i: string) => ({
+                                        uri: i,
+                                    }))}
+                                />
+                            )}
+                        />
+
+                        <Text
+                            mt="5"
+                            fontSize="2xs"
+                            color="coolGray.400"
+                            textAlign="justify"
+                            lineHeight="2xl"
+                        >
+                            <Text fontWeight="bold">Note : </Text>
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Perspiciatis tempora eligendi enim distinctio
+                            unde eaque doloremque! Eum ipsum libero, id sequi
+                            odit incidunt voluptates molestiae blanditiis
+                            ratione sunt ullam quos.
+                        </Text>
+                    </VStack>
+                </View>
+            </View>
+        </ScrollView>
     );
 };
 

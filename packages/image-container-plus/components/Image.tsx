@@ -1,19 +1,25 @@
 /** @format */
 
 import React from "react";
-import { ImageURISource } from "react-native";
+import {
+    GestureResponderEvent,
+    ImageURISource,
+    TouchableOpacity,
+} from "react-native";
 import { View, Image as NBImage } from "native-base";
 import { InterfaceViewProps } from "native-base/src/components/basic/View/types";
 import { fetchImage } from "../utils/fetcher";
 
 export type ImageProps = {
     source?: ImageURISource | number;
+    onPress?(event?: GestureResponderEvent): void;
 } & InterfaceViewProps;
 
 const Image: React.FC<ImageProps> = ({
     bgColor = "coolGray.400",
     borderRadius = "md",
     source,
+    onPress,
     ...props
 }) => {
     const [inner, setInner] = React.useState(
@@ -38,12 +44,18 @@ const Image: React.FC<ImageProps> = ({
             fetchImage(url, { signal: controller.signal }).then((isImage) => {
                 if (isImage) {
                     setInner(
-                        <NBImage
-                            borderRadius={borderRadius}
-                            alt="img"
-                            source={source}
-                            flex={1}
-                        />
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            style={{ flex: 1 }}
+                            onPress={onPress}
+                        >
+                            <NBImage
+                                borderRadius={borderRadius}
+                                alt="img"
+                                source={source}
+                                flex={1}
+                            />
+                        </TouchableOpacity>
                     );
                 }
             });

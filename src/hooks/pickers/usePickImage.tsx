@@ -12,6 +12,18 @@ export type pickerImageType = {
     aspect?: [number, number];
 };
 
+export function connetorPickImage<T>(Component: React.ComponentType<T>) {
+    return (
+        props: T & { image?: TypeImage; onChange?(image: TypeImage): void }
+    ) => {
+        const { onpenSelectorImage, source } = usePickImage({
+            initialSource: props.image,
+            onSelectImage: props.onChange,
+        });
+        return <Component />;
+    };
+}
+
 export default function usePickImage({
     aspect = [4, 3],
     initialSource,

@@ -5,14 +5,16 @@ import { Text, HStack, Icon } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { InterfaceTextProps } from "native-base/lib/typescript/components/primitives/Text/types";
 import { InterfaceIconProps } from "native-base/lib/typescript/components/primitives/Icon/types";
+import { InterfaceHStackProps } from "native-base/src/components/primitives/Stack/HStack";
+import { IoniconsNameType } from "../Type";
 
 export type IconLabelProps = {
     label: string;
-    icon?: any;
+    icon?: IoniconsNameType;
     iconProps?: InterfaceIconProps;
     labelProps?: InterfaceTextProps;
     labelPosition?: "Left" | "Right";
-};
+} & InterfaceHStackProps;
 
 const IconLabel: React.FC<IconLabelProps> = ({
     label,
@@ -20,6 +22,7 @@ const IconLabel: React.FC<IconLabelProps> = ({
     icon,
     labelProps,
     iconProps,
+    ...props
 }) => {
     const Label = (
         <Text isTruncated fontSize="2xs" {...labelProps}>
@@ -27,7 +30,7 @@ const IconLabel: React.FC<IconLabelProps> = ({
         </Text>
     );
     return (
-        <HStack space={2} alignItems="center">
+        <HStack space={2} alignItems="center" {...props}>
             {labelPosition === "Left" && Label}
             {icon && (
                 <Icon size="xs" as={Ionicons} name={icon} {...iconProps} />

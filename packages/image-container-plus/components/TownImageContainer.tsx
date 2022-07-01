@@ -13,9 +13,14 @@ const TownImageContainer: React.FC<TownImageContainerProps> = ({
     ...props
 }) => {
     return (
-        <HStack space={2} overflow="hidden" borderRadius="md" {...props}>
-            <Image />
-            <Image />
+        <HStack space={1} overflow="hidden" borderRadius="md" {...props}>
+            {images?.map((image, index) => (
+                <Image
+                    key={index}
+                    source={image}
+                    onPress={() => props.onPress?.(image)}
+                />
+            ))}
         </HStack>
     );
 };

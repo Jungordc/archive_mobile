@@ -2,9 +2,14 @@
 
 import React from "react";
 import { RootStackScreenProps } from "../../navigation/types";
-import Editor from "../../components/Composite/Editor/Editor";
-import { Box } from "native-base";
-import useBtnSaveEffect from "../../hooks/actions/useBtnSaveEffect";
+import {
+    MSTEditor,
+    EditorRefType,
+} from "../../components/Composite/Editor/EditConnector";
+import useBtnSaveEffect, {
+    useBtnSaveRefType,
+} from "../../hooks/actions/useBtnSaveEffect";
+import { View } from "native-base/src/components/basic/View";
 
 export type EditProps = {} & RootStackScreenProps<"Edition">;
 
@@ -14,18 +19,41 @@ const Edit: React.FC<EditProps> = ({
         params: { category },
     },
 }) => {
+    const EditorRef = React.useRef<EditorRefType>(null);
+    const BtnSaveRef = React.useRef<useBtnSaveRefType>(null);
+
+    const handlerPress = React.useCallback(
+        (value?: any) => EditorRef.current?.handlerSubmit?.(),
+        [EditorRef]
+    );
+
+    const handlerEditingDocs = React.useCallback(
+        () => navigation.navigate("EditionDocs"),
+        []
+    );
+
+    const onSubmit = React.useCallback((data: any) => {
+        console.log("data...", data);
+    }, []);
+
+    //
     useBtnSaveEffect({
         navigation,
+        ref: BtnSaveRef,
         btnProps: {
-            onPress: () => {
-                console.log("Text....");
-            },
+            onPress: handlerPress,
         },
     });
+
     return (
-        <Box flex={1}>
-            <Editor />
-        </Box>
+        <View flex={1}>
+            <MSTEditor
+                ref={EditorRef}
+                onSubmit={onSubmit}
+                handlerEditingDocs={handlerEditingDocs}
+                onPressImage={handlerEditingDocs}
+            />
+        </View>
     );
 };
 

@@ -1,12 +1,12 @@
 /** @format */
 
-import { View } from "react-native";
 import React from "react";
 import HStack, {
     IHStackProps,
 } from "native-base/src/components/primitives/Stack/HStack";
 import Text from "native-base/src/components/primitives/Text";
 import Divider from "native-base/src/components/composites/Divider";
+import { View } from "native-base/src/components/basic/View";
 
 export type InputTitleUtilsUtilsProps = {
     placeholder?: string;
@@ -32,7 +32,7 @@ const InputTitleUtils: React.FC<InputTitleUtilsUtilsProps> = ({
                     padding: 5,
                 }}
             >
-                <Text isTruncated color="coolGray.700">
+                <Text fontSize="2xs" isTruncated color="coolGray.700">
                     {isEdit ? placeholder : ""}
                 </Text>
                 <Text
