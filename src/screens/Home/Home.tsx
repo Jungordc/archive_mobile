@@ -1,10 +1,9 @@
 /** @format */
 
 import React from "react";
-import { Heading, View } from "native-base";
+import { View } from "native-base";
 import { HomeTabScreenProps } from "../../navigation/types";
 import TopicList from "../../components/Primitive/TopicList/TopicList";
-import HStack from "native-base/src/components/primitives/Stack/HStack";
 import FeedCardHorizontal from "../../components/Composite/Cards/FeedCardHorizontal/FeedCardHorizontal";
 import CardFeedContainer from "../../containers/CardFeedContainer";
 import Divider from "native-base/src/components/composites/Divider";
@@ -12,7 +11,9 @@ import Animated from "react-native-reanimated";
 import useAnimatedCollapsingHeader from "../../hooks/animations/useAnimatedCollapsingHeader";
 import useFakeData from "../../services/faceData";
 import RootContainer from "../../components/Primitive/RootContainer/Container";
-import IconButton from "../../components/Primitive/IconButton/IconButton";
+import Header from "../../components/Composite/Headers/Header";
+
+const AView = Animated.createAnimatedComponent(View);
 
 export type HomeProps = {} & HomeTabScreenProps<"Index">;
 
@@ -26,44 +27,21 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
 
     return (
         <RootContainer>
-            <Animated.View
-                style={[
-                    {
-                        marginVertical: 10,
-                        backgroundColor: "#fff",
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        zIndex: 1,
-                    },
-                    headerAnimated.animatedStyles,
-                ]}
+            <AView
+                position="absolute"
+                my="5"
+                top="0"
+                left="0"
+                right="0"
+                zIndex="2"
+                bg="white"
+                style={headerAnimated.animatedStyles}
             >
-                <HStack
-                    mt="7"
-                    mb="2"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    p="4"
-                >
-                    <Heading fontSize="xl" color="coolGray.700">
-                        Archive
-                    </Heading>
-                    <IconButton
-                        borderColor="coolGray.200"
-                        tintColor="coolGray.200"
-                        colorScheme="coolGray"
-                        variant="outline"
-                        borderRadius="full"
-                        size="sm"
-                        iconName="ios-flash-outline"
-                    />
-                </HStack>
+                <Header showBtn />
                 <View my="1">
                     <TopicList />
                 </View>
-            </Animated.View>
+            </AView>
             <Animated.FlatList
                 bounces={false}
                 ListHeaderComponent={<View my="20" />}

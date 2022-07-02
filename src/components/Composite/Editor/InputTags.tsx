@@ -25,23 +25,22 @@ const InputTags: React.FC<InputTagsProps> = ({
     ...props
 }) => {
     const theme = useTheme();
-    const [tags, setStags] = React.useState<tagsType>(value || []);
+    const [tags, setTags] = React.useState<tagsType>(value || []);
 
-    const tagLenght = React.useMemo(
-        () => value?.length || tags.length,
-        [tags, value]
-    );
+    const tagLenght = React.useMemo(() => tags?.length, [tags]);
 
     const onChangeTags = React.useCallback((newTags: tagsType) => {
-        onChange?.(newTags) || setStags(newTags);
+        onChange?.(newTags);
+        setTags(newTags);
     }, []);
 
     const onTagPress = React.useCallback(
-        (index: number, tagLabel: string, event: any, deleted: boolean) => {
-            onChange?.(value?.filter((_, i) => i !== index) || []) ||
-                setStags((tgs) => tgs.filter((_, i) => i !== index));
+        (index: number) => {
+            const tagsFiltered = tags.filter((_, i) => i !== index);
+            onChange?.(tagsFiltered);
+            setTags(tagsFiltered);
         },
-        [tags, value]
+        [tags]
     );
 
     return (

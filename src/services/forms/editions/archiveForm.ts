@@ -1,5 +1,5 @@
 /** @format */
-import { Field, Form, converters } from "mstform";
+import { Field, Form, converters, RepeatingForm } from "mstform";
 import { ArchiveEditionModel } from "./archiveModel";
 
 export const ArchiveEditionForm = new Form(ArchiveEditionModel, {
@@ -7,6 +7,6 @@ export const ArchiveEditionForm = new Form(ArchiveEditionModel, {
     description: new Field(converters.string),
     category: new Field(converters.string),
     cover: new Field(converters.maybeNull(converters.string)),
-    tags: new Field(converters.stringArray),
+    tags: new Field(converters.stringArray, {}),
     docs: new Field(converters.stringArray),
 });

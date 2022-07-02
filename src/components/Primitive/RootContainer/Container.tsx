@@ -25,7 +25,13 @@ const RootContainer: React.FC<RootContainerProps> = ({
             }}
             {...props}
         >
-            {withStatusBar && <StatusBar {...statubarProps} />}
+            {withStatusBar && (
+                <StatusBar
+                    backgroundColor="#fff"
+                    style="dark"
+                    {...statubarProps}
+                />
+            )}
             {children}
         </SafeAreaView>
     );

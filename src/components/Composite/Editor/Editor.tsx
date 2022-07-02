@@ -81,29 +81,38 @@ const Editor: React.FC<EditorProps> = ({
                     <Controller
                         controller={controller}
                         name="description"
-                        render={({ onChange, value }) => (
-                            <InputTitle
-                                textInputProps={{
-                                    placeholder: "Description",
-                                    multiline: true,
-                                    style: {
-                                        fontSize: 16,
-                                        color: "#626262",
-                                    },
-                                    value,
-                                    onChangeText: onChange,
-                                }}
-                            />
-                        )}
+                        render={({ onChange, value }) => {
+                            console.log("description: ", value);
+                            return (
+                                <InputTitle
+                                    textInputProps={{
+                                        placeholder: "Description",
+                                        multiline: true,
+                                        style: {
+                                            fontSize: 16,
+                                            color: "#626262",
+                                        },
+                                        value,
+                                        onChangeText: onChange,
+                                    }}
+                                />
+                            );
+                        }}
                     />
                 </View>
                 <View flex={1}>
                     <Controller
                         controller={controller}
                         name="tags"
-                        render={({ onChange, value }) => (
-                            <InputTags value={value} onChange={onChange} />
-                        )}
+                        render={({ onChange, value }) => {
+                            const newValue =
+                                typeof value === "object"
+                                    ? { ...value }
+                                    : { value };
+                            return (
+                                <InputTags {...newValue} onChange={onChange} />
+                            );
+                        }}
                     />
                 </View>
                 <View m="4" ml="16">

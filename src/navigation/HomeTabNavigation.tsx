@@ -58,9 +58,7 @@ const HomeTabNavigation: React.FC = () => {
                 name="Edit"
                 component={SelectCategorie}
                 options={{
-                    title: "Categorie",
-                    tabBarLabel: "Nouveau",
-                    headerTitleAlign: "center",
+                    headerShown: false,
                     tabBarIcon: (props) => (
                         <TabBarIcon
                             name="add-circle-outline"
@@ -74,9 +72,7 @@ const HomeTabNavigation: React.FC = () => {
                 name="MeDash"
                 component={MeDash}
                 options={{
-                    title: "Menu",
-                    tabBarLabel: "Moi",
-                    headerTitleAlign: "center",
+                    headerShown: false,
                     tabBarIcon: (props) => (
                         <TabBarIcon
                             name="person-circle-outline"
