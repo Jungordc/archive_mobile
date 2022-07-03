@@ -43,6 +43,7 @@ const AvatarLabel: React.FC<AvatarLabelProps> = ({
             mainProps={{ ml: "4", ...titleContainer }}
             avatar={<Avatar size="sm" {...avatarProps} source={source} />}
             actions={action}
+            {...restProps}
         />
     );
 

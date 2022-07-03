@@ -14,7 +14,7 @@ import IconButton, {
 
 const AHeading = Animated.createAnimatedComponent(Heading);
 
-type HeaderProps = {
+export type HeaderProps = {
     title?: string;
     titleProps?: IHeadingProps;
     iconButtonProps?: IconButtonProps;
