@@ -1,24 +1,27 @@
 /** @format */
 
 import React from "react";
-import { Text, HStack, Icon } from "native-base";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Text from "native-base/src/components/primitives/Text";
 import { InterfaceTextProps } from "native-base/lib/typescript/components/primitives/Text/types";
-import { InterfaceIconProps } from "native-base/lib/typescript/components/primitives/Icon/types";
-import { InterfaceHStackProps } from "native-base/src/components/primitives/Stack/HStack";
+import {
+    IStackProps,
+    Stack,
+} from "native-base/src/components/primitives/Stack";
 import { IoniconsNameType } from "../Type";
+import Icon, { IconProps } from "../Icons/Icon";
 
 export type IconLabelProps = {
     label: string;
     icon?: IoniconsNameType;
-    iconProps?: InterfaceIconProps;
+    iconProps?: IconProps;
     labelProps?: InterfaceTextProps;
     labelPosition?: "Left" | "Right";
-} & InterfaceHStackProps;
+} & IStackProps;
 
 const IconLabel: React.FC<IconLabelProps> = ({
     label,
     labelPosition = "Right",
+    direction = "row",
     icon,
     labelProps,
     iconProps,
@@ -30,13 +33,11 @@ const IconLabel: React.FC<IconLabelProps> = ({
         </Text>
     );
     return (
-        <HStack space={2} alignItems="center" {...props}>
+        <Stack space={2} alignItems="center" {...props}>
             {labelPosition === "Left" && Label}
-            {icon && (
-                <Icon size="xs" as={Ionicons} name={icon} {...iconProps} />
-            )}
+            {icon && <Icon size="xs" name={icon} {...iconProps} />}
             {labelPosition === "Right" && Label}
-        </HStack>
+        </Stack>
     );
 };
 

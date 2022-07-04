@@ -2,26 +2,44 @@
 
 import React from "react";
 import { ScrollView } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Box, Text, Heading, VStack, HStack, Icon } from "native-base";
+import { Text, Heading } from "native-base";
+import { HStack, VStack } from "native-base/src/components/primitives/Stack";
+import { View } from "native-base/src/components/basic/View";
+
 import { RootStackScreenProps } from "../../navigation/types";
 import RootContainer from "../../components/Primitive/RootContainer/Container";
 import ProfileImageButton from "../../components/Composite/ProfileImages/ProfileImageButton";
 import SubButtonContainer from "../../containers/Actions/SubButtonContainer";
+import IconLabel from "../../components/Primitive/IconLabel/IconLabel";
 
 export type ProfileProps = {} & RootStackScreenProps<"Profile">;
+
+export type SuscriberTextProps = {
+    name: string | number;
+    n: string | number;
+};
+export const SuscriberText: React.FC<SuscriberTextProps> = ({ n, name }) => {
+    return (
+        <HStack space={2} alignItems="center">
+            <Heading color="coolGray.600" size="md">
+                {n}
+            </Heading>
+            <Text color="coolGray.600">{name}</Text>
+        </HStack>
+    );
+};
 
 const Profile: React.FC<ProfileProps> = ({ route: { params }, navigation }) => {
     return (
         <RootContainer>
             <ScrollView>
                 <ProfileImageButton btn={<SubButtonContainer />} />
-                <Box my={3} p={2}>
+                <View my={3} p={2}>
                     <VStack mb={3}>
                         <Heading>Unicaf Schoolarships</Heading>
                         <Text>@username </Text>
                     </VStack>
-                    <Box>
+                    <View>
                         <Text>
                             Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. Recusandae harum doloribus, cumque quo labore
@@ -29,45 +47,41 @@ const Profile: React.FC<ProfileProps> = ({ route: { params }, navigation }) => {
                             unde quas voluptate magnam accusantium nihil. Eaque,
                             omnis consectetur.
                         </Text>
-                    </Box>
+                    </View>
                     <VStack my={3} space={2}>
-                        <HStack alignItems="center" space={2}>
+                        <IconLabel icon="link" label="https://www.mashin.com" />
+                        <IconLabel
+                            icon="calculator"
+                            label="A rejoins Archive depuis le 23/3/2012"
+                        />
+                        <IconLabel icon="briefcase" label="Education" />
+                        {/* <HStack alignItems="center" space={2}>
                             <Icon as={Ionicons} name="md-link" />
                             <Text color="coolGray.500">
                                 https://www.mashin.com
                             </Text>
-                        </HStack>
-                        <HStack alignItems="center" space={2}>
+                        </HStack> */}
+                        {/* <HStack alignItems="center" space={2}>
                             <Icon as={Ionicons} name="md-calendar" />
                             <Text color="coolGray.500">
                                 A rejoins Archive depuis le 23/3/2012
                             </Text>
-                        </HStack>
-                        <HStack alignItems="center" space={2}>
+                        </HStack> */}
+                        {/* <HStack alignItems="center" space={2}>
                             <Icon as={Ionicons} name="briefcase" />
                             <Text color="coolGray.500">Education</Text>
-                        </HStack>
+                        </HStack> */}
                     </VStack>
-                    <Box>
+                    <View>
                         <HStack space={5}>
-                            <HStack space={2} alignItems="center">
-                                <Heading color="coolGray.600" size="md">
-                                    234
-                                </Heading>
-                                <Text color="coolGray.600">Abonners</Text>
-                            </HStack>
-                            <HStack space={2} alignItems="center">
-                                <Heading color="coolGray.600" size="md">
-                                    23
-                                </Heading>
-                                <Text color="coolGray.600">Abonnements</Text>
-                            </HStack>
+                            <SuscriberText n={243} name="Abonners" />
+                            <SuscriberText n={34} name="Abonnements" />
                         </HStack>
-                    </Box>
-                </Box>
-                <Box>
+                    </View>
+                </View>
+                <View>
                     <Text>Content here</Text>
-                </Box>
+                </View>
             </ScrollView>
         </RootContainer>
     );
