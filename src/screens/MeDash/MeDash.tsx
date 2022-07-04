@@ -2,26 +2,25 @@
 
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Heading, Divider, VStack, HStack, Text } from "native-base";
+import { IterfaceHeadingProps } from "native-base/src/components/primitives/Heading/types";
 import { View } from "native-base/src/components/basic/View";
+import Text from "native-base/src/components/primitives/Text";
+import Heading from "native-base/src/components/primitives/Heading";
+import VStack from "native-base/src/components/primitives/Stack/VStack";
+import Divider from "native-base/src/components/composites/Divider";
+import HStack from "native-base/src/components/primitives/Stack/HStack";
+
 import CardDash from "../../components/Composite/CardDash/CardDash";
 import ItemSetting from "../../components/Composite/ItemSetting/ItemSetting";
 import AvatarLabel from "../../components/Primitive/AvatarLabel/AvatarLabel";
-import {
-    HomeTabScreenProps,
-    RootStackParamList,
-    HomeTabPramList,
-} from "../../navigation/types";
+import HeaderAnimationContainer from "../../containers/screens/HeaderAnimationContainer";
+import { HomeTabScreenProps } from "../../navigation/types";
+import { MenuItemType, MENUS } from "./menus";
+
 import { uri } from "../../utils/uri";
 
-import { IoniconsNameType } from "../../components/Primitive/Type";
-import HeaderAnimationContainer from "../../containers/screens/HeaderAnimationContainer";
-
-type MenuItemType = {
-    id: string;
-    icon: IoniconsNameType;
-    name: string;
-    path: keyof RootStackParamList | keyof HomeTabPramList;
+const HeaderTitleList: React.FC<IterfaceHeadingProps> = (props) => {
+    return <Heading fontSize="lg" my="2" color="coolGray.700" {...props} />;
 };
 
 type ListAuthorProps = {
@@ -39,12 +38,12 @@ export const ListAuthor: React.FC<ListAuthorProps> = ({
 
     return (
         <VStack space={1}>
+            <HeaderTitleList>Autheurs</HeaderTitleList>
             {authors.map((author, i) => (
                 <View key={i}>
                     <TouchableOpacity onPress={handlerSelectAuthor(author)}>
                         <AvatarLabel
-                            px="3"
-                            py="1"
+                            p="1"
                             avatarProps={{
                                 size: "md",
                             }}
@@ -56,7 +55,7 @@ export const ListAuthor: React.FC<ListAuthorProps> = ({
                             subTitle="Voir votre profile"
                         />
                     </TouchableOpacity>
-                    <Divider />
+                    <Divider mt="2" />
                 </View>
             ))}
         </VStack>
@@ -95,16 +94,18 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
                 title: "Menu",
             }}
             flatListProps={{
-                data: MENU_ITEMS,
+                data: MENUS,
                 renderItem,
                 ListFooterComponent: CopyrightText,
                 ListHeaderComponent: () => {
                     return (
-                        <VStack p="3" mt="24">
+                        <VStack p="3" mt="24" space="3">
                             <ListAuthor
                                 onSelectAuthor={handlerAuthorNavigation}
                             />
-                            <Heading>Tous les raccourcis</Heading>
+                            <HeaderTitleList>
+                                Tous les raccourcis
+                            </HeaderTitleList>
                             <HStack space={2}>
                                 <CardDash
                                     flex={0.5}
@@ -116,6 +117,7 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
                                     <CardDash title="enregistrement" />
                                 </VStack>
                             </HStack>
+                            <HeaderTitleList>Parametres</HeaderTitleList>
                         </VStack>
                     );
                 },
@@ -141,24 +143,3 @@ const CopyrightText = () => {
         </View>
     );
 };
-
-const MENU_ITEMS: MenuItemType[] = [
-    {
-        id: "1",
-        icon: "",
-        name: "Creer une bibliotheque",
-        path: "NewLib",
-    },
-    {
-        id: "2",
-        icon: "",
-        name: "Aide et assistance",
-        path: "Help",
-    },
-    {
-        id: "3",
-        icon: "",
-        name: "Apropos",
-        path: "About",
-    },
-];

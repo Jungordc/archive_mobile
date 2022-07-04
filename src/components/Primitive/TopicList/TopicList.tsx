@@ -1,9 +1,10 @@
 /** @format */
 
-import { View, FlatList } from "react-native";
 import React from "react";
+import { FlatList } from "react-native";
 import TopicItem from "./TopicItem";
 import useFakeData from "../../../services/faceData";
+import { keyExtractor } from "../../../utils/core";
 
 export type TopicListProps = {
     data?: { title: string; id: number | string }[];
@@ -19,32 +20,40 @@ const TopicList: React.FC<TopicListProps> = ({
     const data = useFakeData({ id: 0, title: "Topic title" });
     const [_selected, setSelected] = React.useState<number | string>(selected);
 
+    const handlerSelectTopic = React.useCallback((index: string | number) => {
+        return () => {
+            setSelected(index);
+            onSelect?.(index);
+        };
+    }, []);
+
+    const renderItem = React.useCallback(
+        ({ index, item }) => {
+            const indexSelected: boolean = _selected === index;
+            return (
+                <TopicItem
+                    onPress={handlerSelectTopic(index)}
+                    title={item.title}
+                    _text={{
+                        color: indexSelected ? "coolGray.300" : "coolGray.700",
+                    }}
+                    colorScheme="muted"
+                    bg={indexSelected ? "black" : "coolGray.100"}
+                />
+            );
+        },
+        [_selected]
+    );
+
     return (
-        <View>
-            <FlatList
-                bounces={false}
-                showsHorizontalScrollIndicator={false}
-                horizontal
-                data={data}
-                renderItem={({ index, item }) => (
-                    <TopicItem
-                        onPress={() => {
-                            setSelected(index);
-                            onSelect?.(index);
-                        }}
-                        title={item.title}
-                        _text={{
-                            color:
-                                _selected === index
-                                    ? "coolGray.300"
-                                    : "coolGray.700",
-                        }}
-                        colorScheme="muted"
-                        bg={_selected === index ? "black" : "coolGray.100"}
-                    />
-                )}
-            />
-        </View>
+        <FlatList
+            horizontal
+            data={data}
+            bounces={false}
+            showsHorizontalScrollIndicator={false}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+        />
     );
 };
 

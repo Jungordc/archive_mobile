@@ -1,8 +1,8 @@
 /** @format */
 
+import React from "react";
 import { Button } from "native-base";
 import { IButtonProps } from "native-base/lib/typescript/components/primitives/Button/types";
-import React from "react";
 
 type TopicItemProps = {
     title: string;
