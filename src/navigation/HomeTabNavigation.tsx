@@ -1,6 +1,5 @@
 /** @format */
 
-import { BottomTab } from "./NavigatorCreator";
 import { useTheme } from "native-base";
 import TabBarIcon from "./TabBarIcon";
 // screens
@@ -8,6 +7,48 @@ import MeDash from "../screens/MeDash/MeDash";
 import Home from "../screens/Home/Home";
 import SelectCategorie from "../screens/SelectCategorie/SelectCategorie";
 import Search from "../screens/Search/Search";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { HomeTabPramList } from "./types";
+
+export const BottomTab = createBottomTabNavigator<HomeTabPramList>();
+
+type tabBarIconPropType = {
+    focused: boolean;
+    color: string;
+    size: number;
+};
+
+const tabBarIconHome = (props: tabBarIconPropType) => {
+    return <TabBarIcon name="home-outline" focusIconName="home" {...props} />;
+};
+const tabBarIconSearch = (props: tabBarIconPropType) => {
+    return (
+        <TabBarIcon
+            name="search-outline"
+            focusIconName="search-sharp"
+            {...props}
+        />
+    );
+};
+const tabBarIconMenu = (props: tabBarIconPropType) => {
+    return (
+        <TabBarIcon
+            name="add-circle-outline"
+            focusIconName="add-circle-sharp"
+            {...props}
+        />
+    );
+};
+
+const tabBarIconEdit = (props: tabBarIconPropType) => {
+    return (
+        <TabBarIcon
+            name="add-circle-outline"
+            focusIconName="add-circle-sharp"
+            {...props}
+        />
+    );
+};
 
 const HomeTabNavigation: React.FC = () => {
     const theme = useTheme();
@@ -18,6 +59,7 @@ const HomeTabNavigation: React.FC = () => {
                 backgroundColor: theme.colors.white,
             }}
             screenOptions={{
+                headerShown: false,
                 tabBarActiveTintColor: theme.colors.coolGray[800],
                 tabBarInactiveTintColor: theme.colors.coolGray[500],
                 tabBarShowLabel: false,
@@ -28,28 +70,14 @@ const HomeTabNavigation: React.FC = () => {
         >
             <BottomTab.Screen
                 options={{
-                    headerShown: false,
-                    tabBarIcon: (props) => (
-                        <TabBarIcon
-                            name="home-outline"
-                            focusIconName="home"
-                            {...props}
-                        />
-                    ),
+                    tabBarIcon: tabBarIconHome,
                 }}
                 name="Index"
                 component={Home}
             />
             <BottomTab.Screen
                 options={{
-                    headerShown: false,
-                    tabBarIcon: (props) => (
-                        <TabBarIcon
-                            name="search-outline"
-                            focusIconName="search-sharp"
-                            {...props}
-                        />
-                    ),
+                    tabBarIcon: tabBarIconSearch,
                 }}
                 name="Search"
                 component={Search}
@@ -58,28 +86,14 @@ const HomeTabNavigation: React.FC = () => {
                 name="Edit"
                 component={SelectCategorie}
                 options={{
-                    headerShown: false,
-                    tabBarIcon: (props) => (
-                        <TabBarIcon
-                            name="add-circle-outline"
-                            focusIconName="add-circle-sharp"
-                            {...props}
-                        />
-                    ),
+                    tabBarIcon: tabBarIconEdit,
                 }}
             />
             <BottomTab.Screen
                 name="MeDash"
                 component={MeDash}
                 options={{
-                    headerShown: false,
-                    tabBarIcon: (props) => (
-                        <TabBarIcon
-                            name="person-circle-outline"
-                            focusIconName="person-circle-sharp"
-                            {...props}
-                        />
-                    ),
+                    tabBarIcon: tabBarIconMenu,
                 }}
             />
         </BottomTab.Navigator>

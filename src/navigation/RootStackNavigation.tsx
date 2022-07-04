@@ -3,9 +3,6 @@
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Pressable } from "react-native";
-
-import { HomeStack } from "./NavigatorCreator";
-
 import Detail from "../screens/Detail/Detail";
 import Search from "../screens/Search/Search";
 import HomeTabNavigation from "./HomeTabNavigation";
@@ -31,6 +28,10 @@ import {
 } from "./options/rootStackNavigationOptions";
 import Reading from "../screens/Reading/Reading";
 import EditingDocs from "../screens/EditingDocs/EditingDocs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { RootStackParamList } from "./types";
+
+export const HomeStack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootStackNavigation: React.FC = () => {
     return (
