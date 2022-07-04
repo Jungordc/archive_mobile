@@ -9,27 +9,29 @@ import SaveButton, {
 export type SaveButtonBottomSheetProps = {
     btnProps?: SaveButtonProps;
     onSaved?(toogle: boolean): void;
+    initialValue?: boolean;
 };
 const SaveButtonBottomSheet: React.FC<SaveButtonBottomSheetProps> = ({
     btnProps,
     onSaved,
+    initialValue,
 }) => {
-    const [saved, setSaved] = React.useState<boolean>(false);
-    React.useEffect(() => {
-        onSaved?.(saved);
-    }, [saved]);
+    const [saved, setSaved] = React.useState<boolean>(initialValue || false);
+    const onSavedChange = React.useCallback(() => {
+        setSaved((state) => {
+            const newState = !state;
+            onSaved?.(newState);
+            return newState;
+        });
+    }, []);
 
     const savePostBottonSheet = useBottomSheetActions({
         onOpen(present) {
-            if (!saved) {
-                present();
-            } else {
-                setSaved((state) => !state);
-            }
+            !saved ? present() : onSavedChange();
         },
         onClose(close) {
+            onSavedChange();
             close();
-            setSaved((state) => !state);
         },
     });
     return (
