@@ -36,13 +36,13 @@ const ItemContainer: React.FC<ItemContainerProps> = ({
     // title container
     const innerTitle = TextOrComponent({
         component: title,
-        textProps: titleProps,
+        textProps: { color: "coolGray.800", ...titleProps },
     });
 
     // subtitle container
     const innerSubTitle = TextOrComponent({
         component: subTitle,
-        textProps: subTitleProps,
+        textProps: { color: "coolGray.600", fontSize: "2xs", ...subTitleProps },
     });
     return (
         <HStack justifyContent="space-between" alignItems="center" {...props}>

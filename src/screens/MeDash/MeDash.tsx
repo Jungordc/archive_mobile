@@ -20,7 +20,7 @@ import { MenuItemType, MENUS } from "./menus";
 import { uri } from "../../utils/uri";
 
 const HeaderTitleList: React.FC<IterfaceHeadingProps> = (props) => {
-    return <Heading fontSize="lg" my="2" color="coolGray.700" {...props} />;
+    return <Heading fontSize="md" my="2" color="coolGray.700" {...props} />;
 };
 
 type ListAuthorProps = {
@@ -81,7 +81,7 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
             <TouchableOpacity onPress={handlerItemNavigation(item.path)}>
                 <ItemSetting
                     p="3"
-                    iconLeftProps={{ name: "library-sharp" }}
+                    iconLeftProps={{ name: item.icon }}
                     title={item.name}
                 />
             </TouchableOpacity>
@@ -91,7 +91,11 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
     return (
         <HeaderAnimationContainer
             headerProps={{
+                showBtn: true,
                 title: "Menu",
+                iconButtonProps: {
+                    iconName: "contrast-outline",
+                },
             }}
             flatListProps={{
                 data: MENUS,

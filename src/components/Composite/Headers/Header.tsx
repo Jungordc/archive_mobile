@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
                     variant="outline"
                     borderRadius="full"
                     size="sm"
-                    iconName="ios-flash-outline"
+                    iconName="compass"
                     {...iconButtonProps}
                 />
             )}

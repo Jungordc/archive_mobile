@@ -2,24 +2,30 @@
 
 import React from "react";
 import { ScrollView } from "react-native";
-import { View } from "native-base/src/components/basic/View";
-import ProfileImages from "../../components/Composite/ProfileImages/ProfileImages";
-import InputTitle from "../../components/Primitive/InputTitle/InputTitle";
-import usePickImage from "../../hooks/pickers/usePickImage";
 import { RootStackScreenProps } from "../../navigation/types";
-import useBtnSaveEffect from "../../hooks/actions/useBtnSaveEffect";
+import useBtnSaveEffect, {
+    useBtnSaveRefType,
+} from "../../hooks/actions/useBtnSaveEffect";
+import AuthorEditorConnector, {
+    EditorRefType,
+} from "../../components/Composite/Author/AuthorEditorConnector";
 
 export type NewLibProps = {} & RootStackScreenProps<"NewLib">;
 
 const NewLib: React.FC<NewLibProps> = ({ navigation }) => {
-    const cover = usePickImage({});
-    const profile = usePickImage({ aspect: [4, 4] });
+    const EditorRef = React.useRef<EditorRefType>(null);
+    const BtnSaveRef = React.useRef<useBtnSaveRefType>(null);
 
     const handlerSave = React.useCallback(() => {
-        console.log("save .......//////");
+        EditorRef.current?.handlerSubmit?.();
+    }, [EditorRef]);
+
+    const onSubmit = React.useCallback((data: any) => {
+        console.log("data: ", data);
     }, []);
 
     useBtnSaveEffect({
+        ref: BtnSaveRef,
         navigation,
         btnProps: {
             onPress: handlerSave,
@@ -28,39 +34,7 @@ const NewLib: React.FC<NewLibProps> = ({ navigation }) => {
 
     return (
         <ScrollView bounces={false}>
-            <ProfileImages
-                profileCoverProps={{
-                    source: cover.source,
-                    onSelectProfile: cover.onpenSelectorImage,
-                }}
-                profileAvatarProps={{
-                    source: profile.source,
-                    onSelectProfile: profile.onpenSelectorImage,
-                }}
-                edit
-            />
-            <View p={2} my={50}>
-                <View>
-                    <View mx={1}>
-                        <InputTitle
-                            textInputProps={{
-                                placeholder: "Nom",
-                            }}
-                        />
-                    </View>
-                    <View mx={1}>
-                        <InputTitle
-                            textInputProps={{
-                                placeholder: "Description",
-                                style: {
-                                    fontSize: 20,
-                                    fontWeight: "400",
-                                },
-                            }}
-                        />
-                    </View>
-                </View>
-            </View>
+            <AuthorEditorConnector ref={EditorRef} onSubmit={onSubmit} />
         </ScrollView>
     );
 };

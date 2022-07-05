@@ -30,6 +30,7 @@ const ProfileImageConnector: React.FC<ProfileImageConnectorProps> = ({
         usePickImage({
             onSelectImage: onChangeAvatar,
             initialSource: initialAvatar,
+            aspect: [4, 4],
         });
 
     return (

@@ -1,7 +1,10 @@
 /** @format */
 
 import React from "react";
-import { HStack, Avatar, Text, VStack, IAvatarProps } from "native-base";
+import {
+    Avatar,
+    IAvatarProps,
+} from "native-base/src/components/composites/Avatar";
 import { ImageSourcePropType } from "react-native";
 import { InterfaceTextProps } from "native-base/lib/typescript/components/primitives/Text/types";
 import { InterfaceHStackProps } from "native-base/lib/typescript/components/primitives/Stack/HStack";
@@ -47,21 +50,21 @@ const AvatarLabel: React.FC<AvatarLabelProps> = ({
         />
     );
 
-    return (
-        <HStack alignItems="center" {...restProps}>
-            {source && <Avatar size="sm" {...avatarProps} source={source} />}
-            <VStack justifyContent="center" ml={2} {...titleContainer}>
-                <Text fontSize="xs" {...titleProps} color="blueGray.900">
-                    {title}
-                </Text>
-                {subTitle && (
-                    <Text fontSize="2xs" color="gray.600" {...subTitleProps}>
-                        {subTitle}
-                    </Text>
-                )}
-            </VStack>
-        </HStack>
-    );
+    // return (
+    //     <HStack alignItems="center" {...restProps}>
+    //         {source && <Avatar size="sm" {...avatarProps} source={source} />}
+    //         <VStack justifyContent="center" ml={2} {...titleContainer}>
+    //             <Text fontSize="xs" {...titleProps} color="blueGray.900">
+    //                 {title}
+    //             </Text>
+    //             {subTitle && (
+    //                 <Text fontSize="2xs" color="gray.600" {...subTitleProps}>
+    //                     {subTitle}
+    //                 </Text>
+    //             )}
+    //         </VStack>
+    //     </HStack>
+    // );
 };
 
 AvatarLabel.displayName = "AvatarLabel";

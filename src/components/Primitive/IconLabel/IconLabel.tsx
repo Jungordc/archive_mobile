@@ -33,7 +33,14 @@ const IconLabel: React.FC<IconLabelProps> = ({
         </Text>
     );
     return (
-        <Stack space={2} alignItems="center" {...props}>
+        <Stack
+            direction={direction}
+            space={2}
+            {...(direction === "row" || direction === "row-reverse"
+                ? { alignItems: "center" }
+                : { justifyContent: "center" })}
+            {...props}
+        >
             {labelPosition === "Left" && Label}
             {icon && <Icon size="xs" name={icon} {...iconProps} />}
             {labelPosition === "Right" && Label}

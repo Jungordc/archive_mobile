@@ -33,8 +33,8 @@ const tabBarIconSearch = (props: tabBarIconPropType) => {
 const tabBarIconMenu = (props: tabBarIconPropType) => {
     return (
         <TabBarIcon
-            name="add-circle-outline"
-            focusIconName="add-circle-sharp"
+            name="person-circle-outline"
+            focusIconName="person-circle"
             {...props}
         />
     );

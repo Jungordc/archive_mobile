@@ -19,13 +19,13 @@ export const MENUS: MenuItemType[] = [
     },
     {
         id: "2",
-        icon: "help-outline",
+        icon: "help-circle-outline",
         name: "Aide et assistance",
         path: "Help",
     },
     {
         id: "3",
-        icon: "information-outline",
+        icon: "information-circle-outline",
         name: "Apropos",
         path: "About",
     },

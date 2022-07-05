@@ -22,11 +22,11 @@ export type EditorDataType = {
 
 export type ControllerTypeProps<CType = any, T = EditorDataType> = {
     controller: CType;
+    name: keyof T;
     render: (value: {
         value: any;
         onChange(value: any): void;
     }) => React.ReactNode;
-    name: keyof T;
 };
 
 export type EditorProps<T = { uri: string }> = {
