@@ -14,7 +14,11 @@ import CardDash from "../../components/Composite/CardDash/CardDash";
 import ItemSetting from "../../components/Composite/ItemSetting/ItemSetting";
 import AvatarLabel from "../../components/Primitive/AvatarLabel/AvatarLabel";
 import HeaderAnimationContainer from "../../containers/screens/HeaderAnimationContainer";
-import { HomeTabScreenProps } from "../../navigation/types";
+import {
+    HomeTabPramList,
+    HomeTabScreenProps,
+    RootStackParamList,
+} from "../../navigation/types";
 import { MenuItemType, MENUS } from "./menus";
 
 import { uri } from "../../utils/uri";
@@ -23,13 +27,48 @@ const HeaderTitleList: React.FC<IterfaceHeadingProps> = (props) => {
     return <Heading fontSize="md" my="2" color="coolGray.700" {...props} />;
 };
 
+type AuthorDataType = {
+    id: string | number;
+    name: string;
+    accountType: "USER" | "LIB";
+    cover?: string;
+    avatar?: string;
+    isActif?: boolean;
+};
+
+const _authors: AuthorDataType[] = [
+    {
+        id: 2,
+        name: "bienfait",
+        accountType: "USER",
+        avatar: uri.uri,
+        isActif: true,
+        cover: uri.uri,
+    },
+    {
+        id: 2,
+        name: "Archive page",
+        accountType: "LIB",
+        avatar: uri.uri,
+        isActif: false,
+        cover: uri.uri,
+    },
+    {
+        id: 2,
+        name: "Alvine page test",
+        accountType: "LIB",
+        avatar: uri.uri,
+        isActif: false,
+        cover: uri.uri,
+    },
+];
 type ListAuthorProps = {
-    authors?: any[];
+    authors?: AuthorDataType[];
     onSelectAuthor?(author: number | string): void;
 };
 
 export const ListAuthor: React.FC<ListAuthorProps> = ({
-    authors = [1, 2, 3],
+    authors = _authors,
     onSelectAuthor,
 }) => {
     const handlerSelectAuthor = React.useCallback((author: number | string) => {
@@ -41,18 +80,30 @@ export const ListAuthor: React.FC<ListAuthorProps> = ({
             <HeaderTitleList>Autheurs</HeaderTitleList>
             {authors.map((author, i) => (
                 <View key={i}>
-                    <TouchableOpacity onPress={handlerSelectAuthor(author)}>
+                    <TouchableOpacity onPress={handlerSelectAuthor(author.id)}>
                         <AvatarLabel
                             p="1"
                             avatarProps={{
                                 size: "md",
+                                source: { uri: author.avatar },
                             }}
                             titleProps={{
                                 fontWeight: "bold",
                             }}
                             source={uri}
-                            title="Archive user"
-                            subTitle="Voir votre profile"
+                            title={author.name}
+                            subTitle={
+                                author.accountType === "USER"
+                                    ? "Voir votre profile"
+                                    : "Voir le profile de votre librarie"
+                            }
+                            action={
+                                author.isActif && (
+                                    <Text fontSize="2xs" color="coolGray.500">
+                                        Autheur actif
+                                    </Text>
+                                )
+                            }
                         />
                     </TouchableOpacity>
                     <Divider mt="2" />
@@ -76,6 +127,51 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
         },
         []
     );
+
+    const handlerNavigate = React.useCallback(
+        (path: keyof RootStackParamList | keyof HomeTabPramList) => {
+            return () => navigation.navigate(path);
+        },
+        []
+    );
+
+    const headerComponent = React.useCallback(() => {
+        return (
+            <VStack p="3" mt="24" space="3">
+                <ListAuthor onSelectAuthor={handlerAuthorNavigation} />
+                <HeaderTitleList>Tous les raccourcis</HeaderTitleList>
+                <HStack h={220} space={3}>
+                    <View flex={1}>
+                        <CardDash
+                            onPress={handlerNavigate("Save")}
+                            title="enregistrement"
+                            subTitle="Retrouver vos archives sauvergader pour plus tards"
+                        />
+                    </View>
+                    <VStack space="2" flex={1}>
+                        <CardDash
+                            onPress={handlerNavigate("Subscribers")}
+                            title="abonnés"
+                            subTitle="234 abonnés"
+                            iconProps={{
+                                iconName: "people",
+                            }}
+                        />
+                        <CardDash
+                            onPress={handlerNavigate("Subscribed")}
+                            title="Abonnements"
+                            subTitle="0 abonnements"
+                            iconProps={{
+                                iconName: "people-outline",
+                            }}
+                        />
+                    </VStack>
+                </HStack>
+                <HeaderTitleList>Parametres</HeaderTitleList>
+            </VStack>
+        );
+    }, []);
+
     const renderItem = React.useCallback(({ item }: { item: MenuItemType }) => {
         return (
             <TouchableOpacity onPress={handlerItemNavigation(item.path)}>
@@ -99,32 +195,10 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
             }}
             flatListProps={{
                 data: MENUS,
+                showsVerticalScrollIndicator: false,
                 renderItem,
                 ListFooterComponent: CopyrightText,
-                ListHeaderComponent: () => {
-                    return (
-                        <VStack p="3" mt="24" space="3">
-                            <ListAuthor
-                                onSelectAuthor={handlerAuthorNavigation}
-                            />
-                            <HeaderTitleList>
-                                Tous les raccourcis
-                            </HeaderTitleList>
-                            <HStack space={2}>
-                                <CardDash
-                                    flex={0.5}
-                                    h={200}
-                                    title="enregistrement"
-                                />
-                                <VStack flex={0.5} space={2}>
-                                    <CardDash title="enregistrement" />
-                                    <CardDash title="enregistrement" />
-                                </VStack>
-                            </HStack>
-                            <HeaderTitleList>Parametres</HeaderTitleList>
-                        </VStack>
-                    );
-                },
+                ListHeaderComponent: headerComponent,
             }}
         />
     );

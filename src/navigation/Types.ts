@@ -40,6 +40,8 @@ export type RootStackParamList = {
     Profile: { author: IDType };
     Help: undefined;
     Save: undefined;
+    Subscribers: undefined;
+    Subscribed: undefined;
     SearchDetail: undefined;
     Detail: { post: IDType };
     Reading: { post: IDType };

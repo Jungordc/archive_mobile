@@ -6,11 +6,14 @@ import {
     Icon as NBIcon,
     IIconProps,
 } from "native-base/src/components/primitives/Icon";
+import { IoniconsNameType } from "../Type";
 
-export type IconProps = {} & IIconProps;
+export type IconProps = {
+    iconName?: IoniconsNameType;
+} & IIconProps;
 
-const Icon: React.FC<IconProps> = ({ ...props }) => {
-    return <NBIcon as={Ionicons} {...props} />;
+const Icon: React.FC<IconProps> = ({ iconName, ...props }) => {
+    return <NBIcon as={Ionicons} name={iconName} {...props} />;
 };
 
 export default Icon;

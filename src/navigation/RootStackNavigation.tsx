@@ -30,6 +30,9 @@ import Reading from "../screens/Reading/Reading";
 import EditingDocs from "../screens/EditingDocs/EditingDocs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "./types";
+import Subscriber from "../screens/Subscriber/Subscriber";
+import Subscribed from "../screens/Subscribed/Subscribed";
+import Save from "../screens/Save/Save";
 
 export const HomeStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -113,7 +116,7 @@ export const RootStackNavigation: React.FC = () => {
             />
             <HomeStack.Screen name="Reading" component={Reading} />
             <HomeStack.Screen name="SearchDetail" component={Search} />
-
+            {/* user info */}
             <HomeStack.Screen
                 name="Profile"
                 component={Profile}
@@ -138,6 +141,10 @@ export const RootStackNavigation: React.FC = () => {
                     ),
                 })}
             />
+
+            <HomeStack.Screen name="Subscribers" component={Subscriber} />
+            <HomeStack.Screen name="Subscribed" component={Subscribed} />
+            <HomeStack.Screen name="Save" component={Save} />
 
             {/* Edition and Creator Group */}
             <HomeStack.Group screenOptions={creatorScreenOptions}>
