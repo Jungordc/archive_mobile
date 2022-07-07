@@ -22,6 +22,16 @@ import {
 import { MenuItemType, MENUS } from "./menus";
 
 import { uri } from "../../utils/uri";
+import ChangeAuthorActifBottomSheet from "../../containers/Actions/ChangeAuthorActifBottomSheet";
+import {
+    authorListConnector,
+    bottomSheetChangeAuthorConnector,
+} from "../../services/connectors/AccountConnector";
+
+// connect to data services
+const ChangeAuthorActifBottomSheetConnected = bottomSheetChangeAuthorConnector(
+    ChangeAuthorActifBottomSheet
+);
 
 const HeaderTitleList: React.FC<IterfaceHeadingProps> = (props) => {
     return <Heading fontSize="md" my="2" color="coolGray.700" {...props} />;
@@ -36,39 +46,13 @@ type AuthorDataType = {
     isActif?: boolean;
 };
 
-const _authors: AuthorDataType[] = [
-    {
-        id: 2,
-        name: "bienfait",
-        accountType: "USER",
-        avatar: uri.uri,
-        isActif: true,
-        cover: uri.uri,
-    },
-    {
-        id: 2,
-        name: "Archive page",
-        accountType: "LIB",
-        avatar: uri.uri,
-        isActif: false,
-        cover: uri.uri,
-    },
-    {
-        id: 2,
-        name: "Alvine page test",
-        accountType: "LIB",
-        avatar: uri.uri,
-        isActif: false,
-        cover: uri.uri,
-    },
-];
 type ListAuthorProps = {
     authors?: AuthorDataType[];
     onSelectAuthor?(author: number | string): void;
 };
 
 export const ListAuthor: React.FC<ListAuthorProps> = ({
-    authors = _authors,
+    authors,
     onSelectAuthor,
 }) => {
     const handlerSelectAuthor = React.useCallback((author: number | string) => {
@@ -78,7 +62,7 @@ export const ListAuthor: React.FC<ListAuthorProps> = ({
     return (
         <VStack space={1}>
             <HeaderTitleList>Autheurs</HeaderTitleList>
-            {authors.map((author, i) => (
+            {authors?.map((author, i) => (
                 <View key={i}>
                     <TouchableOpacity onPress={handlerSelectAuthor(author.id)}>
                         <AvatarLabel
@@ -99,9 +83,20 @@ export const ListAuthor: React.FC<ListAuthorProps> = ({
                             }
                             action={
                                 author.isActif && (
-                                    <Text fontSize="2xs" color="coolGray.500">
-                                        Autheur actif
-                                    </Text>
+                                    <HStack space="2" alignItems="center">
+                                        <Text
+                                            fontSize="2xs"
+                                            color="success.700"
+                                        >
+                                            Autheur actif
+                                        </Text>
+                                        <View
+                                            rounded="full"
+                                            h="2"
+                                            w="2"
+                                            bg="success.700"
+                                        />
+                                    </HStack>
                                 )
                             }
                         />
@@ -109,9 +104,16 @@ export const ListAuthor: React.FC<ListAuthorProps> = ({
                     <Divider mt="2" />
                 </View>
             ))}
+            {(authors?.length || 0) > 1 && (
+                <View flex={1} alignItems="flex-end">
+                    <ChangeAuthorActifBottomSheetConnected />
+                </View>
+            )}
         </VStack>
     );
 };
+
+const ListAuthorConnected = authorListConnector(ListAuthor);
 
 export type MeDashProps = {} & HomeTabScreenProps<"MeDash">;
 const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
@@ -138,7 +140,7 @@ const MeDash: React.FC<MeDashProps> = ({ navigation }) => {
     const headerComponent = React.useCallback(() => {
         return (
             <VStack p="3" mt="24" space="3">
-                <ListAuthor onSelectAuthor={handlerAuthorNavigation} />
+                <ListAuthorConnected onSelectAuthor={handlerAuthorNavigation} />
                 <HeaderTitleList>Tous les raccourcis</HeaderTitleList>
                 <HStack h={220} space={3}>
                     <View flex={1}>
