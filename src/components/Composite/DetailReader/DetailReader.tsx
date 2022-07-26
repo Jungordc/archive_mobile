@@ -20,7 +20,12 @@ const DetailReader: React.FC<DetailReaderProps> = ({
     return (
         <Box flex={1}>
             <VStack mb={3} p={3}>
-                <Heading fontSize="4xl" lineHeight="md" color="coolGray.800">
+                <Heading
+                    fontSize="2xl"
+                    lineHeight="md"
+                    color="coolGray.800"
+                    textAlign="justify"
+                >
                     {title}
                 </Heading>
                 <Text fontSize="sm" color="blue.600">

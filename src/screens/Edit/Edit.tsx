@@ -32,6 +32,11 @@ const Edit: React.FC<EditProps> = ({
         []
     );
 
+    const handlerDetailViewDocs = React.useCallback(
+        (index) => navigation.navigate("EditionDocs", { index: 0 }),
+        []
+    );
+
     const onSubmit = React.useCallback((data: any) => {
         console.log("data...", data);
     }, []);
@@ -52,6 +57,7 @@ const Edit: React.FC<EditProps> = ({
                 onSubmit={onSubmit}
                 handlerEditingDocs={handlerEditingDocs}
                 onPressImage={handlerEditingDocs}
+                handlerDetailViewDocs={handlerDetailViewDocs}
             />
         </View>
     );

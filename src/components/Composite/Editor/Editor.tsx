@@ -5,12 +5,11 @@ import { Button } from "native-base/src/components/primitives/Button";
 import { View } from "native-base/src/components/basic/View";
 import Text from "native-base/src/components/primitives/Text";
 import VStack from "native-base/src/components/primitives/Stack/VStack";
-
-import ImageContainers from "../../../../packages/image-container-plus/ImageContainers";
 import InputTitle from "../../Primitive/InputTitle/InputTitle";
 import Icon from "../../Primitive/Icons/Icon";
 import InputTags from "./InputTags";
 import ProfileImageConnector from "../ProfileImages/ProfileImageConnector";
+import ImageList from "../Images/ImageList";
 
 export type EditorDataType = {
     title: string;
@@ -31,18 +30,23 @@ export type ControllerTypeProps<CType = any, T = EditorDataType> = {
 
 export type EditorProps<T = { uri: string }> = {
     handlerEditingDocs?(): void;
+    handlerDetailViewDocs?(item: any): void;
     onPressImage?(image: T): void;
-    controllerComponent: React.ComponentType<ControllerTypeProps>;
+    controllerComponent: React.FC<ControllerTypeProps>;
     controller: any;
 };
 
 const Editor: React.FC<EditorProps> = ({
     handlerEditingDocs,
+    handlerDetailViewDocs,
     onPressImage,
     controller,
     controllerComponent: Controller,
     ...props
 }) => {
+    const handlerViewImgDocs = React.useCallback((item: any) => {
+        handlerDetailViewDocs?.(item);
+    }, []);
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <Controller
@@ -62,8 +66,8 @@ const Editor: React.FC<EditorProps> = ({
             <View flex={1}>
                 <View mx={1}>
                     <Controller
-                        controller={controller}
                         name="title"
+                        controller={controller}
                         render={({ onChange, value }) => (
                             <InputTitle
                                 maxLength={75}
@@ -79,10 +83,9 @@ const Editor: React.FC<EditorProps> = ({
                 </View>
                 <View mx={1}>
                     <Controller
-                        controller={controller}
                         name="description"
+                        controller={controller}
                         render={({ onChange, value }) => {
-                            console.log("description: ", value);
                             return (
                                 <InputTitle
                                     textInputProps={{
@@ -102,13 +105,10 @@ const Editor: React.FC<EditorProps> = ({
                 </View>
                 <View flex={1}>
                     <Controller
-                        controller={controller}
                         name="tags"
+                        controller={controller}
                         render={({ onChange, value }) => {
-                            const newValue =
-                                typeof value === "object"
-                                    ? { ...value }
-                                    : { value };
+                            const newValue = coverToObject(value);
                             return (
                                 <InputTags {...newValue} onChange={onChange} />
                             );
@@ -134,17 +134,18 @@ const Editor: React.FC<EditorProps> = ({
                             Ajouter une document...
                         </Button>
                         <Controller
-                            controller={controller}
                             name="docs"
-                            render={({ value }) => (
-                                <ImageContainers
-                                    h="64"
-                                    onPress={onPressImage}
-                                    images={value?.map((i: string) => ({
-                                        uri: i,
-                                    }))}
-                                />
-                            )}
+                            controller={controller}
+                            render={({ value }) => {
+                                const images: any = parseToDataImageUrl(value);
+                                return (
+                                    <ImageList
+                                        data={images}
+                                        onImagePress={handlerViewImgDocs}
+                                        getShareElementId={(e) => ""}
+                                    />
+                                );
+                            }}
                         />
 
                         <Text
@@ -169,3 +170,13 @@ const Editor: React.FC<EditorProps> = ({
 };
 
 export default Editor;
+
+function coverToObject<T>(value: T) {
+    return typeof value === "object" ? { ...value } : { value };
+}
+
+function parseToDataImageUrl<T>(value: T[]) {
+    return value.map((i) => ({
+        uri: i,
+    }));
+}

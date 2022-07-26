@@ -49,7 +49,7 @@ export type RootStackParamList = {
     SelectCategorie: undefined;
     NewLib: undefined;
     Edition: { category: IDType };
-    EditionDocs: undefined;
+    EditionDocs?: { index?: any };
     //modals
     Comments: { post: IDType }; // Modal
 };

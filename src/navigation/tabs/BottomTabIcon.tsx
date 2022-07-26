@@ -5,14 +5,14 @@ import { Icon, IIconProps } from "native-base/src/components/primitives/Icon";
 
 type IconDefaultNameType = React.ComponentProps<typeof Ionicons>["name"];
 
-export type TabBarIconProps = {
+export type BottomTabIconProps = {
     name: IconDefaultNameType;
     focusIconName?: IconDefaultNameType;
     color: string;
     focused?: boolean;
 } & IIconProps;
 
-const TabBarIcon: React.FC<TabBarIconProps> = ({
+const BottomTabIcon: React.FC<BottomTabIconProps> = ({
     name,
     focused,
     focusIconName,
@@ -27,5 +27,5 @@ const TabBarIcon: React.FC<TabBarIconProps> = ({
     );
 };
 
-TabBarIcon.displayName = "TabBarIcon";
-export default TabBarIcon;
+BottomTabIcon.displayName = "BottomTabIcon";
+export default BottomTabIcon;

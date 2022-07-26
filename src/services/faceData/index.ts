@@ -8,7 +8,7 @@ export default function useFakeData<T extends { id: number | string }>(
 ) {
     const [data, setData] = useState<T[]>([]);
     useEffect(() => {
-        const _data: T[] = new Array(lenght)
+        const _data: T[] = Array(lenght)
             .fill(initialData)
             .map((item, index) => ({
                 ...item,
