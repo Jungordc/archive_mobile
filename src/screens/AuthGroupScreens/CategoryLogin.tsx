@@ -1,6 +1,8 @@
 /** @format */
 
 import React from "react";
+import { observer } from "mobx-react-lite";
+
 import { RootStackScreenProps } from "../../navigation/types";
 import CategoryContainer from "./containers/CategoryContainer";
 
@@ -26,4 +28,4 @@ const CategoryLogin: React.FC<CategoryLoginProps> = ({ navigation }) => {
     );
 };
 
-export default CategoryLogin;
+export default observer(CategoryLogin);

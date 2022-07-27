@@ -1,6 +1,7 @@
 /** @format */
 
 import React, { useRef } from "react";
+import { observer } from "mobx-react-lite";
 import RootContainer from "../../components/Primitive/RootContainer/Container";
 import Heading from "native-base/src/components/primitives/Heading";
 import { View } from "native-base/src/components/basic/View";
@@ -90,5 +91,4 @@ const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
         </RootContainer>
     );
 };
-
-export default CheckInbox;
+export default observer(CheckInbox);

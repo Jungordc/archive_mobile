@@ -15,6 +15,7 @@ import {
     NativeStackNavigationOptions,
     NativeStackScreenProps,
 } from "@react-navigation/native-stack";
+import { StackNavigationOptions } from "@react-navigation/stack";
 
 declare global {
     namespace ReactNavigation {
@@ -78,4 +79,12 @@ export type ScreenOptionsType =
           route: RouteProp<RootStackParamList, keyof RootStackParamList>;
           navigation: any;
       }) => NativeStackNavigationOptions)
+    | undefined;
+
+export type OptionType<T extends keyof RootStackParamList> =
+    | StackNavigationOptions
+    | ((props: {
+          route: RouteProp<RootStackParamList, T>;
+          navigation: any;
+      }) => StackNavigationOptions)
     | undefined;

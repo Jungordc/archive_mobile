@@ -12,7 +12,10 @@ import {
 } from "@react-navigation/native";
 
 import LinkingConfiguration from "./LinkingConfiguration";
-import { RootStackNavigation } from "./RootStackNavigation";
+import RootStackNavigation from "./stacks/StackNavigation";
+import { accountScreenNavigationConnector } from "../services/connectors/AccountConnector";
+
+const StackConnected = accountScreenNavigationConnector(RootStackNavigation);
 
 export default function Navigation({
     colorScheme,
@@ -24,7 +27,7 @@ export default function Navigation({
             linking={LinkingConfiguration}
             theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
         >
-            <RootStackNavigation />
+            <StackConnected />
         </NavigationContainer>
     );
 }

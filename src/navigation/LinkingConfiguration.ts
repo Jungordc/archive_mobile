@@ -9,9 +9,9 @@
 import { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
 
-import { RootTabParamList } from "./types";
+import { RootStackParamList } from "./types";
 
-const linking: LinkingOptions<RootTabParamList> = {
+const linking: LinkingOptions<RootStackParamList> = {
     prefixes: [Linking.makeUrl("/")],
     config: {
         screens: {},

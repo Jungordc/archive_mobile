@@ -1,7 +1,8 @@
 /** @format */
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { acountsInstance } from "../data/accounts";
+import { AccountInstance } from "../accounts/instance";
+import { ScreenManagerPropsType } from "../../Types/screens";
 
 type BottomSheetAuthorDataType = {
     id: number | string;
@@ -28,21 +29,21 @@ export const bottomSheetChangeAuthorConnector = <
 ) => {
     return observer((props: T) => {
         const authors: BottomSheetAuthorDataType[] =
-            acountsInstance.authors.map((author) => ({
+            AccountInstance.authors.map((author) => ({
                 id: author.id,
                 name: author.name,
             }));
 
         const onChangeAuthor = React.useCallback(
             (authorId: string | number) => {
-                acountsInstance.changeActifAuthor(authorId.toString());
+                AccountInstance.changeActifAuthor(authorId.toString());
             },
             []
         );
 
         return (
             <Component
-                actifAuthor={acountsInstance.actifAuthor?.id}
+                actifAuthor={AccountInstance.actifAuthor?.id}
                 authors={authors}
                 onConfirm={onChangeAuthor}
                 {...props}
@@ -57,10 +58,10 @@ export const authorListConnector = <
     }
 >(
     Component: React.FC<T>
-) => {
-    return observer((props: T) => {
-        const actifAuthor = acountsInstance.actifAuthor;
-        const authors: AuthorDataType[] = acountsInstance.authors.map(
+) =>
+    observer((props: T) => {
+        const actifAuthor = AccountInstance.actifAuthor;
+        const authors: AuthorDataType[] = AccountInstance.authors.map(
             (author) => ({
                 id: author.id,
                 name: author.name,
@@ -73,4 +74,23 @@ export const authorListConnector = <
 
         return <Component authors={authors} {...props} />;
     });
-};
+
+// account screen connector manager
+export const accountScreenNavigationConnector = <
+    T extends ScreenManagerPropsType
+>(
+    Component: React.FC<T>
+) =>
+    observer((props: T) => {
+        const isth: boolean = AccountInstance.isAuthenticated;
+        const defaultUser: number | string =
+            AccountInstance.actifAuthor?.id || 0;
+
+        return (
+            <Component
+                {...props}
+                isAuthenticated={isth}
+                defaultUser={defaultUser}
+            />
+        );
+    });
