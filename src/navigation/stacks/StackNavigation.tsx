@@ -1,5 +1,6 @@
 /** @format */
 
+import { View } from "native-base/src/components/basic/View";
 import React from "react";
 import { Pressable } from "react-native";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
@@ -69,36 +70,70 @@ const StackNavigation: React.FC<StackNavigationProps> = ({
                     <HomeStack.Screen
                         name="Signin"
                         component={CategorySigninScreen}
+                        options={{
+                            headerShown: false,
+                        }}
                     />
                     <HomeStack.Screen
                         name="EmailAuth"
                         component={EmailScreen}
+                        options={{
+                            headerTransparent: true,
+                            headerTitle: () => null,
+                        }}
+                        initialParams={{
+                            type: "LOGIN",
+                        }}
                     />
                     <HomeStack.Screen
                         name="UsernameAuth"
                         component={UserNameScreen}
+                        options={{
+                            headerTransparent: true,
+                            headerTitle: () => null,
+                        }}
                     />
                     <HomeStack.Screen
                         name="CheckInbox"
                         component={CheckInboxScreen}
-                        options={({ navigation }) => ({
-                            presentation: "modal",
-                            headerShadowVisible: false,
-                            headerLeft: () => (
-                                <Pressable
-                                    onPress={navigation.goBack}
-                                    style={({ pressed }) => ({
-                                        opacity: pressed ? 0.5 : 1,
-                                    })}
+                        options={{
+                            headerTransparent: true,
+                            headerTitle: () => null,
+                            headerBackImage: () => (
+                                <View
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    p="1"
                                 >
-                                    <Icon size={25} iconName="close" mr="5" />
-                                </Pressable>
+                                    <Icon
+                                        color="black"
+                                        size={27}
+                                        iconName="close"
+                                    />
+                                </View>
                             ),
-                        })}
+                        }}
                     />
                     <HomeStack.Screen
                         name="ConfimCodeAuth"
                         component={ConfirmCodeScreen}
+                        options={{
+                            headerTransparent: true,
+                            headerTitle: () => null,
+                            headerBackImage: () => (
+                                <View
+                                    justifyContent="center"
+                                    alignItems="center"
+                                    p="1"
+                                >
+                                    <Icon
+                                        color="black"
+                                        size={27}
+                                        iconName="close"
+                                    />
+                                </View>
+                            ),
+                        }}
                     />
                     {/* </HomeStack.Group> */}
                 </React.Fragment>

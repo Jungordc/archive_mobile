@@ -1,7 +1,38 @@
 /** @format */
 
-import { types, cast } from "mobx-state-tree";
+import { types } from "mobx-state-tree";
 
+export const EmailRegistration = types
+    .model("EmailRegistration", {
+        orgin: types.optional(
+            types.union(types.literal("LOGIN"), types.literal("SIGNIN")),
+            "LOGIN"
+        ),
+        email: types.optional(types.string, ""),
+        fullname: types.optional(types.string, ""),
+    })
+    .views((self) => ({
+        getValues() {
+            return {
+                email: self.email,
+                name: self.fullname,
+            };
+        },
+    }))
+    .actions((self) => ({
+        setEmail(email: string) {
+            console.log("SetEmail");
+            self.email = email;
+        },
+        setFullname(name: string) {
+            self.fullname = name;
+        },
+        setOrgin(orgin: "LOGIN" | "SIGNIN") {
+            self.orgin = orgin;
+        },
+    }));
+
+//
 export const AuthorModel = types.model("Author", {
     id: types.identifier,
     name: types.string,
@@ -16,6 +47,7 @@ export const AuthorModel = types.model("Author", {
     ),
 });
 
+//
 export const AccountsModel = types
     .model("AccountModel", {
         isAuthenticated: types.boolean,
@@ -41,7 +73,7 @@ export const AccountsModel = types
             },
             authenticate() {
                 self.isAuthenticated = true;
-                console.log("Authicanted", self.isAuthenticated)
+                console.log("Authicanted", self.isAuthenticated);
             },
             deconnect() {
                 self.isAuthenticated = false;

@@ -1,7 +1,7 @@
 {
     "expo": {
-        "name": "archive",
-        "slug": "archive",
+        "name": "j-archive",
+        "slug": "j-archive",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/images/icon.png",
@@ -19,11 +19,22 @@
         "ios": {
             "supportsTablet": true
         },
+        "androidStatusBar": {
+            "backgroundColor": "#fff",
+            "barStyle": "light-content",
+            "translucent": true
+        },
+        "androidNavigationBar": {
+            "backgroundColor": "#fff",
+            "barStyle": "light-content",
+            "visible": "immersive"
+        },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/icon.png",
                 "backgroundColor": "#ffffff"
-            }
+            },
+            "package": "com.jungo.jarchive"
         },
         "web": {
             "favicon": "./assets/images/favicon.png"

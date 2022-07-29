@@ -18,7 +18,7 @@ const CategoryLogin: React.FC<CategoryLoginProps> = ({ navigation }) => {
             textGoogle="Se connecter avec Google"
             textMail="Se connecter avec Email"
             textOtherAuth="Ou, se connecter avec"
-            textCategory="Joindre archive"
+            textCategory="Joindre j-archive"
             textNotAccount="Vous n'avez pas encore de compte? "
             onPressTextCategory={onPressTextCategory}
             onPressAuthGoogle={onPressAuthGoogle}

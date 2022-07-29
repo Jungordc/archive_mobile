@@ -12,6 +12,7 @@ import { RootStackScreenProps } from "../../navigation/types";
 import LottieView from "lottie-react-native";
 import Animated from "react-native-reanimated";
 import useEmailCheckAnimations from "../../hooks/animations/useEmailCheckAnimation";
+import { getTextCheckEmailCode } from "../../services/accounts/hooks/messagesAuth";
 
 export type CheckInboxProps = {} & RootStackScreenProps<"CheckInbox">;
 
@@ -19,6 +20,8 @@ const AText = Animated.createAnimatedComponent(Button);
 
 const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
     const lottieRef = useRef<LottieView | null>(null);
+    const emailCheckText = getTextCheckEmailCode();
+
     const {
         animatedTextStyle,
         animatedTextResendStyle,
@@ -38,6 +41,7 @@ const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
     const onAnimationFinish = React.useCallback((isCancelled: boolean) => {
         handlerAnimationFinish();
     }, []);
+
     return (
         <RootContainer>
             <View flex={1} px="5" py="16">
@@ -49,10 +53,7 @@ const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
                     >
                         Check your inbox
                     </Heading>
-                    <Text textAlign="center">
-                        Please check your email email.contact@gmail.com for a
-                        link to sign up to Archive
-                    </Text>
+                    <Text textAlign="center">{emailCheckText}</Text>
                     <View h="24" position="relative">
                         <AText
                             style={animatedTextStyle}

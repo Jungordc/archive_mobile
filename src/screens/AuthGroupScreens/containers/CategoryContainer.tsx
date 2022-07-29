@@ -78,7 +78,7 @@ const CategoryContainer: React.FC<CategoryContainerProps> = ({
             <View flex={1} px="7" py="10">
                 <VStack space="6" flex={0.9}>
                     <Heading textAlign="center" color="coolGray.900">
-                        Jungo Archive
+                        J-Archive
                     </Heading>
                     <View mt="16">
                         <VStack space="7">

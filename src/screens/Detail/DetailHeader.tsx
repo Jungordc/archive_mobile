@@ -1,15 +1,16 @@
 /** @format */
 
 import { View } from "native-base";
+import { PlatformPressable } from "@react-navigation/elements";
 import React from "react";
 import HeaderNavbar from "../../components/Primitive/HeaderNavBar/HeaderNavbar";
 import { HStack } from "native-base/src/components/primitives/Stack";
-import IconButton from "../../components/Primitive/IconButton/IconButton";
 import Animated from "react-native-reanimated";
 import { ViewStyle } from "react-native";
 import Heading from "native-base/src/components/primitives/Heading";
 import MoreButtonBottomSheet from "../../containers/Actions/MoreButtonBottomSheet";
 import SubButtonContainer from "../../containers/Actions/SubButtonContainer";
+import Icon from "../../components/Primitive/Icons/Icon";
 
 const AnimatedBox = Animated.createAnimatedComponent(View);
 
@@ -27,12 +28,19 @@ const DetailHeader: React.FC<DetailHeaderProps> = ({
             <HeaderNavbar
                 backButton={
                     <HStack space={2} alignItems="center">
-                        <IconButton
+                        <PlatformPressable
                             onPress={goBack}
-                            fontVariant="small-caps"
-                            colorScheme="coolGray"
-                            iconName="ios-arrow-back-outline"
-                        />
+                            style={{
+                                padding: 10,
+                                borderRadius: 100,
+                            }}
+                        >
+                            <Icon
+                                color="black"
+                                iconName="arrow-back"
+                                size="md"
+                            />
+                        </PlatformPressable>
                         <AnimatedBox style={animatedStyle}>
                             <Heading fontSize="md" color="coolGray.700">
                                 Lorem ipsum

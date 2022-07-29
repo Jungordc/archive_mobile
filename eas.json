@@ -1,0 +1,20 @@
+{
+    "build": {
+        "development": {
+            "developmentClient": true,
+            "distribution": "internal",
+            "env": {
+                "API_URL": "https://www.google.com"
+            }
+        },
+        "preview": {
+            "distribution": "internal"
+        },
+        "production": {
+            "buildType": "apk",
+            "env": {
+                "API_URL": "https://www.google.com"
+            }
+        }
+    }
+}

@@ -8,7 +8,8 @@ import { RootStackScreenProps } from "../../navigation/types";
 export type CategorySigninProps = {} & RootStackScreenProps<"Signin">;
 const CategorySignin: React.FC<CategorySigninProps> = ({ navigation }) => {
     const onPressTextCategory = () => navigation.navigate("Login");
-    const onPressMail = () => navigation.navigate("EmailAuth");
+    const onPressMail = () =>
+        navigation.navigate("EmailAuth", { type: "SIGIN" });
     const onPressAuthGoogle = () => {};
     const onPressFaceBook = () => {};
     return (

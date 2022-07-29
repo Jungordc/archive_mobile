@@ -30,7 +30,7 @@ export type RootStackParamList = {
     // Group Auth
     Login: undefined;
     Signin: undefined;
-    EmailAuth: undefined;
+    EmailAuth?: { type: "LOGIN" | "SIGIN" };
     UsernameAuth: undefined;
     ConfimCodeAuth: undefined;
     CheckInbox: undefined;

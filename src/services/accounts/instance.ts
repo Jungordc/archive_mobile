@@ -1,9 +1,11 @@
 /** @format */
 
-import { AccountsModel } from "./models";
+import { AccountsModel, EmailRegistration } from "./models";
+
+export const emailRegistrationInstance = EmailRegistration.create({});
 
 export const AccountInstance = AccountsModel.create({
-    isAuthenticated: true,
+    isAuthenticated: false,
     authors: [
         {
             id: "1",

@@ -87,7 +87,6 @@ const InputContainer: React.FC<InputContainerProps> = ({
                                     <Input
                                         variant="underlined"
                                         fontSize="lg"
-                                        tintColor="green.800"
                                         onSubmitEditing={Keyboard.dismiss}
                                         {...inputProps}
                                     />

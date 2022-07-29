@@ -1,11 +1,16 @@
 /** @format */
 
 import React from "react";
-import { AccountInstance as Auth } from "../instance";
+import { isValideEmail } from "../../../utils/validations";
+import {
+    AccountInstance as Auth,
+    emailRegistrationInstance as EAuth,
+} from "../instance";
 
 type D<T> = {
     initialState: T;
-    onSubmit?(): void;
+    onSubmit?(e?: T): void;
+    validator?(e: T): boolean;
 };
 
 export function useBaseInputAuth<T>(params: D<T>) {
@@ -16,29 +21,57 @@ export function useBaseInputAuth<T>(params: D<T>) {
     }, []);
 
     const onSubmit = React.useCallback(() => {
-        params.onSubmit?.();
-        console.log(value);
+        params.onSubmit?.(value);
+    }, [value]);
+
+    const isValid = React.useMemo(() => {
+        if (params.validator) return params.validator(value);
+        return true;
     }, [value]);
 
     return {
         value,
         onChangeValue,
         onSubmit,
+        isValid,
     };
 }
 
-export function useEmailInputAuth(params: Partial<D<string>>) {
-    return useBaseInputAuth({ initialState: "", ...params });
+export function useEmailInputAuth({
+    onSubmit,
+    validator,
+    ...params
+}: Partial<D<string>>) {
+    return useBaseInputAuth({
+        initialState: "",
+        validator(value) {
+            return isValideEmail(value);
+        },
+        onSubmit(value) {
+            value && EAuth.setEmail(value);
+            onSubmit?.();
+        },
+        ...params,
+    });
 }
 
-export function useNameInputAuth(params: Partial<D<string>>) {
-    return useBaseInputAuth({ initialState: "", ...params });
+export function useNameInputAuth({ onSubmit, ...params }: Partial<D<string>>) {
+    return useBaseInputAuth({
+        initialState: "",
+        onSubmit(value) {
+            value && EAuth.setFullname(value);
+            onSubmit?.();
+        },
+        ...params,
+    });
 }
 
 export function useCodeInputAuth({ onSubmit, ...params }: Partial<D<string>>) {
     return useBaseInputAuth({
         initialState: "",
         onSubmit() {
+            const value = EAuth.getValues();
+            console.log(value, "value");
             Auth.authenticate();
             onSubmit?.();
         },

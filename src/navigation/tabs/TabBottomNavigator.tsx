@@ -7,8 +7,8 @@ import Home from "../../screens/Home/Home";
 import Search from "../../screens/Search/Search";
 import SelectCategorie from "../../screens/SelectCategorie/SelectCategorie";
 import MeDash from "../../screens/MeDash/MeDash";
-
 import { HomeTabPramList } from "../types";
+
 import {
     BottomTabIconEdit,
     BottomTabIconHome,
@@ -21,15 +21,16 @@ export const BottomTab = createBottomTabNavigator<HomeTabPramList>();
 
 export type TabBottomNavigatorProps = {};
 
-const TabBottomNavigator: React.FC<TabBottomNavigatorProps> = ({
-    ...props
-}) => {
+const TabBottomNavigator: React.FC<TabBottomNavigatorProps> = () => {
     const screenOptionsThemed = useBottomTabTheme();
 
     return (
         <BottomTab.Navigator
             initialRouteName="Index"
             screenOptions={screenOptionsThemed}
+            sceneContainerStyle={{
+                backgroundColor: "white",
+            }}
         >
             <BottomTab.Screen
                 options={{

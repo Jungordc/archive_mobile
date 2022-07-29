@@ -61,7 +61,7 @@ const Detail: React.FC<DetailProps> = ({ navigation }) => {
                 bounces={false}
                 ListHeaderComponent={
                     <View>
-                        <View mt="10" p={3} onLayout={setBreakPoints}>
+                        <View mt="16" p={3} onLayout={setBreakPoints}>
                             <AvatarLabel
                                 p={2}
                                 my={2}
