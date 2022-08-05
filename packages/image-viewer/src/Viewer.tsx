@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { GestureDetector, Gesture } from "react-native-gesture-handler";
 import { runOnJS } from "react-native-reanimated";
-import { TIME_OUT } from "./constantes";
+import { TIME_OUT_DEFAULT } from "./constantes";
 import { reducer, initialState, Actions } from "./state";
 import { initializeNavigationBar } from "./status";
 
@@ -25,7 +25,10 @@ type ViewerProps = {
 const uri =
     "https://scontent.ffbm1-1.fna.fbcdn.net/v/t39.30808-6/297360086_2551317781668785_6373804017365185875_n.jpg?stp=dst-jpg_p180x540&_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeFx-Rch_nSXi-EZLXhuxQx9KEqRliPQB6YoSpGWI9AHpnYT8eZzfqM8JBCcf_ytlzJDk9CTj5YeskFOPHLDAZeN&_nc_ohc=ekc-ekldX2sAX-L3yV2&_nc_zt=23&_nc_ht=scontent.ffbm1-1.fna&oh=00_AT_CS8X42gXq778GWgmJnateWejwAiec6jGZysuD9qE80Q&oe=62F2CEC9";
 
-const Viewer: React.FC<ViewerProps> = ({ timeOut = TIME_OUT, ...props }) => {
+const Viewer: React.FC<ViewerProps> = ({
+    timeOut = TIME_OUT_DEFAULT,
+    ...props
+}) => {
     const [state, dispatch] = React.useReducer(reducer(timeOut), initialState);
 
     const gesture = React.useMemo(() => {
