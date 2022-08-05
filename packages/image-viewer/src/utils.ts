@@ -6,7 +6,7 @@ export function callIfIsAndroid(callback?: () => void) {
     Platform.OS === "android" && callback?.();
 }
 
-export function timer(prevValue: number, step: number = 1) {
+export function timeSteper(prevValue: number, step: number = 1): number {
     return prevValue + step;
 }
 
@@ -22,6 +22,6 @@ export function timerCallBackProcess(
 ): (e: number) => number {
     return (prevTimer: number) => {
         if (prevTimer >= timeOut) return initializer;
-        return isToped ? prevTimer : timer(prevTimer, step);
+        return isToped ? prevTimer : timeSteper(prevTimer, step);
     };
 }

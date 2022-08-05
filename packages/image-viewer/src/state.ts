@@ -1,7 +1,7 @@
 /** @format */
 
 import { hiddenBars, showBars } from "./status";
-import { clampHidden, timer, timerCallBackProcess } from "./utils";
+import { clampHidden, timeSteper, timerCallBackProcess } from "./utils";
 
 export enum Actions {
     START_STOPING,
@@ -35,7 +35,7 @@ export function reducer(timeOut: number) {
                 return {
                     ...state,
                     hidden: clampHidden(state.hidden, hidden1),
-                    timer: timer(state.timer),
+                    timer: timeSteper(state.timer),
                     time: timerCallBackProcess(state.stop, timeOut)(state.time),
                 };
             case Actions.START_STOPING:
