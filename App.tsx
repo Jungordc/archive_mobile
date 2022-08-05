@@ -9,24 +9,29 @@ import SplashLoader from "./src/containers/SplachLoader";
 import BottomButtonNavigationColor from "./src/containers/BottomButtonNavigationColor";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Viewer from "./packages/image-viewer/src/Viewer";
+
+/*
+    a force de rester avec des chiens,
+        je fini par aboyer!
+
+        @bienfaitshm jungoteam
+*/
 
 export default function App() {
     const colorScheme = "light"; //useColorScheme();
 
+    return <Viewer />;
     return (
-        <ThemeProvider>
-            <BottomButtonNavigationColor>
-                <SplashLoader>
-                    <SafeAreaProvider>
-                        <StatusBar />
-                        <GestureHandlerRootView style={{ flex: 1 }}>
-                            <BottomSheetModalProvider>
-                                <Navigation colorScheme={colorScheme} />
-                            </BottomSheetModalProvider>
-                        </GestureHandlerRootView>
-                    </SafeAreaProvider>
-                </SplashLoader>
-            </BottomButtonNavigationColor>
-        </ThemeProvider>
+        <SplashLoader>
+            <ThemeProvider>
+                <GestureHandlerRootView style={{ flex: 1 }}>
+                    <BottomSheetModalProvider>
+                        <Viewer />
+                        {/* <Navigation colorScheme={colorScheme} /> */}
+                    </BottomSheetModalProvider>
+                </GestureHandlerRootView>
+            </ThemeProvider>
+        </SplashLoader>
     );
 }

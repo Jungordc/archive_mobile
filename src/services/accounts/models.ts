@@ -16,12 +16,12 @@ export const EmailRegistration = types
             return {
                 email: self.email,
                 name: self.fullname,
+                orgin: self.orgin,
             };
         },
     }))
     .actions((self) => ({
         setEmail(email: string) {
-            console.log("SetEmail");
             self.email = email;
         },
         setFullname(name: string) {
