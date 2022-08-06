@@ -32,30 +32,25 @@ export function reducer(timeOut: number) {
             case Actions.TIMMER:
                 const hidden1 = state.time >= timeOut;
                 hidden1 && !state.hidden && hiddenBars();
-                return {
-                    ...state,
-                    hidden: clampHidden(state.hidden, hidden1),
-                    timer: timeSteper(state.timer),
-                    time: timerCallBackProcess(state.stop, timeOut)(state.time),
-                };
+                state["hidden"] = clampHidden(state.hidden, hidden1);
+                state["timer"] = timeSteper(state.timer);
+                state["time"] = timerCallBackProcess(
+                    state.stop,
+                    timeOut
+                )(state.time);
+                return state;
             case Actions.START_STOPING:
-                return {
-                    ...state,
-                    stop: true,
-                };
+                state["stop"] = true;
+                return state;
             case Actions.END_STOPING:
-                return {
-                    ...state,
-                    stop: false,
-                };
+                state["stop"] = false;
+                return state;
             case Actions.TOOGLE_STOPING:
-                const hidden = !state.hidden;
-                hidden ? showBars() : hiddenBars();
-                return {
-                    ...state,
-                    time: 0,
-                    hidden,
-                };
+                // toogle state
+                state.hidden ? hiddenBars() : showBars();
+                state["hidden"] = !state.hidden;
+                state["time"] = 0;
+                return state;
             default:
                 return state;
         }
