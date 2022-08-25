@@ -2,6 +2,11 @@
 
 import { Platform } from "react-native";
 
+export function getStylesConvertedToArray<T>(styles: T) {
+    if (styles === undefined) return [{}];
+    return Array.isArray(styles) ? styles : [styles];
+}
+
 export function callIfIsAndroid(callback?: () => void) {
     Platform.OS === "android" && callback?.();
 }

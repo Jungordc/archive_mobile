@@ -10,6 +10,7 @@ import BottomButtonNavigationColor from "./src/containers/BottomButtonNavigation
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Viewer from "./packages/image-viewer/src/Viewer";
+import TestAuth from "./src/screens/AuthGroupScreens/Test.Auth";
 
 /*
     a force de rester avec des chiens,
@@ -21,14 +22,15 @@ import Viewer from "./packages/image-viewer/src/Viewer";
 export default function App() {
     const colorScheme = "light"; //useColorScheme();
 
-    return <Viewer />;
+    // return <Viewer />;
     return (
         <SplashLoader>
             <ThemeProvider>
                 <GestureHandlerRootView style={{ flex: 1 }}>
                     <BottomSheetModalProvider>
-                        <Viewer />
-                        {/* <Navigation colorScheme={colorScheme} /> */}
+                        {/* <Viewer /> */}
+                        {/* <TestAuth /> */}
+                        <Navigation colorScheme={colorScheme} />
                     </BottomSheetModalProvider>
                 </GestureHandlerRootView>
             </ThemeProvider>
