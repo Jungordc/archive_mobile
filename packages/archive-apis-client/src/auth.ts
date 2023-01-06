@@ -118,4 +118,5 @@ class AuthenticationApis {
     }
 }
 
+// the instance of auth apis
 export const Authapis = new AuthenticationApis(clients);

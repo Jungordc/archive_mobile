@@ -11,9 +11,9 @@ export const LOGIN_EMAIL = "accounts/auth/actions/login_email/";
 export const CONFIRM_CODE = "accounts/auth/actions/confirm_code/";
 
 export const AuthUrls = {
-    LoginEmail: "d",
-    SigninEmail: "email",
-    ResendCode: "r",
+    LoginEmail: "accounts/auth/registration/email_login/",
+    SigninEmail: "accounts/auth/registration/email_signin/",
+    ResendCode: "accounts/auth/registration/confirmation/",
     ConfimCode: "",
-    UpdateName: "",
+    UpdateName: "accounts/auth/registration/name_signin/",
 };
