@@ -24,6 +24,32 @@ export function connetorPickImage<T>(Component: React.ComponentType<T>) {
     };
 }
 
+/**
+ * **Image launcher function**
+ * @param param0
+ * @returns
+ */
+async function launchImagePicker<T extends ImagePicker.ImagePickerOptions>({
+    quality = 1,
+    mediaTypes = ImagePicker.MediaTypeOptions.Images,
+    aspect = [4, 3],
+    allowsEditing = true,
+    ...params
+}: T) {
+    return await ImagePicker.launchImageLibraryAsync({
+        quality,
+        mediaTypes,
+        aspect,
+        allowsEditing,
+        ...params,
+    });
+}
+
+/**
+ * usePickImage hooks
+ * @param param0
+ * @returns
+ */
 export default function usePickImage({
     aspect = [4, 3],
     initialSource,
@@ -34,18 +60,14 @@ export default function usePickImage({
     );
 
     const onpenSelectorImage = React.useCallback(async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            quality: 1,
-            aspect,
-        });
+        let result = await launchImagePicker({ aspect });
         if (!result.cancelled) {
-            const newSource = {
-                uri: result.uri,
-            };
-            setSource(newSource);
-            onSelectImage?.(newSource);
+            console.log(result);
+            // const newSource = {
+            //     uri: result.uri,
+            // };
+            // setSource(newSource);
+            // onSelectImage?.(newSource);
         }
     }, []);
 

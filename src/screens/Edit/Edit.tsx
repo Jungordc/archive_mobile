@@ -1,15 +1,15 @@
 /** @format */
 
 import React from "react";
-import { RootStackScreenProps } from "../../navigation/types";
+import { View } from "native-base/src/components/basic/View";
+import useBtnSaveEffect, {
+    useBtnSaveRefType,
+} from "../../hooks/actions/useBtnSaveEffect";
 import {
     MSTEditor,
     EditorRefType,
 } from "../../components/Composite/Editor/EditConnector";
-import useBtnSaveEffect, {
-    useBtnSaveRefType,
-} from "../../hooks/actions/useBtnSaveEffect";
-import { View } from "native-base/src/components/basic/View";
+import { RootStackScreenProps } from "../../navigation/types";
 
 export type EditProps = {} & RootStackScreenProps<"Edition">;
 
