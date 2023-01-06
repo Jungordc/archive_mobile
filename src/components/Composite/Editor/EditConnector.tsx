@@ -42,6 +42,8 @@ export const MSTEditor = React.forwardRef<
         onSubmit?(data: any): void;
     } & Partial<EditorProps>
 >(({ onSubmit, ...restProps }, ref) => {
+
+    // controller
     const controller = formStateController({
         backend: {
             process: async (node, liveOnly) => {
@@ -54,9 +56,11 @@ export const MSTEditor = React.forwardRef<
             },
         },
     });
+    
+    // callback on submit
     const handlerSubmit = React.useCallback(() => {
-        const d: any = controller.value;
-        onSubmit?.(d?.toJSON());
+        const values: any = controller.value;
+        onSubmit?.(values?.toJSON());
     }, []);
 
     React.useImperativeHandle(ref, () => ({

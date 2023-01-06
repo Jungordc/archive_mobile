@@ -3,13 +3,16 @@
 import {
     View,
     Text,
-    Button,
     Divider,
     IconButton,
     Icon,
     Heading,
     VStack,
 } from "native-base";
+import {
+    Button,
+    IButtonProps,
+} from "native-base/src/components/primitives/Button";
 import { HStack } from "native-base/src/components/primitives/Stack";
 import React from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -17,11 +20,18 @@ import RootContainer from "../../../components/Primitive/RootContainer/Container
 import TextLink from "../../../components/Primitive/TextLink/TextLink";
 import { InterfaceTextProps } from "native-base/src/components/primitives/Text/types";
 
-const ButtonChoice: React.FC<{
+type ButtonProps = {
     onPress?: (e: any) => void;
     iconName: string;
     title: string;
-}> = ({ iconName, onPress, title }) => {
+} & IButtonProps;
+
+const ButtonChoice: React.FC<ButtonProps> = ({
+    iconName,
+    onPress,
+    title,
+    ...props
+}) => {
     return (
         <Button
             colorScheme="coolGray"
@@ -33,6 +43,7 @@ const ButtonChoice: React.FC<{
             _text={{
                 ml: "3",
             }}
+            {...props}
         >
             {title}
         </Button>
@@ -92,6 +103,7 @@ const CategoryContainer: React.FC<CategoryContainerProps> = ({
                                 {title}
                             </Heading>
                             <ButtonChoice
+                                disabled={true}
                                 onPress={onPressAuthGoogle}
                                 iconName="logo-google"
                                 title={textGoogle}
@@ -116,6 +128,7 @@ const CategoryContainer: React.FC<CategoryContainerProps> = ({
                     </HStack>
                     <HStack space={7} justifyContent="center">
                         <IconButton
+                            disabled={true}
                             onPress={onPressFaceBook}
                             colorScheme="darkBlue"
                             size="lg"

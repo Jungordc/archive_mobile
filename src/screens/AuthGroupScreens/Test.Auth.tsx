@@ -8,7 +8,7 @@ import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 import * as Facebook from "expo-auth-session/providers/facebook";
 import { ResponseType } from "expo-auth-session";
-import { login } from "../../../packages/archive-apis-client/src/auth";
+import { login_providers } from "../../../packages/archive-apis-client/src/auth";
 import Provider from "../../../packages/archive-apis-client/src/providers";
 
 type TestAuthProps = {};
@@ -20,6 +20,8 @@ const iosClientId =
 const androidClientId =
     "720203986210-tr8m0r61nvc43pf8h86v8tuo1j60h33b.apps.googleusercontent.com";
 const apisGoogle = "https://www.googleapis.com/userinfo/v2/me";
+const apisFacebook =
+    "https://graph.facebook.com/me?fields=id,name,birthday,picture,email";
 
 const FBID = "524264546141594";
 
@@ -37,45 +39,68 @@ const TestAuth: React.FC<TestAuthProps> = ({ ...props }) => {
 
     const [FBrequest, FBresponse, FBpromptAsync] = Facebook.useAuthRequest({
         clientId: FBID,
-        responseType: ResponseType.Code,
+        responseType: ResponseType.Token,
     });
 
     React.useEffect(() => {
         if (FBresponse?.type === "success") {
-            const { code } = FBresponse.params;
+            const access_token = FBresponse.authentication?.accessToken || "";
+            const token_type = "Bearer";
+            login_providers({
+                access_token,
+                token_type,
+                providers: Provider.FACEBOOK,
+            })
+                .then(console.log)
+                .catch((e) =>
+                    console.warn("Error", JSON.stringify(e, null, 4))
+                );
             console.log("Facebook", JSON.stringify(FBresponse, null, 4));
         }
     }, [FBresponse]);
 
     React.useEffect(() => {
         if (responce?.type === "success") {
-            const accessToken = responce.authentication?.accessToken;
-            const tokenType = responce.authentication?.tokenType;
-            if (accessToken) {
-                login(Provider.GOOGLE, {
-                    accessToken,
-                    tokenType,
-                })
-                    .then((re) => {
-                        console.log("Success", re.data);
-                    })
-                    .catch((err) => {
-                        console.log("error", err);
-                    });
-                // axios
-                //     .get(apisGoogle, {
-                //         headers: {
-                //             Authorization: `${tokenType} ${accessToken}`,
-                //         },
-                //     })
-                //     .then((res) => {
-                //         setUserInfo(res.data);
-                //         console.log("reponce...", res);
-                //     })
-                //     .catch((err) => {
-                //         console.log("error", err);
-                //     });
-            }
+            const access_token = responce.authentication?.accessToken || "";
+            const token_type = responce.authentication?.tokenType || "bearer";
+
+            login_providers({
+                access_token,
+                token_type,
+                providers: Provider.GOOGLE,
+            })
+                .then(console.log)
+                .catch((e) => console.warn("Error", e));
+
+            console.log(
+                "Google",
+                JSON.stringify(responce.authentication, null, 4)
+            );
+            // if (accessToken) {
+            //     login(Provider.GOOGLE, {
+            //         accessToken,
+            //         tokenType,
+            //     })
+            //         .then((re) => {
+            //             console.log("Success", re.data);
+            //         })
+            //         .catch((err) => {
+            //             console.log("error", err);
+            //         });
+            //     // axios
+            //     //     .get(apisGoogle, {
+            //     //         headers: {
+            //     //             Authorization: `${tokenType} ${accessToken}`,
+            //     //         },
+            //     //     })
+            //     //     .then((res) => {
+            //     //         setUserInfo(res.data);
+            //     //         console.log("reponce...", res);
+            //     //     })
+            //     //     .catch((err) => {
+            //     //         console.log("error", err);
+            //     //     });
+            // }
         }
     }, [responce]);
 
