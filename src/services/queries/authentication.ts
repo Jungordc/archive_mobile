@@ -15,6 +15,9 @@ export function useEmailSignin<T extends onSuccessType>(params?: T) {
             }),
         {
             onSuccess: params?.onSuccess,
+            onError(error, variables, context) {
+                return error?.response?.data || error;
+            },
         }
     );
 }

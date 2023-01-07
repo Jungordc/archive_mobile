@@ -5,4 +5,7 @@ import { BASE_URL_APIS } from "./urls";
 
 export const clients = axios.create({
     baseURL: BASE_URL_APIS,
+    headers: {
+        "Content-type": "application/json",
+    },
 });

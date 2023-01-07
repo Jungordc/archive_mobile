@@ -21,7 +21,7 @@ export type InputContainerProps = {
     inputLabel?: string;
     inputProps?: IInputProps;
     btnProps?: IButtonProps;
-    textError?: string;
+    textError?: string | boolean;
 };
 
 const AView = Animated.createAnimatedComponent(View);

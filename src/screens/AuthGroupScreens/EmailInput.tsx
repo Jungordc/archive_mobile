@@ -13,6 +13,7 @@ import {
     useEmailLogin,
     useEmailSignin,
 } from "../../services/queries/authentication";
+import { parserResultError } from "../../utils/parser";
 
 export type EmailInputProps = {} & RootStackScreenProps<"EmailAuth">;
 
@@ -48,17 +49,14 @@ const EmailInput: React.FC<EmailInputProps> = ({ navigation, route }) => {
 
     // text of error responces
     const textError = React.useMemo(() => {
-        if (mutationEmailLogin.isError)
-            return mutationEmailLogin.error?.message as string;
-        if (mutationEmailSignin.isError)
-            return mutationEmailSignin.error?.message as string;
+        if (mutationEmailLogin.isError) {
+            return parserResultError(mutationEmailLogin.error);
+        }
+        if (mutationEmailSignin.isError) {
+            return parserResultError(mutationEmailSignin.error);
+        }
+
         return undefined;
-        // console.log(
-        //     "Error...",
-        //     JSON.stringify(mutationEmailLogin.error?.responce, null, 4),
-        //     JSON.stringify(mutationEmailSignin.error?.responce, null, 4)
-        // );
-        // return "error";
     }, [mutationEmailLogin.error, mutationEmailSignin.error]);
 
     //
