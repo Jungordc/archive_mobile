@@ -48,9 +48,7 @@ const CheckInbox: React.FC<CheckInboxProps> = ({ navigation, route }) => {
     }, []);
 
     const onGoNext = React.useCallback(() => {
-        navigation.navigate("ConfimCodeAuth", {
-            session: route.params.session,
-        });
+        navigation.navigate("ConfimCodeAuth", route.params);
     }, []);
 
     console.log(JSON.stringify(mutation.error, null, 4));

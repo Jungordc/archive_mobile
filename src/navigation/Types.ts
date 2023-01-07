@@ -24,16 +24,17 @@ declare global {
 }
 
 type IDType = number | string;
+export type AuthOrgineType = "LOGIN" | "SIGNIN";
 
 // route stack params list
 export type RootStackParamList = {
     // Group Auth
     Login: undefined;
     Signin: undefined;
-    EmailAuth?: { type: "LOGIN" | "SIGIN" };
+    EmailAuth?: { type?: AuthOrgineType };
     UsernameAuth: undefined;
-    ConfimCodeAuth: { session: string };
-    CheckInbox: { session: string };
+    ConfimCodeAuth: { session: string; type?: AuthOrgineType };
+    CheckInbox: { session: string; type?: AuthOrgineType };
     //
     Home: NavigatorScreenParams<HomeTabPramList>; //tab Route
     DashList: undefined;

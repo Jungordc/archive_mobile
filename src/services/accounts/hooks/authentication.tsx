@@ -59,7 +59,6 @@ export function useNameInputAuth({ onSubmit, ...params }: Partial<D<string>>) {
     return useBaseInputAuth({
         initialState: "",
         onSubmit(value) {
-            value && EAuth.setFullname(value);
             onSubmit?.();
         },
         ...params,
@@ -70,9 +69,8 @@ export function useCodeInputAuth({ onSubmit, ...params }: Partial<D<string>>) {
     return useBaseInputAuth({
         initialState: "",
         onSubmit() {
-            const value = EAuth.getValues();
-            console.log(value, "value");
-            Auth.authenticate();
+            // const value = EAuth.getValues();
+            // Auth.authenticate();
             onSubmit?.();
         },
         ...params,

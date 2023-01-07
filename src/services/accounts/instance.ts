@@ -15,10 +15,10 @@ export const AccountInstance = AccountsModel.create({
     authors: [],
 });
 
-// persist("@AccountsJA", AccountInstance, {
-//     storage: storage,
-//     whitelist: ["isAuthenticated", "authors"], // only these keys will be persisted
-// }).then((value) => console.log("AccountsJA has been hydrated", value));
+persist("@AccountsJA", AccountInstance, {
+    storage: storage,
+    whitelist: ["isAuthenticated", "authors"], // only these keys will be persisted
+}).then((value) => console.log("AccountsJA has been hydrated", value));
 
 persist("__SecureStorageToken", TokenInstance, {
     storage: secureToAsyncStorage,

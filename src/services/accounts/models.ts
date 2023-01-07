@@ -88,8 +88,12 @@ export const TokenModel = types
         refresh: types.maybeNull(types.string),
     })
     .actions((self) => ({
-        setToken({ access, refrech }: { access: string; refrech: string }) {
+        setToken({ access, refresh }: { access: string; refresh: string }) {
             self.access = access;
-            self.refresh = refrech;
+            self.refresh = refresh;
+        },
+        clear() {
+            self.access = null;
+            self.refresh = null;
         },
     }));
