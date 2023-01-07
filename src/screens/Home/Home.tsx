@@ -8,6 +8,7 @@ import FeedCardHorizontal from "../../components/Composite/Cards/FeedCardHorizon
 import CardFeedContainer from "../../containers/CardFeedContainer";
 import HomeAnimatedContainer from "../../containers/screens/HomeAnimatedContainer";
 import useFakeData from "../../services/faceData";
+import HomeLoader from "../../containers/Loaders/HomeLoader";
 
 export type HomeProps = {} & HomeTabScreenProps<"Index">;
 
@@ -38,10 +39,13 @@ const Home: React.FC<HomeProps> = ({ navigation, route }) => {
     }, []);
 
     return (
-        <HomeAnimatedContainer
+        <>
+            {/* <HomeAnimatedContainer
             topics={<TopicList />}
             flatListProps={{ data, renderItem }}
-        />
+        /> */}
+            <HomeLoader />
+        </>
     );
 };
 

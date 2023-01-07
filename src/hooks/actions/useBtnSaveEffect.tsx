@@ -5,6 +5,7 @@ import {
     Button,
     IButtonProps,
 } from "native-base/src/components/primitives/Button";
+import View from "native-base/src/components/primitives/View";
 import { RootStackParamList } from "../../navigation/types";
 
 export type useBtnSaveRefType = {
@@ -39,15 +40,17 @@ export default function useBtnSaveEffect<T extends keyof RootStackParamList>({
         navigation.setOptions({
             headerRight() {
                 return (
-                    <Button
-                        isDisabled={disabled}
-                        colorScheme="green"
-                        rounded="full"
-                        size="sm"
-                        {...btnProps}
-                    >
-                        {title}
-                    </Button>
+                    <View mr="2" bg="amber.300">
+                        <Button
+                            isDisabled={disabled}
+                            colorScheme="green"
+                            rounded="full"
+                            size="sm"
+                            {...btnProps}
+                        >
+                            {title}
+                        </Button>
+                    </View>
                 );
             },
         });

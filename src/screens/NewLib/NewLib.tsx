@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ScrollView } from "react-native";
+import { observer } from "mobx-react-lite";
 import { RootStackScreenProps } from "../../navigation/types";
 import useBtnSaveEffect, {
     useBtnSaveRefType,
@@ -9,6 +10,7 @@ import useBtnSaveEffect, {
 import AuthorEditorConnector, {
     EditorRefType,
 } from "../../components/Composite/Author/AuthorEditorConnector";
+import { getTokens } from "../../services/accounts/utils";
 
 export type NewLibProps = {} & RootStackScreenProps<"NewLib">;
 
@@ -21,7 +23,7 @@ const NewLib: React.FC<NewLibProps> = ({ navigation }) => {
     }, [EditorRef]);
 
     const onSubmit = React.useCallback((data: any) => {
-        console.log("data: ", data);
+        console.log("data: ", data, getTokens());
     }, []);
 
     useBtnSaveEffect({
@@ -40,4 +42,4 @@ const NewLib: React.FC<NewLibProps> = ({ navigation }) => {
 };
 
 NewLib.displayName = "NewLib";
-export default NewLib;
+export default observer(NewLib);

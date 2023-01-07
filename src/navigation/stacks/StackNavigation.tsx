@@ -221,7 +221,7 @@ const StackNavigation: React.FC<StackNavigationProps> = ({
                     />
                     <HomeStack.Screen
                         options={{
-                            title: "Nouvelle Bibliotheque",
+                            title: "Ma Bibliotheque",
                         }}
                         name="NewLib"
                         component={NewLib}
