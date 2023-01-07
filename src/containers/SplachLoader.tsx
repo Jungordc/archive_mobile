@@ -1,13 +1,16 @@
 /** @format */
 
-import { View, Text } from "react-native";
 import React from "react";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { HStack, Spinner, Heading } from "native-base";
 import * as SplashScreen from "expo-splash-screen";
 import * as Font from "expo-font";
 
-export type SplashLoader = {};
+export type SplashLoader = {
+    children: React.ReactNode;
+};
+
 const SplashLoader: React.FC<SplashLoader> = ({ children }) => {
     const [appIsReady, setAppIsReady] = React.useState(false);
 
@@ -42,15 +45,12 @@ const SplashLoader: React.FC<SplashLoader> = ({ children }) => {
 
     if (!appIsReady) {
         return (
-            <View
-                style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
-            >
-                <Text>Archive</Text>
-            </View>
+            <HStack space={2} justifyContent="center">
+                <Spinner accessibilityLabel="Loading posts" />
+                <Heading color="primary.500" fontSize="md">
+                    Loading
+                </Heading>
+            </HStack>
         );
     }
     return <>{children}</>;
