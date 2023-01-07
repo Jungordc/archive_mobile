@@ -28,7 +28,6 @@ import {
     EmailAuthReturnType,
     ParamsEmailAuth,
     ParamsConfirmCodeType,
-    ParamsResendCodeConfirmation,
     TokenAuthReturnType,
 } from "./types/auth.type";
 
@@ -81,10 +80,10 @@ class AuthenticationApis {
     /**
      * rensend_code
      */
-    public rensend_code<
-        P = ParamsResendCodeConfirmation,
-        D = EmailAuthReturnType
-    >(params: P, headers?: AxiosRequestConfig) {
+    public rensend_code<P = { session: string }, D = { detail: string }>(
+        params: P,
+        headers?: AxiosRequestConfig
+    ) {
         return this.client.post<D, AxiosResponse<D, P>>(
             AuthUrls.ResendCode,
             params,

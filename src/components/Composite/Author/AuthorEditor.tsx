@@ -35,13 +35,15 @@ const AuthorEditor: React.FC<AuthorEditorProps> = ({
 }) => {
     const handlerChangeAvatar = React.useCallback(
         (func?: (uri: string) => void) => {
-            return (image: { uri: string }) => func?.(image.uri);
+            return console.log;
+            // return (image: { uri: string }) => func?.(image.uri);
         },
         []
     );
     const handlerChangeCover = React.useCallback(
         (func?: (uri: string) => void) => {
-            return (image: { uri: string }) => func?.(image.uri);
+            return console.log;
+            // return (image: { uri: string }) => func?.(image.uri);
         },
         []
     );

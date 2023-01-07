@@ -32,7 +32,7 @@ export const EmailRegistration = types
         },
     }));
 
-//
+//author model
 export const AuthorModel = types.model("Author", {
     id: types.identifier,
     name: types.string,
@@ -47,7 +47,7 @@ export const AuthorModel = types.model("Author", {
     ),
 });
 
-//
+// root account model
 export const AccountsModel = types
     .model("AccountModel", {
         isAuthenticated: types.boolean,
@@ -80,3 +80,16 @@ export const AccountsModel = types
             },
         };
     });
+
+// key token models
+export const TokenModel = types
+    .model("TokenModel", {
+        access: types.maybeNull(types.string),
+        refresh: types.maybeNull(types.string),
+    })
+    .actions((self) => ({
+        setToken({ access, refrech }: { access: string; refrech: string }) {
+            self.access = access;
+            self.refresh = refrech;
+        },
+    }));

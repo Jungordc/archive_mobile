@@ -18,10 +18,6 @@ export type ParamsConfirmCodeType = {
     code: string;
 };
 
-export type ParamsResendCodeConfirmation = {
-    access_token_confirmation: string;
-};
-
 // return Type
 export type ErrorReturnType = {
     detail: string;
