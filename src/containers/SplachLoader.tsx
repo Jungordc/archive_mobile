@@ -45,7 +45,12 @@ const SplashLoader: React.FC<SplashLoader> = ({ children }) => {
 
     if (!appIsReady) {
         return (
-            <HStack space={2} justifyContent="center">
+            <HStack
+                space={2}
+                justifyContent="center"
+                alignItems="center"
+                flex={1}
+            >
                 <Spinner accessibilityLabel="Loading posts" />
                 <Heading color="primary.500" fontSize="md">
                     Loading

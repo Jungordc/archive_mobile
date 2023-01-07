@@ -21,6 +21,7 @@ export type InputContainerProps = {
     inputLabel?: string;
     inputProps?: IInputProps;
     btnProps?: IButtonProps;
+    textError?: string;
 };
 
 const AView = Animated.createAnimatedComponent(View);
@@ -31,6 +32,7 @@ const InputContainer: React.FC<InputContainerProps> = ({
     inputLabel = "Your email",
     inputProps,
     btnProps,
+    textError,
 }) => {
     const animatedValue = useSharedValue(1);
 
@@ -90,6 +92,15 @@ const InputContainer: React.FC<InputContainerProps> = ({
                                         onSubmitEditing={Keyboard.dismiss}
                                         {...inputProps}
                                     />
+                                    {/* Error text */}
+                                    {textError && (
+                                        <Text
+                                            color="error.400"
+                                            textAlign="center"
+                                        >
+                                            {textError}
+                                        </Text>
+                                    )}
                                 </VStack>
                                 <Button
                                     rounded="full"

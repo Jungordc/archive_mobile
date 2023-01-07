@@ -18,6 +18,9 @@ export type ParamsConfirmCodeType = {
     code: string;
 };
 
+export type ParamsUpdateName = {
+    name: string;
+};
 // return Type
 export type ErrorReturnType = {
     detail: string;

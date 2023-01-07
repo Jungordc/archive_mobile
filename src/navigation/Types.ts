@@ -32,8 +32,8 @@ export type RootStackParamList = {
     Signin: undefined;
     EmailAuth?: { type: "LOGIN" | "SIGIN" };
     UsernameAuth: undefined;
-    ConfimCodeAuth: undefined;
-    CheckInbox: undefined;
+    ConfimCodeAuth: { session: string };
+    CheckInbox: { session: string };
     //
     Home: NavigatorScreenParams<HomeTabPramList>; //tab Route
     DashList: undefined;

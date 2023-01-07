@@ -25,9 +25,9 @@ export default function App() {
 
     // return <Viewer />;
     return (
-        <SplashLoader>
-            <ThemeProvider>
-                <QueryProviders>
+        <ThemeProvider>
+            <QueryProviders>
+                <SplashLoader>
                     <GestureHandlerRootView style={{ flex: 1 }}>
                         <BottomSheetModalProvider>
                             {/* <Viewer /> */}
@@ -35,8 +35,8 @@ export default function App() {
                             <Navigation colorScheme={colorScheme} />
                         </BottomSheetModalProvider>
                     </GestureHandlerRootView>
-                </QueryProviders>
-            </ThemeProvider>
-        </SplashLoader>
+                </SplashLoader>
+            </QueryProviders>
+        </ThemeProvider>
     );
 }

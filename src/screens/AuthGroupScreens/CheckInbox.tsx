@@ -14,13 +14,21 @@ import Animated from "react-native-reanimated";
 import useEmailCheckAnimations from "../../hooks/animations/useEmailCheckAnimation";
 import { getTextCheckEmailCode } from "../../services/accounts/hooks/messagesAuth";
 
+import { useResendCode } from "../../services/queries/authentication";
+
 export type CheckInboxProps = {} & RootStackScreenProps<"CheckInbox">;
 
 const AText = Animated.createAnimatedComponent(Button);
 
-const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
+const CheckInbox: React.FC<CheckInboxProps> = ({ navigation, route }) => {
     const lottieRef = useRef<LottieView | null>(null);
     const emailCheckText = getTextCheckEmailCode();
+
+    const mutation = useResendCode({
+        onSuccess(args) {
+            onGoNext();
+        },
+    });
 
     const {
         animatedTextStyle,
@@ -30,18 +38,22 @@ const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
     } = useEmailCheckAnimations();
 
     const onResend = React.useCallback(() => {
+        mutation.mutate(route.params.session);
         lottieRef.current?.play();
         onAnimationStart();
-    }, []);
-
-    const onGoNext = React.useCallback(() => {
-        navigation.navigate("ConfimCodeAuth");
     }, []);
 
     const onAnimationFinish = React.useCallback((isCancelled: boolean) => {
         handlerAnimationFinish();
     }, []);
 
+    const onGoNext = React.useCallback(() => {
+        navigation.navigate("ConfimCodeAuth", {
+            session: route.params.session,
+        });
+    }, []);
+
+    console.log(JSON.stringify(mutation.error, null, 4));
     return (
         <RootContainer>
             <View flex={1} px="5" py="16">
@@ -77,6 +89,11 @@ const CheckInbox: React.FC<CheckInboxProps> = ({ navigation }) => {
                         >
                             Renvoyer le code de confirmation
                         </AText>
+                        {mutation.isError && (
+                            <Text mt="10" textAlign="center" color="error.400">
+                                Il y a eu une erreur
+                            </Text>
+                        )}
                     </View>
                 </VStack>
                 <View flex={1} p="16">

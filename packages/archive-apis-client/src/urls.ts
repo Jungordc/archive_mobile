@@ -13,7 +13,7 @@ export const CONFIRM_CODE = "accounts/auth/actions/confirm_code/";
 export const AuthUrls = {
     LoginEmail: "accounts/auth/registration/email_login/",
     SigninEmail: "accounts/auth/registration/email_signin/",
-    ResendCode: "accounts/auth/registration/confirmation/",
-    ConfimCode: "",
+    ResendCode: "accounts/auth/registration/resend_code_confirmation/",
+    ConfimCode: "accounts/auth/registration/confirmation/",
     UpdateName: "accounts/auth/registration/name_signin/",
 };

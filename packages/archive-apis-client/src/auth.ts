@@ -29,6 +29,7 @@ import {
     ParamsEmailAuth,
     ParamsConfirmCodeType,
     TokenAuthReturnType,
+    ParamsUpdateName,
 } from "./types/auth.type";
 
 export async function updateName(name: string) {
@@ -99,7 +100,7 @@ class AuthenticationApis {
         headers?: AxiosRequestConfig
     ) {
         return this.client.post<D, AxiosResponse<D, P>>(
-            AuthUrls.ResendCode,
+            AuthUrls.ConfimCode,
             params,
             headers
         );
@@ -108,7 +109,10 @@ class AuthenticationApis {
     /**
      * name
      */
-    public update_name<P, D>(params: P, headers: AxiosRequestConfig) {
+    public update_name<P = ParamsUpdateName, D = any>(
+        params: P,
+        headers?: AxiosRequestConfig
+    ) {
         return this.client.post<D, AxiosResponse<D, P>>(
             AuthUrls.UpdateName,
             params,
