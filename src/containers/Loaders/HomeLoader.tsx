@@ -54,11 +54,11 @@ const HomeLoader: React.FC<HomeLoaderProps> = ({ ...props }) => {
                 }
                 flatListProps={{
                     data,
-                    renderItem: () => (
-                        <View>
+                    renderItem: ({ index, item }) => (
+                        <>
+                            {index !== 0 && <Divider color="amber.300" />}
                             <HonrizontalCard />
-                            <Divider />
-                        </View>
+                        </>
                     ),
                 }}
             />
