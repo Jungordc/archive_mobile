@@ -1,6 +1,26 @@
 /** @format */
 
 import { types, cast } from "mobx-state-tree";
+import { MediaModel } from "../media";
+
+/**
+ * Tags model
+ */
+export const TagsModel = types.model("TagsModel", {
+    name: types.string,
+});
+
+/**
+ * ArchiveEditModel
+ */
+export const ArchiveEditModel = types.model("ArchiveEditModel", {
+    title: types.string,
+    description: types.string,
+    category: types.union(types.number, types.string, types.null),
+    cover: types.maybeNull(MediaModel),
+    tags: types.array(TagsModel),
+    docs: types.array(MediaModel),
+});
 
 export const ArchiveEditionModel = types
     .model("Archive", {
@@ -36,4 +56,23 @@ export const ArchiveEditionModelInstance = ArchiveEditionModel.create({
         "https://www.bing.com/th?id=OIP.Y2uAB8AOCC88s6iQML13MgHaEK&w=187&h=98&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
     ],
     tags: ["Annee", "Institusion"],
+});
+
+/**
+ * Instance of archive model with default value
+ */
+export const ArchiveEditModelInstance = ArchiveEditModel.create({
+    title: "",
+    cover: null,
+    description: "",
+    category: null,
+    docs: [
+        { uri: "https://archive.hnsa.org/doc/whitehead3/img/pg45.jpg" },
+        { uri: "https://pixy.org/src/467/thumbs350/4675468.jpg" },
+    ],
+    tags: [
+        {
+            name: "Archive tags",
+        },
+    ],
 });
