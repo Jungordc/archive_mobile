@@ -11,16 +11,28 @@ import InputTags from "./InputTags";
 import ProfileImageConnector from "../ProfileImages/ProfileImageConnector";
 import ImageList from "../Images/ImageList";
 
+type MediaType = {
+    isNew?: boolean;
+    uri: string;
+    type?: string;
+};
+
 export type EditorDataType = {
     title: string;
     description: string;
-    cover: string;
-    tags: string[];
-    docs: string[];
+    cover: MediaType;
+    tags: { name: string }[];
+    docs: MediaType[];
 };
 
 export type ControllerTypeProps<CType = any, T = EditorDataType> = {
     controller: CType;
+    /**
+     * S: Simple
+     * Sub: Subform
+     * Arr:Array form
+     */
+    type: "S" | "Sub" | "Arr";
     name: keyof T;
     render: (value: {
         value: any;
@@ -50,6 +62,7 @@ const Editor: React.FC<EditorProps> = ({
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <Controller
+                type="S"
                 name="cover"
                 controller={controller}
                 render={({ onChange, value }) => {
@@ -57,7 +70,9 @@ const Editor: React.FC<EditorProps> = ({
                         <ProfileImageConnector
                             edit
                             showAvatar={false}
-                            initialCover={value ? { uri: value } : undefined}
+                            initialCover={
+                                value ? { uri: value.uri } : undefined
+                            }
                             onChangeCover={({ uri }) => onChange(uri)}
                         />
                     );
@@ -66,6 +81,7 @@ const Editor: React.FC<EditorProps> = ({
             <View flex={1}>
                 <View mx={1}>
                     <Controller
+                        type="S"
                         name="title"
                         controller={controller}
                         render={({ onChange, value }) => (
@@ -83,6 +99,7 @@ const Editor: React.FC<EditorProps> = ({
                 </View>
                 <View mx={1}>
                     <Controller
+                        type="S"
                         name="description"
                         controller={controller}
                         render={({ onChange, value }) => {
@@ -105,6 +122,7 @@ const Editor: React.FC<EditorProps> = ({
                 </View>
                 <View flex={1}>
                     <Controller
+                        type="Arr"
                         name="tags"
                         controller={controller}
                         render={({ onChange, value }) => {
@@ -134,6 +152,7 @@ const Editor: React.FC<EditorProps> = ({
                             Ajouter une document...
                         </Button>
                         <Controller
+                            type="Arr"
                             name="docs"
                             controller={controller}
                             render={({ value }) => {

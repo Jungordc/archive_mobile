@@ -62,9 +62,11 @@ export const ArchiveEditionModelInstance = ArchiveEditionModel.create({
  * Instance of archive model with default value
  */
 export const ArchiveEditModelInstance = ArchiveEditModel.create({
-    title: "",
-    cover: null,
-    description: "",
+    title: "Ton titre ici",
+    cover: {
+        uri: "https://th.bing.com/th/id/OIP.Nri3x9AFUTPmoN0tVB9ziAHaLc?pid=ImgDet&w=638&h=986&rs=1",
+    },
+    description: "une petite desciption ici",
     category: null,
     docs: [
         { uri: "https://archive.hnsa.org/doc/whitehead3/img/pg45.jpg" },

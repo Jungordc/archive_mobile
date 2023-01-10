@@ -2,43 +2,43 @@
 
 import React from "react";
 import VStack from "native-base/src/components/primitives/Stack/VStack";
-import Tags from "react-native-tags";
 import { useTheme } from "native-base/src/hooks";
 import Chip from "../../Primitive/Chip/Chip";
 import InputTitleUtils from "../../Primitive/InputTitle/InputTitleUtils";
 import IconLabel from "../../Primitive/IconLabel/IconLabel";
+import Tags from "../../../../packages/react-native-tags/src/Tags";
 
-export type tagsType = string[];
-
-interface InputTagsProps {
+interface InputTagsProps<T extends string> {
     placeholder?: string;
     maxTags?: number;
-    onChange?(tags: tagsType): void;
-    value?: tagsType;
+    onChange?(tag: T, index?: number): void;
+    onRemove?(tag: T, index: number): void;
+    value?: T[];
 }
 
-const InputTags: React.FC<InputTagsProps> = ({
+const InputTags: React.FC<InputTagsProps<string>> = ({
     placeholder = "Tags",
     maxTags = 6,
     value,
     onChange,
+    onRemove,
     ...props
 }) => {
     const theme = useTheme();
-    const [tags, setTags] = React.useState<tagsType>(value || []);
+    const [tags, setTags] = React.useState<string[]>(value || []);
 
-    const tagLenght = React.useMemo(() => tags?.length, [tags]);
-
-    const onChangeTags = React.useCallback((newTags: tagsType) => {
-        onChange?.(newTags);
-        setTags(newTags);
+    const onAddTag = React.useCallback((tag: string, index?: number) => {
+        console.log("InputTags add", tag);
+        setTags((p) => [...p, tag]);
+        onChange?.(tag);
     }, []);
 
-    const onTagPress = React.useCallback(
-        (index: number) => {
+    const onRemoveTag = React.useCallback(
+        (tag: any, index: number) => {
+            console.log("InputTags remove", tag, index);
             const tagsFiltered = tags.filter((_, i) => i !== index);
-            onChange?.(tagsFiltered);
             setTags(tagsFiltered);
+            onRemove?.(tag, index);
         },
         [tags]
     );
@@ -47,35 +47,26 @@ const InputTags: React.FC<InputTagsProps> = ({
         <InputTitleUtils
             max={maxTags}
             placeholder={placeholder}
-            value={tagLenght}
+            value={tags?.length}
         >
-            <VStack flex={1}>
+            <VStack flex={1} space="2">
                 <Tags
-                    maxNumberOfTags={maxTags}
-                    initialText="Tags_example"
-                    initialTags={value || tags}
-                    onChangeTags={onChangeTags}
-                    onTagPress={onTagPress}
-                    containerStyle={{
-                        flex: 1,
-                    }}
-                    textInputProps={{
-                        placeholder,
-                    }}
+                    initialTags={tags}
+                    textInputProps={{ placeholder }}
+                    onAdd={onAddTag}
+                    onRemove={onRemoveTag}
                     inputContainerStyle={{
                         backgroundColor: theme.colors.coolGray[100],
                         borderRadius: theme.radii.full,
                         height: 40,
                     }}
-                    inputStyle={{
-                        color: theme.colors.coolGray[600],
-                        fontSize: 14,
+                    renderItem={({ tag, onDelete, index }) => {
+                        return (
+                            <Chip onDelete={onDelete} key={index} m="1">
+                                {tag}
+                            </Chip>
+                        );
                     }}
-                    renderTag={({ tag, index, onPress }) => (
-                        <Chip onDelete={onPress} key={index} m="1">
-                            {tag}
-                        </Chip>
-                    )}
                 />
                 <IconLabel
                     icon="pricetags-outline"

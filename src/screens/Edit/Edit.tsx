@@ -9,6 +9,8 @@ import {
     MSTEditor,
     EditorRefType,
 } from "../../components/Composite/Editor/EditConnector";
+
+import MstEditor from "../../components/Composite/Editor/MstEditor";
 import { RootStackScreenProps } from "../../navigation/types";
 
 export type EditProps = {} & RootStackScreenProps<"Edition">;
@@ -52,13 +54,14 @@ const Edit: React.FC<EditProps> = ({
 
     return (
         <View flex={1}>
-            <MSTEditor
+            <MstEditor />
+            {/* <MSTEditor
                 ref={EditorRef}
                 onSubmit={onSubmit}
                 handlerEditingDocs={handlerEditingDocs}
                 onPressImage={handlerEditingDocs}
                 handlerDetailViewDocs={handlerDetailViewDocs}
-            />
+            /> */}
         </View>
     );
 };
