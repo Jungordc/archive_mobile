@@ -2,8 +2,14 @@
 
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { ArchiveEditionForm } from "../../../services/forms/editions/archiveForm";
-import { ArchiveEditionModelInstance } from "../../../services/forms/editions/archiveModel";
+import {
+    ArchiveEditionForm,
+    ArchiveEditForm,
+} from "../../../services/forms/editions/archiveForm";
+import {
+    ArchiveEditionModelInstance,
+    ArchiveEditModelInstance,
+} from "../../../services/forms/editions/archiveModel";
 import Editor, { ControllerTypeProps, EditorProps } from "./Editor";
 import { getTargetValue } from "../../../utils/transformer";
 import { FormStateOptions } from "mstform";
@@ -12,21 +18,36 @@ export type EditorRefType = {
     handlerSubmit?(): void;
 };
 
+// state of mst form
 const formStateController = (options?: FormStateOptions<any>) =>
-    ArchiveEditionForm.state(ArchiveEditionModelInstance, options);
+    ArchiveEditForm.state(ArchiveEditModelInstance, options);
 
 export const MSTController: React.FC<
     ControllerTypeProps<ReturnType<typeof formStateController>>
-> = ({ controller, name, render }) => {
-    const valueField = controller.field(name);
+> = ({ controller, name, type, render }) => {
+    let valvalueField = type === "S";
+    // const valueField = "controller.field(name);";
+
+    const valueField = React.useMemo(() => {
+        if (type == "Sub" && name === "cover") {
+            return controller.subForm("cover").field("uri");
+        }
+        if (type === "S") {
+            return controller.field(name);
+        }
+    }, [type, name]);
 
     const onChange = React.useCallback(
-        (value: typeof valueField.value) => {
+        (value: "typeof valueField.value") => {
             console.log("onChange: ", value);
-            valueField?.inputProps?.onChange?.(getTargetValue({ name, value }));
+            // valueField?.inputProps?.onChange?.(getTargetValue({ name, value }));
         },
         [valueField]
     );
+    if (type === "Arr" && name === "Tags") {
+        let field = controller.subForm("cover").field("uri");
+        return <React.Fragment></React.Fragment>;
+    }
     return (
         <React.Fragment>
             {render({ value: valueField?.inputProps?.value, onChange })}
@@ -42,7 +63,6 @@ export const MSTEditor = React.forwardRef<
         onSubmit?(data: any): void;
     } & Partial<EditorProps>
 >(({ onSubmit, ...restProps }, ref) => {
-
     // controller
     const controller = formStateController({
         backend: {
@@ -56,7 +76,7 @@ export const MSTEditor = React.forwardRef<
             },
         },
     });
-    
+
     // callback on submit
     const handlerSubmit = React.useCallback(() => {
         const values: any = controller.value;
