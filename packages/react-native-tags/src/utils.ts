@@ -52,3 +52,12 @@ export function canAddTag(
         !indexOf(text, tags)
     );
 }
+
+/**
+ * return the last tag
+ * @param tags list of tags
+ * @returns
+ */
+export function getLastTag(tags: string[]): string {
+    return tags.slice(-1)[0];
+}

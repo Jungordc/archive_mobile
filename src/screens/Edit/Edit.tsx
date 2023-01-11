@@ -5,12 +5,10 @@ import { View } from "native-base/src/components/basic/View";
 import useBtnSaveEffect, {
     useBtnSaveRefType,
 } from "../../hooks/actions/useBtnSaveEffect";
-import {
-    MSTEditor,
-    EditorRefType,
-} from "../../components/Composite/Editor/EditConnector";
 
-import MstEditor from "../../components/Composite/Editor/MstEditor";
+import MstEditor, {
+    EditorRefType,
+} from "../../components/Composite/Editor/MstEditor";
 import { RootStackScreenProps } from "../../navigation/types";
 
 export type EditProps = {} & RootStackScreenProps<"Edition">;
@@ -35,12 +33,12 @@ const Edit: React.FC<EditProps> = ({
     );
 
     const handlerDetailViewDocs = React.useCallback(
-        (index) => navigation.navigate("EditionDocs", { index: 0 }),
+        (index: any) => navigation.navigate("EditionDocs", { index: 0 }),
         []
     );
 
     const onSubmit = React.useCallback((data: any) => {
-        console.log("data...", data);
+        console.log(JSON.stringify(data, null, 4));
     }, []);
 
     //
@@ -54,14 +52,7 @@ const Edit: React.FC<EditProps> = ({
 
     return (
         <View flex={1}>
-            <MstEditor />
-            {/* <MSTEditor
-                ref={EditorRef}
-                onSubmit={onSubmit}
-                handlerEditingDocs={handlerEditingDocs}
-                onPressImage={handlerEditingDocs}
-                handlerDetailViewDocs={handlerDetailViewDocs}
-            /> */}
+            <MstEditor ref={EditorRef} onSubmit={onSubmit} />
         </View>
     );
 };

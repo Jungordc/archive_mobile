@@ -13,14 +13,27 @@ export const TagsModel = types.model("TagsModel", {
 /**
  * ArchiveEditModel
  */
-export const ArchiveEditModel = types.model("ArchiveEditModel", {
-    title: types.string,
-    description: types.string,
-    category: types.union(types.number, types.string, types.null),
-    cover: types.maybeNull(MediaModel),
-    tags: types.array(TagsModel),
-    docs: types.array(MediaModel),
-});
+export const ArchiveEditModel = types
+    .model("ArchiveEditModel", {
+        title: types.string,
+        description: types.string,
+        category: types.union(types.number, types.string, types.null),
+        cover: types.maybeNull(MediaModel),
+        tags: types.array(TagsModel),
+        docs: types.array(MediaModel),
+    })
+    .actions((self) => ({
+        addDoc: () => {},
+        removeDoc: () => {},
+        addTag: (tag: string, index?: number) => {
+            self.tags.push({
+                name: tag,
+            });
+        },
+        removeTag: (tag: string, index: number) => {
+            self.tags = cast(self.tags.filter((item, i) => i !== index));
+        },
+    }));
 
 export const ArchiveEditionModel = types
     .model("Archive", {
@@ -75,6 +88,9 @@ export const ArchiveEditModelInstance = ArchiveEditModel.create({
     tags: [
         {
             name: "Archive tags",
+        },
+        {
+            name: "Recherche",
         },
     ],
 });

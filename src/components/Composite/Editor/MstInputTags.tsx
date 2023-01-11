@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import { observer } from "mobx-react-lite";
 import VStack from "native-base/src/components/primitives/Stack/VStack";
 import { useTheme } from "native-base/src/hooks";
 import Chip from "../../Primitive/Chip/Chip";
@@ -8,51 +9,40 @@ import InputTitleUtils from "../../Primitive/InputTitle/InputTitleUtils";
 import IconLabel from "../../Primitive/IconLabel/IconLabel";
 import Tags from "../../../../packages/react-native-tags/src/Tags";
 
-interface InputTagsProps<T extends string> {
+const MstTags = observer(Tags);
+const MstInputTitleUtils = observer(InputTitleUtils);
+
+interface MstInputTagsProps<T extends string> {
     placeholder?: string;
     maxTags?: number;
-    onChange?(tag: T, index?: number): void;
+    onAdd?(tag: T, index?: number): void;
     onRemove?(tag: T, index: number): void;
-    value?: T[];
+    tags?: T[];
 }
 
-const InputTags: React.FC<InputTagsProps<string>> = ({
+const MstInputTags: React.FC<MstInputTagsProps<string>> = ({
     placeholder = "Tags",
     maxTags = 6,
-    value,
-    onChange,
+    tags = [],
+    onAdd,
     onRemove,
     ...props
 }) => {
     const theme = useTheme();
-    const [tags, setTags] = React.useState<string[]>(value || []);
-
-    const onAddTag = React.useCallback((tag: string, index?: number) => {
-        onChange?.(tag);
-        setTags((p) => [...p, tag]);
-    }, []);
-
-    const onRemoveTag = React.useCallback(
-        (tag: any, index: number) => {
-            onRemove?.(tag, index);
-            setTags(tags.filter((_, i) => i !== index));
-        },
-        [tags]
-    );
 
     return (
-        <InputTitleUtils
+        <MstInputTitleUtils
             max={maxTags}
             placeholder={placeholder}
             value={tags?.length}
         >
             <VStack flex={1} space="2">
-                <Tags
+                <MstTags
                     maxNumberOfTags={6}
                     initialTags={tags}
                     textInputProps={{ placeholder }}
-                    onAdd={onAddTag}
-                    onRemove={onRemoveTag}
+                    onAdd={onAdd}
+                    onRemove={onRemove}
                     inputContainerStyle={{
                         backgroundColor: theme.colors.coolGray[100],
                         borderRadius: theme.radii.full,
@@ -68,13 +58,13 @@ const InputTags: React.FC<InputTagsProps<string>> = ({
                 />
                 <IconLabel
                     icon="pricetags-outline"
-                    label="Taper sur espace pour confirmer le tag"
+                    label="Taper sur espace, virgule ou enter pour confirmer le tag"
                     ml="1"
                     mt="2"
                 />
             </VStack>
-        </InputTitleUtils>
+        </MstInputTitleUtils>
     );
 };
 
-export default InputTags;
+export default MstInputTags;
