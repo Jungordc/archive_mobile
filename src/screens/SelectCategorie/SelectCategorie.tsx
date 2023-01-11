@@ -6,6 +6,7 @@ import { Heading, View } from "native-base";
 import PopularCat from "../../components/Composite/PopularCat/PopularCat";
 import Category from "../../components/Composite/Cards/Category/Category";
 import HeaderAnimationContainer from "../../containers/screens/HeaderAnimationContainer";
+import CategoryEditLoader from "../../containers/Loaders/CategoryEditLoader";
 
 export type SelectCategorieProps = {} & HomeTabScreenProps<"Edit">;
 
@@ -47,25 +48,26 @@ const SelectCategorie: React.FC<SelectCategorieProps> = ({ navigation }) => {
         return <Category mx="1" onPress={handlerSelectCategory(item.id)} />;
     }, []);
     return (
-        <HeaderAnimationContainer
-            headerProps={{
-                title: "Categorie",
-            }}
-            flatListProps={{
-                data,
-                renderItem,
-                ListHeaderComponent: () => (
-                    <View mb={2} mt="24">
-                        <HeaderTitle>Categories Populaires</HeaderTitle>
-                        <PopularCat
-                            my={2}
-                            onPressCategory={onNavigateToCategory}
-                        />
-                        <HeaderTitle>Toutes les Catgories</HeaderTitle>
-                    </View>
-                ),
-            }}
-        />
+        <CategoryEditLoader />
+        // <HeaderAnimationContainer
+        //     headerProps={{
+        //         title: "Categorie",
+        //     }}
+        //     flatListProps={{
+        //         data,
+        //         renderItem,
+        //         ListHeaderComponent: () => (
+        //             <View mb={2} mt="24">
+        //                 <HeaderTitle>Categories Populaires</HeaderTitle>
+        //                 <PopularCat
+        //                     my={2}
+        //                     onPressCategory={onNavigateToCategory}
+        //                 />
+        //                 <HeaderTitle>Toutes les Catgories</HeaderTitle>
+        //             </View>
+        //         ),
+        //     }}
+        // />
     );
 };
 

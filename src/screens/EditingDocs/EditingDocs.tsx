@@ -1,7 +1,7 @@
 /** @format */
 
 import React from "react";
-import { View, Text } from "native-base";
+import { View} from "native-base";
 import { observer } from "mobx-react-lite";
 import { RootStackScreenProps } from "../../navigation/types";
 import DocsEditor from "../../components/Composite/Editor/DocsEditor";
