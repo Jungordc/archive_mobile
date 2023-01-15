@@ -4,14 +4,17 @@ import React from "react";
 import { View, Text, ScrollView, VStack, Button, HStack } from "native-base";
 import { observer } from "mobx-react-lite";
 import Icon from "../../Primitive/Icons/Icon";
-import ProfileImageConnector from "../ProfileImages/ProfileImageConnector";
 import InputTitle from "../../Primitive/InputTitle/InputTitle";
 import InputTags from "./InputTags";
+import EditBottomAction from "./EditBottomAction";
+import { inputAdaptorProcess } from "./Utils";
 
 import {
     ArchiveEditModelInstance,
     ArchiveEditForm,
 } from "../../../services/forms/editions";
+import CoverItem from "./CoverItem";
+import DocItem, { DocItemType } from "./DocItem";
 
 export type EditorRefType = {
     handlerSubmit?(): void;
@@ -22,9 +25,9 @@ type MstEditorProps = {
 };
 
 /** Docs cover input */
-const DocsCover = observer(ProfileImageConnector);
 const OInputTitle = observer(InputTitle);
 const OInputTags = observer(InputTags);
+const OCoverItem = observer(CoverItem);
 
 /**
  * <
@@ -56,114 +59,70 @@ const MstEditor = React.forwardRef<EditorRefType, MstEditorProps>(
             handlerSubmit,
         }));
         return (
-            <ScrollView showsVerticalScrollIndicator={false}>
-                <DocsCover
-                    edit
-                    showAvatar={false}
-                    initialCover={{
-                        uri: cover.field("uri").value,
-                    }}
-                />
-                <VStack flex={1}>
-                    <OInputTitle
-                        maxLength={75}
-                        textInputProps={{
-                            placeholder: "Titre",
-                            multiline: true,
-                            ...processor(titleField.inputProps),
-                        }}
-                    />
-                    <OInputTitle
-                        textInputProps={{
-                            placeholder: "Description",
-                            multiline: true,
-                            style: {
-                                fontSize: 16,
-                                color: "#626262",
-                            },
-                            ...processor(descriptionField.inputProps),
-                        }}
-                    />
-                    <OInputTags
-                        maxTags={6}
-                        value={tags.map((i) => i.field("name").value)}
-                        placeholder="Aa"
-                        onChange={ArchiveEditModelInstance.addTag}
-                        onRemove={ArchiveEditModelInstance.removeTag}
-                    />
-                </VStack>
-                <View>
-                    <ScrollView
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                    >
-                        <HStack space="3">
-                            <Button
-                                variant="outline"
-                                colorScheme="text"
-                                rounded="full"
-                                w="64"
-                                leftIcon={
-                                    <Icon name="document-attach-outline" />
-                                }
-                                _text={{
-                                    fontSize: "2xs",
-                                    ml: "1",
-                                }}
-                                _icon={{
-                                    size: "xs",
-                                }}
-                            >
-                                Ajouter une document...
-                            </Button>
-                            <Button
-                                variant="outline"
-                                colorScheme="text"
-                                rounded="full"
-                                leftIcon={<Icon name="images-outline" />}
-                                _text={{
-                                    fontSize: "2xs",
-                                    ml: "1",
-                                }}
-                                _icon={{
-                                    size: "xs",
-                                }}
-                            >
-                                Une photo
-                            </Button>
-                        </HStack>
-                    </ScrollView>
-                </View>
-                <View flex={1} m="4" ml="16">
-                    <VStack flex={1} space="3">
-                        <Text
-                            mt="5"
-                            fontSize="2xs"
-                            color="coolGray.400"
-                            textAlign="justify"
-                            lineHeight="2xl"
-                        >
-                            <Text fontWeight="bold">Note : </Text>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Perspiciatis tempora eligendi enim distinctio
-                            unde eaque doloremque! Eum ipsum libero, id sequi
-                            odit incidunt voluptates molestiae blanditiis
-                            ratione sunt ullam quos.
-                        </Text>
+            <View flex={1} position="relative">
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <VStack flex={1}>
+                        <OInputTitle
+                            maxLength={75}
+                            textInputProps={{
+                                placeholder: "Titre",
+                                multiline: true,
+                                ...inputAdaptorProcess(titleField.inputProps),
+                            }}
+                        />
+                        <OInputTitle
+                            textInputProps={{
+                                placeholder: "Description",
+                                multiline: true,
+                                style: {
+                                    fontSize: 16,
+                                    color: "#626262",
+                                },
+                                ...inputAdaptorProcess(
+                                    descriptionField.inputProps
+                                ),
+                            }}
+                        />
+                        <OInputTags
+                            maxTags={6}
+                            placeholder="Aa"
+                            value={tags.map((i) => i.field("name").value)}
+                            onChange={ArchiveEditModelInstance.addTag}
+                            onRemove={ArchiveEditModelInstance.removeTag}
+                        />
+                        <VStack ml="16" flex={1} mb="16" space="2">
+                            <OCoverItem />
+                            <VStack mx="2" space="2">
+                                <DocItem
+                                    name="lorem.pdf"
+                                    description="lorem daa ljjd hdhsfjho iiejio sjhkj"
+                                    infoText={["6 pages", "2.34 ko", "pdf"]}
+                                />
+                                <DocItem
+                                    name="image Yeti.jpg"
+                                    type={DocItemType.IMAGE}
+                                    source={{
+                                        uri: "https://www.bing.com/th?id=OIP.-HEOxAoVM-1iCJjOJaa8MQHaEK&w=168&h=100&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2",
+                                    }}
+                                />
+                            </VStack>
+                            <View h="32" bg="red.400" />
+                        </VStack>
                     </VStack>
+                </ScrollView>
+                <View
+                    position="absolute"
+                    bg="white"
+                    bottom="0"
+                    left="0"
+                    right="0"
+                    py="2"
+                >
+                    <EditBottomAction />
                 </View>
-            </ScrollView>
+            </View>
         );
     }
 );
 
 export default observer(MstEditor);
-
-function processor(inputProps: any) {
-    return {
-        value: inputProps?.value,
-        onChangeText: (value: string) => {
-            inputProps.onChange({ target: { value } });
-        },
-    };
-}

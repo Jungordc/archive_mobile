@@ -1,10 +1,10 @@
 /** @format */
 
-import { View } from "native-base/src/components/basic/View";
 import React from "react";
 import { Pressable } from "react-native";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import Icon from "../../components/Primitive/Icons/Icon";
+import { View } from "native-base/src/components/basic/View";
 import About from "../../screens/About/About";
 import {
     CategoryLoginScreen,
@@ -195,9 +195,38 @@ const StackNavigation: React.FC<StackNavigationProps> = ({
                     {/* Edition and Creator Group */}
                     {/* <HomeStack.Group screenOptions={creatorScreenOptions}> */}
                     <HomeStack.Screen
-                        options={{
-                            title: "Nouvel archive",
-                        }}
+                        options={({ navigation }) => ({
+                            headerBackTitleVisible: false,
+                            headerTitle: () => null,
+                            // headerTransparent: true,
+                            headerShadowVisible: false,
+                            headerLeft: () => (
+                                <View ml="2">
+                                    <Pressable
+                                        onPress={navigation.goBack}
+                                        style={({ pressed }) => ({
+                                            opacity: pressed ? 0.5 : 1,
+                                            borderRadius: 100,
+                                            height: 30,
+                                            width: 30,
+                                        })}
+                                    >
+                                        <View
+                                            flex={1}
+                                            justifyContent="center"
+                                            alignItems="center"
+                                            rounded="full"
+                                        >
+                                            <Icon
+                                                size={25}
+                                                iconName="close"
+                                                color="black"
+                                            />
+                                        </View>
+                                    </Pressable>
+                                </View>
+                            ),
+                        })}
                         name="Edition"
                         component={Edit}
                     />

@@ -48,26 +48,26 @@ const SelectCategorie: React.FC<SelectCategorieProps> = ({ navigation }) => {
         return <Category mx="1" onPress={handlerSelectCategory(item.id)} />;
     }, []);
     return (
-        <CategoryEditLoader />
-        // <HeaderAnimationContainer
-        //     headerProps={{
-        //         title: "Categorie",
-        //     }}
-        //     flatListProps={{
-        //         data,
-        //         renderItem,
-        //         ListHeaderComponent: () => (
-        //             <View mb={2} mt="24">
-        //                 <HeaderTitle>Categories Populaires</HeaderTitle>
-        //                 <PopularCat
-        //                     my={2}
-        //                     onPressCategory={onNavigateToCategory}
-        //                 />
-        //                 <HeaderTitle>Toutes les Catgories</HeaderTitle>
-        //             </View>
-        //         ),
-        //     }}
-        // />
+        // <CategoryEditLoader />
+        <HeaderAnimationContainer
+            headerProps={{
+                title: "Categorie",
+            }}
+            flatListProps={{
+                data,
+                renderItem,
+                ListHeaderComponent: () => (
+                    <View mb={2} mt="24">
+                        <HeaderTitle>Categories Populaires</HeaderTitle>
+                        <PopularCat
+                            my={2}
+                            onPressCategory={onNavigateToCategory}
+                        />
+                        <HeaderTitle>Toutes les Catgories</HeaderTitle>
+                    </View>
+                ),
+            }}
+        />
     );
 };
 
