@@ -4,7 +4,7 @@
  * @returns
  */
 
-export function inputAdaptorProcess(inputProps: any) {
+export function inputApdatorProcess(inputProps: any) {
     return {
         value: inputProps?.value,
         onChangeText: (value: string) => {
