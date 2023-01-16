@@ -7,7 +7,7 @@ import Header from "../../components/Composite/Headers/Header";
 // import DocReader from "../../components/Composite/DocReader/DocReader";
 import * as MediaLibrary from "expo-media-library";
 import Camera from "./Camera";
-
+import Gallerie from "../Gallerie/Gallerie";
 export type SearchProps = {};
 
 const Search: React.FC<SearchProps> = ({}) => {
@@ -26,8 +26,16 @@ const Search: React.FC<SearchProps> = ({}) => {
     };
     return (
         <RootContainer>
-            <Header title="Recherche" />
-            {/* <Camera /> */}
+            <Gallerie />
+        </RootContainer>
+    );
+};
+
+export default Search;
+
+/**
+ * {/* <Header title="Recherche" />
+            {/* <Camera /> 
             <Button onPress={click}>Press</Button>
             <FlatList
                 data={data}
@@ -44,9 +52,5 @@ const Search: React.FC<SearchProps> = ({}) => {
                         </View>
                     );
                 }}
-            />
-        </RootContainer>
-    );
-};
-
-export default Search;
+            /> 
+ */
