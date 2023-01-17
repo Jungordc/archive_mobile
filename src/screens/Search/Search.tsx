@@ -1,32 +1,16 @@
 /** @format */
 
-import { View, Text, Button, Image, FlatList } from "native-base";
 import React from "react";
 import RootContainer from "../../components/Primitive/RootContainer/Container";
-import Header from "../../components/Composite/Headers/Header";
-// import DocReader from "../../components/Composite/DocReader/DocReader";
-import * as MediaLibrary from "expo-media-library";
-import Camera from "./Camera";
-import Gallerie from "../Gallerie/Gallerie";
+
+import { OGallerie } from "../Gallerie/Gallerie";
+
 export type SearchProps = {};
 
 const Search: React.FC<SearchProps> = ({}) => {
-    const [data, setData] = React.useState<MediaLibrary.Asset[]>([]);
-    const click = async () => {
-        const perReq = await MediaLibrary.requestPermissionsAsync();
-        const permission = await MediaLibrary.getPermissionsAsync();
-        console.log("permission", permission, perReq);
-        if (permission.granted) {
-            const data = await MediaLibrary.getAssetsAsync({
-                mediaType: MediaLibrary.MediaType.photo,
-                sortBy: "creationTime",
-            });
-            setData(data.assets);
-        }
-    };
     return (
         <RootContainer>
-            <Gallerie />
+            <OGallerie />
         </RootContainer>
     );
 };

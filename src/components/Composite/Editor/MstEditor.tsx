@@ -7,7 +7,7 @@ import Icon from "../../Primitive/Icons/Icon";
 import InputTitle from "../../Primitive/InputTitle/InputTitle";
 import InputTags from "./InputTags";
 import EditBottomAction from "./EditBottomAction";
-import { inputAdaptorProcess } from "./Utils";
+import { inputApdatorProcess } from "./Utils";
 
 import {
     ArchiveEditModelInstance,
@@ -67,7 +67,7 @@ const MstEditor = React.forwardRef<EditorRefType, MstEditorProps>(
                             textInputProps={{
                                 placeholder: "Titre",
                                 multiline: true,
-                                ...inputAdaptorProcess(titleField.inputProps),
+                                ...inputApdatorProcess(titleField.inputProps),
                             }}
                         />
                         <OInputTitle
@@ -78,7 +78,7 @@ const MstEditor = React.forwardRef<EditorRefType, MstEditorProps>(
                                     fontSize: 16,
                                     color: "#626262",
                                 },
-                                ...inputAdaptorProcess(
+                                ...inputApdatorProcess(
                                     descriptionField.inputProps
                                 ),
                             }}
