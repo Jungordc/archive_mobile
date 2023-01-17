@@ -5,6 +5,8 @@ import { View, FlatList } from "native-base";
 import { observer } from "mobx-react-lite";
 import { useLoadImages } from "./hooks.Gallery";
 import ImageItem from "./ImageItem";
+import * as FileSystem from "expo-file-system";
+import { humanFileSize } from "../../../utils/humaneReadable";
 
 type GalleryProps = {
     numColumns?: number;
@@ -28,6 +30,19 @@ const Gallery: React.FC<GalleryProps> = ({
                 keyExtractor={(i) => i.id}
                 renderItem={({ item }) => (
                     <ImageItem
+                        onPress={async () => {
+                            const info = await FileSystem.getInfoAsync(
+                                item.uri
+                            );
+                            console.log(
+                                JSON.stringify(info, null, 3),
+                                "\n",
+                                "file: ",
+                                fileExtension(info.uri),
+                                humanFileSize(info.size || 0)
+                            );
+                            console.log(JSON.stringify(item, null, 2));
+                        }}
                         alt={item.filename}
                         source={{
                             uri: item.uri,
@@ -41,3 +56,7 @@ const Gallery: React.FC<GalleryProps> = ({
 
 export const OGallery = observer(Gallery);
 export default Gallery;
+
+const fileExtension = (filename: string) => {
+    return /[.]/.exec(filename) ? /[^.]+$/.exec(filename)?.pop() : undefined;
+};

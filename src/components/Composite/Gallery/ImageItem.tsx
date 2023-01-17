@@ -1,16 +1,18 @@
 /** @format */
 
 import React from "react";
-import { View, Image, IImageProps } from "native-base";
+import { Image, IImageProps, Pressable } from "native-base";
 import { observer } from "mobx-react-lite";
 
-type ImageItemProps = {} & IImageProps;
+type ImageItemProps = {
+    onPress?(): void;
+} & IImageProps;
 
-const ImageItem: React.FC<ImageItemProps> = ({ ...props }) => {
+const ImageItem: React.FC<ImageItemProps> = ({ onPress, ...props }) => {
     return (
-        <View m="0.5" flex={1}>
+        <Pressable m="0.5" flex={1} onPress={onPress}>
             <Image rounded="lg" height="32" width="32" {...props} />
-        </View>
+        </Pressable>
     );
 };
 
