@@ -3,23 +3,26 @@
 import React from "react";
 import { View, FlatList } from "native-base";
 import { observer } from "mobx-react-lite";
-import { useLoadImages } from "./hooks.Gallery";
+import { IImageAsset, InstGallery } from "./Model.Gallery";
 import ImageItem from "./ImageItem";
 import * as FileSystem from "expo-file-system";
 import { humanFileSize } from "../../../utils/humaneReadable";
 
 type GalleryProps = {
     numColumns?: number;
-    data: ReturnType<typeof useLoadImages>;
+    data?: IImageAsset[];
 };
 
 const OFlatList = observer(FlatList);
 
 const Gallery: React.FC<GalleryProps> = ({
     numColumns = 3,
-    data,
+    data = InstGallery.images.toJSON(),
     ...props
 }) => {
+    //
+    const handlerSelect = (item: IImageAsset, index: number) => {};
+
     return (
         <View>
             <OFlatList
@@ -28,21 +31,25 @@ const Gallery: React.FC<GalleryProps> = ({
                 onEndReached={() => {}}
                 numColumns={numColumns}
                 keyExtractor={(i) => i.id}
-                renderItem={({ item }) => (
+                renderItem={({ item, index }) => (
                     <ImageItem
                         onPress={async () => {
-                            const info = await FileSystem.getInfoAsync(
-                                item.uri
-                            );
-                            console.log(
-                                JSON.stringify(info, null, 3),
-                                "\n",
-                                "file: ",
-                                fileExtension(info.uri),
-                                humanFileSize(info.size || 0)
-                            );
-                            console.log(JSON.stringify(item, null, 2));
+                            // item.toogleSelect();
+                            console.log("Selected");
+                            InstGallery.toogleSelect(item, index);
+                            // const info = await FileSystem.getInfoAsync(
+                            //     item.uri
+                            // );
+                            // console.log(
+                            //     JSON.stringify(info, null, 3),
+                            //     "\n",
+                            //     "file: ",
+                            //     fileExtension(info.uri),
+                            //     humanFileSize(info.size || 0)
+                            // );
+                            // console.log(JSON.stringify(item, null, 2));
                         }}
+                        selected={item.selected}
                         alt={item.filename}
                         source={{
                             uri: item.uri,

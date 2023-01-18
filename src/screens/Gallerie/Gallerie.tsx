@@ -8,10 +8,10 @@ import { useLoadImages, OGallery } from "../../components/Composite/Gallery";
 type GallerieProps = {};
 
 const Gallerie: React.FC<GallerieProps> = ({ ...props }) => {
-    const images = useLoadImages();
+    useLoadImages();
     return (
         <View>
-            <OGallery data={images} />
+            <OGallery />
         </View>
     );
 };

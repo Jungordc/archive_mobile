@@ -24,27 +24,34 @@ const MediaSubtype = types.union(
 /**
  * Image select
  */
-const ImageAssetModel = types.model("ImageAssetModel", {
-    id: types.identifier,
-    filename: types.string,
-    uri: types.string,
-    width: types.number,
-    height: types.number,
-    creationTime: types.number,
-    modificationTime: types.number,
-    duration: types.number,
-    mediaType: MediaTypeValue,
-    albumId: types.optional(types.maybe(types.string), undefined),
-    mediaSubtypes: types.optional(
-        types.maybe(types.array(MediaSubtype)),
-        undefined
-    ),
-});
+const ImageAssetModel = types
+    .model("ImageAssetModel", {
+        id: types.identifier,
+        filename: types.string,
+        uri: types.string,
+        width: types.number,
+        height: types.number,
+        creationTime: types.number,
+        modificationTime: types.number,
+        duration: types.number,
+        mediaType: MediaTypeValue,
+        selected: types.optional(types.boolean, false),
+        albumId: types.optional(types.maybe(types.string), undefined),
+        mediaSubtypes: types.optional(
+            types.maybe(types.array(MediaSubtype)),
+            undefined
+        ),
+    })
+    .actions((self) => ({
+        toogleSelect() {
+            self.selected = !self.selected;
+        },
+    }));
 
 /**
  *
  */
-type IImageAsset = Instance<typeof ImageAssetModel>;
+export type IImageAsset = Instance<typeof ImageAssetModel>;
 
 /**
  *
@@ -74,14 +81,13 @@ export const GalleryModel = types
         },
         /**
          *
-         * @param image
          */
-        selectImage(image: IImageAsset) {},
-        /**
-         *
-         */
-        toogleSelect(image: IImageAsset) {
-            console.log("toogleSelect", self.selected.includes(image));
+        toogleSelect(image: IImageAsset, index?: number) {
+            if (index && self.images.length > 0) {
+                self.images[index].toogleSelect();
+            } else {
+                self.images.find((i) => i.id === image.id)?.toogleSelect();
+            }
         },
         /**
          *
