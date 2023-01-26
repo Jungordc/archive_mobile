@@ -72,6 +72,14 @@ export const GalleryModel = types
             self.hasNextPage = pageInfo.hasNextPage;
             self.totalCount = pageInfo.totalCount;
         },
+
+        loadmore(pageInfo: PagedInfo<Asset>) {
+            console.log("___________________________________________");
+            self.images = cast(self.images.concat(pageInfo.assets));
+            self.endCursor = pageInfo.endCursor;
+            self.hasNextPage = pageInfo.hasNextPage;
+            self.totalCount = pageInfo.totalCount;
+        },
         /**
          *
          * @param images

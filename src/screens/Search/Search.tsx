@@ -2,6 +2,7 @@
 
 import React from "react";
 import RootContainer from "../../components/Primitive/RootContainer/Container";
+import Camera from "../Camera/Camera";
 
 import { OGallerie } from "../Gallerie/Gallerie";
 
@@ -10,7 +11,7 @@ export type SearchProps = {};
 const Search: React.FC<SearchProps> = ({}) => {
     return (
         <RootContainer>
-            <OGallerie />
+            <Camera />
         </RootContainer>
     );
 };

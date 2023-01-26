@@ -1,12 +1,13 @@
 /** @format */
 
 import React from "react";
-import { View, FlatList } from "native-base";
+import { View, FlatList, Text } from "native-base";
 import { observer } from "mobx-react-lite";
 import { IImageAsset, InstGallery } from "./Model.Gallery";
 import ImageItem from "./ImageItem";
 import * as FileSystem from "expo-file-system";
 import { humanFileSize } from "../../../utils/humaneReadable";
+import { getAssyncImages } from "./Utils.Gallery";
 
 type GalleryProps = {
     numColumns?: number;
@@ -17,7 +18,7 @@ const OFlatList = observer(FlatList);
 
 const Gallery: React.FC<GalleryProps> = ({
     numColumns = 3,
-    data = InstGallery.images.toJSON(),
+    data = InstGallery.images,
     ...props
 }) => {
     //
@@ -25,18 +26,35 @@ const Gallery: React.FC<GalleryProps> = ({
 
     return (
         <View>
+            <Text>{InstGallery.endCursor}</Text>
             <OFlatList
                 data={data}
                 onEndReachedThreshold={0.5}
-                onEndReached={() => {}}
+                onEndReached={() => {
+                    if (InstGallery.hasNextPage) {
+                        getAssyncImages(
+                            (value) => {
+                                InstGallery.loadmore(value);
+                                console.log(
+                                    "Value..."
+                                    // JSON.stringify(value, null, 1)
+                                );
+                            },
+                            {
+                                after: InstGallery.endCursor,
+                            }
+                        );
+                    }
+                }}
                 numColumns={numColumns}
                 keyExtractor={(i) => i.id}
                 renderItem={({ item, index }) => (
                     <ImageItem
                         onPress={async () => {
                             // item.toogleSelect();
-                            console.log("Selected");
+                            console.log("Selected", InstGallery.images.length);
                             InstGallery.toogleSelect(item, index);
+
                             // const info = await FileSystem.getInfoAsync(
                             //     item.uri
                             // );
